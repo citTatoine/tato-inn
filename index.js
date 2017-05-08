@@ -20,19 +20,24 @@ var app = express();
 
 // resolving paths
 var pF = path.resolve(__dirname, "public");
-var src = path.resolve(__dirname, "bundle");
+var src = path.resolve(__dirname, "build");
 var dbURL = process.env.DATABASE_URL || ""; // add database url
 
 app.use("/bundle", express.static(src));
 
-app.use(bodyParser.urlencoded({extende:true}));
+app.use(bodyParser.urlencoded({extended:true}));
 
 app.use(session({
     secret:"supersecret",
     resave:"true",
-    saveUnitInitialized: true
+    saveUninitialized: true
 }));
 
+app.get("/", function(req,resp){
+    console.log(req);
+    resp.sendFile(pF+"/order.html");
+    console.log(req);
+})
 server.listen(port, function(err){
     if(err){
         console.log(err);
