@@ -1,0 +1,139 @@
+﻿<!--// /**-->
+<!--//  * Created by Kenneth on 2017-05-09.-->
+<!--//  */-->
+<!DOCTYPE html>
+<html  data-ng-app="admin">
+<head>
+    <base href="/" />
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Responsive Admin</title>
+	<!-- BOOTSTRAP STYLES-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- CUSTOM STYLES-->
+    <link href="/styles/admin.css" rel="stylesheet" />
+     <!-- GOOGLE FONTS-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <script src="https://use.fontawesome.com/1e5385ddc9.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="/bundle/custombundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js"></script>
+</head>
+<body>
+     
+           
+          
+    <div id="wrapper">
+         <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="adjust-nav">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img id ="logo" src="https://image.freepik.com/free-vector/burger-logo-with-a-green-flag_1051-1010.jpg" />
+
+                    </a>
+                    
+                </div>
+              
+                <span class="logout-spn" >
+                  <a href="#" style="color:#fff;">LOGOUT</a>  
+
+                </span>
+            </div>
+        </div>
+        <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                 
+
+
+                    <li class="active-link">
+                        <a href="/admin" ><i class="fa fa-desktop"></i>Dashboard</a>
+                    </li>
+
+                    <li>
+                        <a href="/admin/menu"><i class="fa fa-pencil-square-o"></i>Edit Menu</a>
+                    </li>
+                    <li>
+                        <a href="/admin/accounts"><i class="fa fa-pencil-square-o"></i>Edit Account</a>
+                    </li>
+                    <li>
+                        <a href="/admin/transactions"><i class="fa fa-pencil-square-o"></i>Transactions</a>
+                    </li>
+
+                    
+                </ul>
+                            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-lg-12">
+                     <h2>ADMIN DASHBOARD</h2>   
+                    </div>
+                </div>              
+
+                  <!-- /. View  -->
+                <div>
+                    <div ng-view></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- /. Footer  -->
+
+    <div class="navbar navbar-fixed-bottom open-close">
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                <a href="#" target="_blank" class="btn btn-success btn-lg btn-block">Open Shop</a>
+            </div>
+            <div class="col-md-4">
+                <a href="#" target="_blank" class="btn btn-danger btn-lg btn-block">Close Shop</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<script>
+    var adminapp = angular.module("admin", ["ngRoute"]);
+
+    adminapp.config(function($routeProvider, $locationProvider) {
+        $locationProvider.html5Mode(true);
+        $routeProvider
+            .when("/admin", {
+                templateUrl : "/admin-partials/dashboard.html"
+            })
+            .when("/admin/accounts", {
+                templateUrl : "/admin-partials/accountdetails.html"
+            })
+            .when("/admin/transactions", {
+                templateUrl : "/admin-partials/transactions.html"
+            })
+            .when("/admin/menu", {
+                templateUrl : "/admin-partials/menu.html"
+            })
+            .otherwise({redirectTo: '/'});
+
+    });
+</script>
+    
+   
+</body>
+</html>
