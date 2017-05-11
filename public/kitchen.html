@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <title>Tatoo-Inn - Kitchen</title>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <style>
+        body{
+            background-color: dimgray;
+        }
+        
+        .orderdiv{
+            background-color: #214761;
+            background-size: 100% 100%;
+            min-height: 300px;
+            min-width: 200px;
+            padding: 20px;
+            border-style: solid;
+            border-color: dimgray;
+            border-radius: 25px;
+            
+        }
+        
+        #orderscontainer{
+            text-align: center;
+        }
+        
+        div#banner { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            background-color: skyblue; 
+            width: 100%; 
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+        
+        div#banner-content { 
+            padding: 10px; 
+            color: white;
+            font-weight: bold;
+            font-size: 25px;
+        }
+        
+        .cookButDiv{
+            background-image: url("http://i.imgur.com/E20jTpB.png");
+            width: 151px;
+            height: 56px;
+            margin-left: 30%;   
+            bottom: 20px;
+            position: absolute;
+        }
+        .cookButDiv:hover{
+            background-image: url("http://i.imgur.com/rU5sL9z.png");
+            cursor: pointer;
+        }
+    
+        #orderrow{
+            height: auto;   
+        }
+        
+        .items{
+            margin-top: 50px;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20%;
+        }
+
+    </style>
+    <body>
+            <div class="container-fluid">    
+                <div class="row">
+                    <div class="col-sm-8" id="orderscontainer">  
+                            <div class="row" class="orderrow">
+                                <div class="col-sm-4 orderdiv" id="orderdiv1">  
+                                    <div id="banner">
+                                        <div id="banner-content">
+                                            Order 1
+                                        </div>
+                                    </div>
+                                    <div class="items">
+                                        <p>Cheese Burger   1</p>
+                                        <p>Big Mac         2</p>
+                                        <p>Diet Coke (L)   3</p>
+                                        <p>Fries (L)       3</p>
+                                    </div>
+                                    <div class="cookButDiv" id="1" onclick = "cooktime(this)">
+                                    </div>  
+                                </div>
+                                <div class="col-sm-4 orderdiv" id="orderdiv2">
+                                    <div id="banner">
+                                        <div id="banner-content">
+                                            Order 2
+                                        </div>
+                                    </div>
+                                    <div class="items">
+                                        <p>Cheese Burger   1</p>
+                                        <p>Big Mac         2</p>
+                                        <p>Diet Coke (L)   3</p>
+                                        <p>Fries (L)       3</p>
+                                    </div>
+                                    <div class="cookButDiv" id="2" onclick = "cooktime(this)">
+                                    </div>                                       
+                                </div>
+                                <div class="col-sm-4 orderdiv" id="orderdiv3">
+                                    <div id="banner">
+                                        <div id="banner-content">
+                                            Order 3
+                                        </div>
+                                    </div>       
+                                        <div class="items">
+                                            <p>Cheese Burger   1</p>
+                                            <p>Big Mac         2</p>
+                                            <p>Diet Coke (L)   3</p>
+                                            <p>Fries (L)       3</p>
+                                        </div>
+                                        <div class="cookButDiv" id="3" onclick = "cooktime(this)">
+                                        </div>                                                                    
+                                </div>
+                            </div>                          
+                            <div class="row">
+                                <div class="col-sm-4 orderdiv" id="orderdiv4">
+                                    <div id="banner">
+                                        <div id="banner-content">
+                                            Order 4
+                                        </div>
+                                    </div>     
+                                    <div class="items">
+                                        <p>Cheese Burger   1</p>
+                                        <p>Big Mac         2</p>
+                                        <p>Diet Coke (L)   3</p>
+                                        <p>Fries (L)       3</p>
+                                    </div>
+                                    <div class="cookButDiv" id="4" onclick = "cooktime(this)">
+                                    </div>                                   
+                                </div>
+                                <div class="col-sm-4 orderdiv" id="orderdiv5">
+                                    <div id="banner">
+                                        <div id="banner-content">
+                                            Order 5
+                                        </div>
+                                    </div>     
+                                        <div class="items">
+                                            <p>Cheese Burger   1</p>
+                                            <p>Big Mac         2</p>
+                                            <p>Diet Coke (L)   3</p>
+                                            <p>Fries (L)       3</p>
+                                        </div>
+                                        <div class="cookButDiv" id="5" onclick = "cooktime(this)">
+                                        </div>                                                                     
+                                </div>
+                                <div class="col-sm-4 orderdiv" id="orderdiv6">
+                                    <div id="banner">
+                                        <div id="banner-content">
+                                            Order 6
+                                        </div>                                        
+                                    </div> 
+                                    <div class="items">
+                                    <p>Cheese Burger   1</p>
+                                    <p>Big Mac         2</p>
+                                    <p>Diet Coke (L)   3</p>
+                                    <p>Fries (L)       3</p>
+                                    </div>
+                                    <div class="cookButDiv" id="6" onclick = "cooktime(this)">
+                                    </div> 
+                                </div>
+                            </div>                                                   
+                    </div>
+                    <div class="col-sm-4" style="background-color:#C5C5C5;" id="fulfilled">
+                    <h1>Fulfilled</h1>
+                    </div>
+                </div>
+            </div>
+        <script>
+        
+var finishDiv = document.getElementById("fulfilled");
+
+                function cooktime(elem){
+                    elem.onclick = "NOPE";
+                    elem.style.backgroundImage = "url('https://upload.wikimedia.org/wikipedia/commons/5/54/Blank_Canvas_on_Transparent_Background.png')";
+
+                    var progContainer = document.createElement("div");
+                    var progBar = document.createElement("div");
+                    var progBarComplete = document.createElement("div");
+                    progContainer.className = "col-xs-12 col-sm-12 progress-container";
+                    progBar.className = "progress progress-striped active";
+                    progBarComplete.className = "progress-bar progress-bar-info";
+                    progBarComplete.style.width = "0%";
+                    elem.append(progContainer);
+                    progContainer.appendChild(progBar);
+                    progBar.appendChild(progBarComplete);
+
+
+                    $(".progress-bar").animate({
+                        width: "100%"
+                    }, 5000);  
+
+                    var counter = 0;
+                    var interval = setInterval(function() {
+                        counter++;
+                        if (counter == 5) { //change the 5 here to the calculated time 
+                            progBarComplete.className += "progress-bar-complete";
+                        }
+                        if(counter == 6){ //change the 6 here to the calculated time + 1
+                            clearInterval(interval);
+                            var mainDiv = "#orderdiv" + elem.id;
+                            console.log(mainDiv); 
+            
+                            console.log($(mainDiv +' div:eq(2)').html()); 
+                            var ndiv = document.createElement("div");
+                            var countndiv = document.createElement("div");
+                            ndiv.innerHTML = " <hr /> <br /> <b>Order: " + elem.id + "</b><br /> Items: <br />" + $(mainDiv +' div:eq(2)').html();
+                            ndiv.id = "#finisheddiv" + elem.id;
+                            ndiv.append(countndiv);
+                            finishDiv.append(ndiv);            
+                            elem.parentNode.remove();
+                            function startTimer(duration, display) {
+                                var timer = duration, minutes, seconds;
+                                setInterval(function () {
+                                    minutes = parseInt(timer / 60, 10)
+                                    seconds = parseInt(timer % 60, 10);
+
+                                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                                    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                                    display.text(minutes + ":" + seconds);
+
+                                    if (--timer < 0) {
+                                        timer = duration;
+                                    }
+                                }, 1000);
+                            }
+
+                            jQuery(function ($) {
+                                var fiveMinutes = 60 * 5,
+                                    display = $(countndiv);
+                                startTimer(fiveMinutes, display);
+                            });
+                        }
+                    }, 1150);                
+                }
+        </script>
+    </body>
+</html>

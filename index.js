@@ -28,12 +28,9 @@ var dbURL = process.env.DATABASE_URL || "postgres://postgres:Ilikepie5231!@local
 var pF = path.resolve(__dirname, "public");
 var css = path.resolve(__dirname, "css");
 var src = path.resolve(__dirname, "build");
-var adminPartial = path.resolve(__dirname, "admin-partials");
 
 app.use("/bundle", express.static(src));
 app.use("/styles", express.static(css));
-app.use("/admin-partials", express.static(adminPartial));
-
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -49,19 +46,21 @@ app.get("/", function(req, resp){
     resp.sendFile(pF+"/login.html");
 });
 
-app.all('/admin', function(req, resp, next) {
-    resp.sendFile(pF+"/administration.html");
-});
-
 app.get("/order", function(req,resp){
     resp.sendFile(pF+"/order.html");
 });
 
+
+app.get("/kitchen", function(req,resp){
+    resp.sendFile(pF+"/kitchen.html");
+});
+
+
 //========== Login Queries ==========//
 
 app.post("/register", function(req, resp){
-
-
+    
+    
     bcrypt.hash(req.body.pass, 5, function(err, bpass){
         pg.connect(dbURL, function(err, client, done){
             if(err){
@@ -81,25 +80,25 @@ app.post("/register", function(req, resp){
             });
         });
     })
-
+   
 });
 
 app.post("/login", function(req, resp){
-
+    
     pg.connect(dbURL, function(err, client, done){
         if(err){
             console.log(err);
             resp.send({status:"fail"});
         }
-
+        
         client.query("SELECT user_id, user_type, username, password FROM users WHERE username = $1", [req.body.username], function(err, result){
-
+            
             done();
             if(err){
                 console.log(err);
                 resp.send({status:"fail"});
             }
-
+            
             if(result.rows.length > 0){
                 bcrypt.compare(req.body.pass, result.rows[0].password, function(err, isMatch){
                     if(isMatch){

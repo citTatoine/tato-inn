@@ -11,8 +11,8 @@ var config = {
         "login":jF+"/login.js",
          //vendor: ['angular'],
         "order":jF+"/order.js",
-        "admin":jF+"/admin.js",
-        "owl":jF+"/owl.carousel.min.js"
+        "owl":jF+"/owl.carousel.min.js",
+        "kitchen":jF+"/kitchen.js"
     },
     output:{
         filename:"[name]bundle.js",
