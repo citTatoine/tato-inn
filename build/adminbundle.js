@@ -10330,7 +10330,8 @@ return jQuery;
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(jQuery) {
+/* WEBPACK VAR INJECTION */(function(jQuery) { // Created by Kenneth on 2017-05-09
+
 (function ($) {
     "use strict";
     var mainApp = {
