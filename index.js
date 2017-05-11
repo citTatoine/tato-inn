@@ -85,7 +85,7 @@ app.post("/register", function(req, resp){
                     resp.send({status:"fail"});
                 }
 
-                resp.send({status:"success", id:result.rows[0].id});
+                resp.send({status:"success", id:result.rows[0].user_id});
             });
         });
     })
