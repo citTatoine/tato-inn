@@ -28,7 +28,13 @@ $(document).ready(function(){
             },
             success:function(resp){
                 console.log(resp);
-                location.href = "/order";
+                //location.href = "/admin";
+                if(resp.user.type == "Admin"){
+                    location.href = "/admin";
+                }
+                else if(resp.user.type == "Ramsey"){
+                    location.href = "/order";
+                }
             }
 
         });

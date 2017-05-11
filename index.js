@@ -57,6 +57,14 @@ app.get("/order", function(req,resp){
     resp.sendFile(pF+"/order.html");
 });
 
+// app.get("/kitchen", function(req,resp){
+//    resp.sendFile(pF+"kitchen.html");
+// });
+
+app.get("/admin", function(req,resp){
+    resp.sendFile(pF+"administration.html");
+});
+
 //========== Login Queries ==========//
 
 app.post("/register", function(req, resp){
@@ -89,24 +97,26 @@ app.post("/login", function(req, resp){
     pg.connect(dbURL, function(err, client, done){
         if(err){
             console.log(err);
-            resp.send({status:"fail"});
+            resp.send({status:"fail1"});
         }
 
-        client.query("SELECT user_id, user_type, username, password FROM users WHERE username = $1", [req.body.username], function(err, result){
+        client.query("SELECT user_id, user_type, username, password FROM users WHERE username = $1", [req.body.un], function(err, result){
 
             done();
             if(err){
                 console.log(err);
-                resp.send({status:"fail"});
+                resp.send({status:"fail2"});
             }
 
             if(result.rows.length > 0){
                 bcrypt.compare(req.body.pass, result.rows[0].password, function(err, isMatch){
                     if(isMatch){
                         console.log("match");
+                        console.log(result.rows[0]);
                         req.session.user = {
                             username:result.rows[0].username,
-                            id: result.rows[0].id
+                            id:result.rows[0].user_id,
+                            type:result.rows[0].user_type
                         };
                         resp.send({status:"success", user:req.session.user});
                     } else {
