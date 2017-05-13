@@ -33,13 +33,17 @@ var pF = path.resolve(__dirname, "public");
 var css = path.resolve(__dirname, "css");
 var src = path.resolve(__dirname, "build");
 var db = path.resolve(__dirname, "db");
+var img = path.resolve(__dirname, "img");
 
 const loginOperation = require (db+"/login_query.js");
 
 app.use("/bundle", express.static(src));
 app.use("/styles", express.static(css));
 app.use("/admin-partials", express.static("admin-partials"));
+app.use("/order-partials", express.static("order-partials"));
 app.use("/plugin", express.static("js"));
+app.use("/img", express.static(img));
+
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -55,8 +59,12 @@ app.all("/", function(req, resp){
     resp.sendFile(pF+"/login.html");
 });
 
+app.all("/start", function(req,resp){
+    resp.sendFile(pF+"/startorder.html");
+});
+
 app.all("/order", function(req,resp){
-    resp.sendFile(pF+"/order.html");
+    resp.sendFile(pF+"/orderpage.html");
 });
 
 
