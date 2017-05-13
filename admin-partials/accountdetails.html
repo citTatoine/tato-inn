@@ -43,26 +43,30 @@
                 <div class="input-group">
                     <div class="row">
                         <h5>Username:</h5>
-                        <input type="text" class="form-control" placeholder="Username" />
+                        <input type="text" id="created_username" class="form-control" placeholder="Username" />
                     </div>
                     <br>
                     <div class="row">
-                        <h5>Email:</h5>
-                        <input type="text" class="form-control" placeholder="Email" />
+                        <label class="mr-sm-2" for="EditinlineFormCustomSelect"><h5 class="required">User Type</h5></label>
+                        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="EditinlineFormCustomSelect">
+                            <option id="user_option" selected>Choose...</option>
+                            <option value="1">Admin</option>
+                            <option value="2">Chef</option>
+                        </select>
                     </div>
                     <br>
                     <div class="row">
                         <h5>Password:</h5>
-                        <input type="text" class="form-control" placeholder="Password" />
+                        <input type="text" id="created_password" class="form-control" placeholder="Password" />
                     </div>
                     <br>
                     <div class="row">
                         <h5>Confirm password:</h5>
-                        <input type="text" class="form-control" placeholder="Confirm password" />
+                        <input type="text" id="con_created_password" class="form-control" placeholder="Confirm password" />
                     </div>
                     <br>
                     <div class="row">
-                        <button type="button" class="btn btn-primary disabled">Register</button>
+                        <button type="button" id="reg_but" class="btn btn-primary enable">Register</button>
                     </div>
                 </div>
             </div>

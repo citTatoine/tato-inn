@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html data-ng-app="tatooine">
+<head>
+    <base href="/" />
+    <title>Tatoo-inn</title>
+    <meta charset="UTF-8">
+
+
+    <link rel="stylesheet" href="/styles/owl.carousel.min.css">
+    <link rel="stylesheet" href="/styles/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/styles/order.css">
+    <link rel="stylesheet" href="/styles/orderpage.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js"></script>
+    <script src="/plugin/orderpage.js"></script>
+
+
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+</head>
+
+
+
+
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Tatoo-inn</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><button class="btn btn-danger navbar-btn"  data-toggle="modal" data-target="#myOrders">Current Orders</button></li>
+        </ul>
+    </div>
+</nav>
+
+<div data-ng-controller = "orders">
+
+<!-- Modal -->
+<div id="myOrders" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Order content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">My Order</h4>
+            </div>
+            <div class="modal-body">
+                <p data-ng-repeat = "x in items" >{{x}}<span class="glyphicon glyphicon-remove item-remove" data-ng-click = "remove($index)"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Checkout</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<wrap-owlcarousel class="owl-carousel owl-theme" data-options="{
+            loop:true,
+            margin:10,
+            responsiveClass:true,
+            responsive:{
+                0:{
+                    items:1,
+                    nav:true
+                },
+                600:{
+                    items:3,
+                    nav:false
+                },
+                1000:{
+                    items:5,
+                    nav:true,
+                    loop:false
+                }
+            }
+        }">
+    <a href="/orderpage/menu1"><img src="/img/categories/hamburger.png" class="categories-img"></a>
+    <a href="/orderpage/menu2"><img src="/img/categories/sandwich.png" class="categories-img"></a>
+    <a href="/orderpage/menu3"><img src="/img/categories/french-fries.png" class="categories-img" ></a>
+    <a href="/orderpage/menu4"><img src="/img/categories/ice-cream.png" class="categories-img" ></a>
+    <a href="/orderpage/menu5"><img src="/img/categories/drinks.png" class="categories-img" ></a>
+    <a href="/orderpage/menu6"><img src="/img/categories/combo.png" class="categories-img" ></a>
+    <a href="/orderpage/menu7"><img src="/img/categories/breakfastcombo.png" class="categories-img" ></a>
+</wrap-owlcarousel>
+
+
+<div>
+    <div data-ng-view></div>
+</div>
+
+</div>
+
+
+<script src='/plugin/owl.carousel.min.js'></script>
+
+
+
+</body>
+</html>

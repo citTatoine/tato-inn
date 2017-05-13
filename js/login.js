@@ -8,8 +8,8 @@ $(document).ready(function(){
     //         url:"/register",
     //         type:"post",
     //         data:{
-    //             user:"Admin",
-    //             un:document.getElementById("Username").value,
+    //             user_type:"Admin",
+    //             username:document.getElementById("Username").value,
     //             pass:document.getElementById("Password").value
     //         },
     //         success:function(resp){
@@ -23,12 +23,17 @@ $(document).ready(function(){
             url:"/login",
             type: "post",
             data:{
-                un:document.getElementById("Username").value,
+                username:document.getElementById("Username").value,
                 pass:document.getElementById("Password").value
             },
             success:function(resp){
                 console.log(resp);
-                location.href = "/order";
+                if(resp.user.type == "Admin"){
+                    location.href = "/admin";
+                }
+                else if (resp.user.type == "Ramsey"){
+                    location.href = "/kitchen";
+                }
             }
 
         });
