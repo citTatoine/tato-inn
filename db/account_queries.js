@@ -2,34 +2,6 @@
  * Created by renzo on 2017-05-11.
  */
 module.exports = {
-    // getUsers: function(req, resp) {
-    //     var pg = require('pg');
-    //     var dbURL = process.env.DATABASE_URL || "postgres://postgres:Ilikepie5231!@localhost:5432/tatooine";
-    //     var client = new pg.Client(dbURL);
-    //     client.connect();
-    //     var query = client.query("select * from users");
-    //     query.on("row", function (row, result) {
-    //         result.addRow(row);
-    //     });
-    //     query.on("end", function (result) {
-    //         client.end();
-    //         res.writeHead(200, {'Content-Type': 'text/plain'});
-    //         res.write(JSON.stringify(result.rows, null, "    ") + "\n");
-    //         res.end();
-    //     });
-    // },
-    // delUser : function(req, resp){
-    //     var pg = require('pg');
-    //     var dbURL = process.env.DATABASE_URL ||  "postgres://postgres:Ilikepie5231!@localhost:5432/tatooine";
-    //     var client = new pg.Client(dbURL);
-    //     client.connect();
-    //     var query = client.query( "Delete from employee Where id ="+req.query.id);
-    //     query.on("end", function (result) {
-    //         client.end();
-    //         res.write('Success');
-    //         res.end();
-    //     });
-    // },
     alterUser: function(req, resp) {
         var pg = require('pg');
         var bcrypt = require('bcrypt');
@@ -64,6 +36,9 @@ module.exports = {
                         console.log(err);
                     }
                 });
+            }
+            else{
+                alert("wrong password");
             }
         });
     },
