@@ -37,3 +37,17 @@ adminapp.controller('postgreSQLCtrl', ['$scope' ,'$http',  function($scope,$http
         });
     }
 }]);
+
+adminapp.controller('postgreSQLCtrl', ['$scope' ,'$http',  function($scope,$http) {
+    $scope.old_password = '';
+    $scope.new_created_password = '';
+    $scope.con_new_created_password = '';
+
+    $scope.modify = function(){
+        $http({method: 'GET', url: '/db/modify?old_password='+$scope.old_password+'&new_created_password='+$scope.new_created_password+'&con_new_created_password='+$scope.con_new_created_password}).then(function successCallback (response){
+            $scope.dataset = response;
+        }, function errCallback(response){
+            $scope.dataset = response || "Request failed ";
+        });
+    }
+}]);

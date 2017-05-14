@@ -12,27 +12,27 @@
 
     </ul>
     <div class="tab-content">
-        <div class="tab-pane fade active in" id="password">
+        <div class="tab-pane fade active in" id=password">
             <br />
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="input-group">
                     <div class="row">
                         <h5>Old Password:</h5>
-                        <input type="text" class="form-control" placeholder="Password" />
+                        <input type="text" class="form-control" placeholder="Password" ng-model="old_password"/>
                     </div>
                     <br>
                     <div class="row">
                         <h5>New Password:</h5>
-                        <input type="text" class="form-control" placeholder="Enter new password" />
+                        <input type="text" class="form-control" placeholder="Enter new password" ng-model="new_created_password"/>
                     </div>
                     <br>
                     <div class="row">
                         <h5>Confirm new password:</h5>
-                        <input type="text" class="form-control" placeholder="Confirm new password" />
+                        <input type="text" class="form-control" placeholder="Confirm new password" ng-model="con_new_created_password"/>
                     </div>
                     <br>
                     <div class="row">
-                        <button type="button" class="btn btn-primary disabled">submit</button>
+                        <button ng-click="modify()" type="button" class="btn btn-primary enable">submit</button>
                     </div>
                 </div>
             </div>
@@ -77,21 +77,21 @@
                 <div class="input-group">
                     <div class="row">
                         <h5>Old Password:</h5>
-                        <input type="text" class="form-control" placeholder="Password" />
+                        <input type="text" class="form-control" placeholder="Password" ng-model="old_password"/>
                     </div>
                     <br>
                     <div class="row">
                         <h5>New Password:</h5>
-                        <input type="text" class="form-control" placeholder="Enter new password" />
+                        <input type="text" class="form-control" placeholder="Enter new password" ng-model="new_created_password"/>
                     </div>
                     <br>
                     <div class="row">
                         <h5>Confirm new password:</h5>
-                        <input type="text" class="form-control" placeholder="Confirm new password" />
+                        <input type="text" class="form-control" placeholder="Confirm new password" ng-model="con_new_created_password"/>
                     </div>
                     <br>
                     <div class="row">
-                        <button type="button" class="btn btn-primary disabled">submit</button>
+                        <button ng-click="modify()" type="button" class="btn btn-primary enable">submit</button>
                     </div>
                 </div>
             </div>

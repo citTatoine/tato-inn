@@ -88,6 +88,9 @@ app.get("/db/login", function(req,resp){
 app.get("/db/register", function(req,resp){
     adminAccOperation.addUser(req,resp);
 });
+app.get("/db/modify", function(req,resp){
+    adminAccOperation.alterUser(req,resp);
+});
 // app.post("/register", function(req, resp){
 //     console.log("checkpoint2");
 //     if(req.body.pass == req.body.con_pass) {
