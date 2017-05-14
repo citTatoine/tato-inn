@@ -36,6 +36,7 @@ var db = path.resolve(__dirname, "db");
 var img = path.resolve(__dirname, "img");
 
 const loginOperation = require (db+"/login_query.js");
+const adminAccOperation = require (db+"/account_queries.js");
 
 app.use("/bundle", express.static(src));
 app.use("/styles", express.static(css));
@@ -82,7 +83,13 @@ app.all("/admin", function(req,resp){
 //========== Login Queries ==========//
 
 app.get("/db/login", function(req,resp){
-   loginOperation.login(req,resp);
+    loginOperation.login(req,resp);
+});
+app.get("/db/register", function(req,resp){
+    adminAccOperation.addUser(req,resp);
+});
+app.get("/db/modify", function(req,resp){
+    adminAccOperation.alterUser(req,resp);
 });
 // app.post("/register", function(req, resp){
 //     console.log("checkpoint2");
