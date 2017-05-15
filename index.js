@@ -36,8 +36,11 @@ var img = path.resolve(__dirname, "img");
 
 const loginOperation = require (db+"/login_query.js");
 const adminAccOperation = require (db+"/account_queries.js");
+<<<<<<< HEAD
 const adminMenuOperation = require (db+"/menu_queries.js");
 const adminTransOperation = require (db+"/transaction_queries");
+=======
+>>>>>>> develop
 
 app.use("/bundle", express.static(src));
 app.use("/styles", express.static(css));
@@ -85,6 +88,12 @@ app.all("/admin", function(req,resp){
 
 app.get("/db/login", function(req,resp){
     loginOperation.login(req,resp);
+<<<<<<< HEAD
+=======
+});
+app.get("/db/register", function(req,resp){
+    adminAccOperation.addUser(req,resp);
+>>>>>>> develop
 });
 app.get("/db/register", function(req,resp){
     adminAccOperation.addUser(req,resp);
