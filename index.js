@@ -21,8 +21,7 @@ var app = express();
 
 const server = require("http").createServer(app);
 
-var io = require("socket.io")(server);
-var dbURL = process.env.DATABASE_URL || "postgres://postgres:Ilikepie5231!@localhost:5432/tatooine";
+var dbURL = process.env.DATABASE_URL || "postgres://postgres:Password@localhost:5432/restaurant";
 
 //resolving paths
 var pF = path.resolve(__dirname, "public");
@@ -118,6 +117,32 @@ app.post("/login", function(req, resp){
         });
     })
 });
+
+//===============Kitchen Queries=============================//
+app.post("/k/getorders", function(req, resp){
+    pg.connect(dbURL, function(err, client, done){
+        if(err){
+            console.log(err);
+            resp.send({status:"fail"});
+        }
+        
+        client.query("SELECT * FROM orders", [], function(err, result){
+            done();
+            if(err){
+                console.log(err);
+                resp.send({status:"fail"});
+            }
+            
+            if(result.rows.length > 0){
+                resp.send(result.rows);
+                console.log(result.rows);
+            } else {
+                resp.send({status:"fail"});
+            }
+        });
+    })
+});
+
 
 server.listen(port, function(err){
     if(err){

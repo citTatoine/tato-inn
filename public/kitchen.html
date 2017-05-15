@@ -123,7 +123,6 @@
                                         </div>                                                                    
                                 </div>
                             </div>                          
-                            <div class="row">
                                 <div class="col-sm-4 orderdiv" id="orderdiv4">
                                     <div id="banner">
                                         <div id="banner-content">
@@ -169,7 +168,49 @@
                                     <div class="cookButDiv" id="6" onclick = "cooktime(this)">
                                     </div> 
                                 </div>
-                            </div>                                                   
+                                <div class="col-sm-4 orderdiv" id="orderdiv6">
+                                    <div id="banner">
+                                        <div id="banner-content">
+                                            Order 6
+                                        </div>                                        
+                                    </div> 
+                                    <div class="items">
+                                    <p>Cheese Burger   1</p>
+                                    <p>Big Mac         2</p>
+                                    <p>Diet Coke (L)   3</p>
+                                    <p>Fries (L)       3</p>
+                                    </div>
+                                    <div class="cookButDiv" id="6" onclick = "cooktime(this)">
+                                    </div> 
+                                </div>                                   <div class="col-sm-4 orderdiv" id="orderdiv6">
+                                    <div id="banner">
+                                        <div id="banner-content">
+                                            Order 6
+                                        </div>                                        
+                                    </div> 
+                                    <div class="items">
+                                    <p>Cheese Burger   1</p>
+                                    <p>Big Mac         2</p>
+                                    <p>Diet Coke (L)   3</p>
+                                    <p>Fries (L)       3</p>
+                                    </div>
+                                    <div class="cookButDiv" id="6" onclick = "cooktime(this)">
+                                    </div> 
+                                </div>                                   <div class="col-sm-4 orderdiv" id="orderdiv6">
+                                    <div id="banner">
+                                        <div id="banner-content">
+                                            Order 6
+                                        </div>                                        
+                                    </div> 
+                                    <div class="items">
+                                    <p>Cheese Burger   1</p>
+                                    <p>Big Mac         2</p>
+                                    <p>Diet Coke (L)   3</p>
+                                    <p>Fries (L)       3</p>
+                                    </div>
+                                    <div class="cookButDiv" id="6" onclick = "cooktime(this)">
+                                    </div> 
+                                </div>                           
                     </div>
                     <div class="col-sm-4" style="background-color:#C5C5C5;" id="fulfilled">
                     <h1>Fulfilled</h1>
@@ -177,7 +218,30 @@
                 </div>
             </div>
         <script>
-        
+        $(document).ready(function(){
+
+    //ajax to get all items
+    $.ajax({
+        url:"/k/getorders",
+        type:"post",
+        success:function(resp){
+
+            //loop through the select
+            for(var i = 0; i<resp.length; i++){
+                var ndiv = document.createElement("div");
+                document.getElementsByClassName("orderrow").append(ndiv);
+                ndiv.style.backgroundColor = "#6599FF";
+                ndiv.style.color = "white";
+                ndiv.style.fontWeight = "bold";
+                ndiv.style.padding= "2%";
+                ndiv.style.margin="1%";
+                ndiv.style.borderRadius= "5px";
+            }
+            
+        }
+    });
+            
+    });
 var finishDiv = document.getElementById("fulfilled");
 
                 function cooktime(elem){
