@@ -22,7 +22,7 @@ var finishDiv = document.getElementById("fulfilled");
                     $(".progress-bar").animate({
                         width: "100%"
                     }, 5000);  
-
+                    
                     var counter = 0;
                     var interval = setInterval(function() {
                         counter++;

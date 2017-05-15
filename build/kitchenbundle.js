@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10327,8 +10327,7 @@ return jQuery;
 
 
 /***/ }),
-/* 1 */,
-/* 2 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($, jQuery) {document.getElementsByClassName("cookButDiv").addEventListener("click", cooktime(this), false);
@@ -10355,7 +10354,7 @@ var finishDiv = document.getElementById("fulfilled");
                     $(".progress-bar").animate({
                         width: "100%"
                     }, 5000);  
-
+                    
                     var counter = 0;
                     var interval = setInterval(function() {
                         counter++;
