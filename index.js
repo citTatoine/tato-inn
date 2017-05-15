@@ -36,11 +36,8 @@ var img = path.resolve(__dirname, "img");
 
 const loginOperation = require (db+"/login_query.js");
 const adminAccOperation = require (db+"/account_queries.js");
-<<<<<<< HEAD
 const adminMenuOperation = require (db+"/menu_queries.js");
 const adminTransOperation = require (db+"/transaction_queries");
-=======
->>>>>>> develop
 
 app.use("/bundle", express.static(src));
 app.use("/styles", express.static(css));
@@ -85,27 +82,24 @@ app.all("/admin", function(req,resp){
 
 
 //========== Login Queries ==========//
-
 app.get("/db/login", function(req,resp){
     loginOperation.login(req,resp);
-<<<<<<< HEAD
-=======
 });
-app.get("/db/register", function(req,resp){
-    adminAccOperation.addUser(req,resp);
->>>>>>> develop
-});
+
+//========== Account Queries ==========//
 app.get("/db/register", function(req,resp){
     adminAccOperation.addUser(req,resp);
 });
 app.get("/db/modify", function(req,resp){
     adminAccOperation.alterUser(req,resp);
 });
+
+//========== Menu Queries ==========//
 app.get("/db/alterItem", function(req,resp){
     adminMenuOperation.alterItem(req,resp);
 });
 app.get("/db/addItem", function(req,resp){
-   adminMenuOperation.addItem(req,resp);
+    adminMenuOperation.addItem(req,resp);
 });
 
 

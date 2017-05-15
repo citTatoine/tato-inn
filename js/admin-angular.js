@@ -11,11 +11,7 @@ adminapp.config(function($routeProvider, $locationProvider) {
         })
         .when("/admin/accounts", {
             templateUrl : "/admin-partials/accountdetails.html",
-<<<<<<< HEAD
             controller: "accounts_controller"
-=======
-            controller: "postgreSQLCtrl"
->>>>>>> develop
         })
         .when("/admin/transactions", {
             templateUrl : "/admin-partials/transactions.html"
@@ -28,7 +24,6 @@ adminapp.config(function($routeProvider, $locationProvider) {
 
 });
 
-<<<<<<< HEAD
 adminapp.controller('accounts_controller', ['$scope' ,'$http',  function($scope,$http) {
     //MODIFY USER
     $scope.old_password = '';
@@ -36,15 +31,11 @@ adminapp.controller('accounts_controller', ['$scope' ,'$http',  function($scope,
     $scope.con_new_created_password = '';
 
     //ADD USER
-=======
-adminapp.controller('postgreSQLCtrl', ['$scope' ,'$http',  function($scope,$http) {
->>>>>>> develop
     $scope.created_username = '';
     $scope.user_option = '';
     $scope.created_password = '';
     $scope.con_created_password = '';
 
-<<<<<<< HEAD
 
     $scope.modify = function(){
         $http({method: 'GET', url: '/db/modify?old_password='+$scope.old_password+'&new_created_password='+$scope.new_created_password+'&con_new_created_password='+$scope.con_new_created_password}).then(function successCallback (){
@@ -142,13 +133,4 @@ adminapp.directive("fileread", [function () {
             });
         }
     }
-=======
-    $scope.register = function(){
-        $http({method: 'GET', url: '/db/register?created_username='+$scope.created_username+'&user_option='+$scope.user_option+'&created_password='+$scope.created_password+'&con_created_password='+$scope.con_created_password}).then(function successCallback (response){
-            $scope.dataset = response;
-        }, function errCallback(response){
-            $scope.dataset = response || "Request failed ";
-        });
-    }
->>>>>>> develop
 }]);
