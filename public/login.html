@@ -13,8 +13,8 @@
 
     </head>
 
-    <body data-ng-app="postgreSQL">
-        <div id="loginDiv" data-ng-controller="postgreSQLCtrl" class="animated bounceInDown" >
+    <body data-ng-app="login">
+        <div id="loginDiv" data-ng-controller="login_controller" class="animated bounceInDown" >
             
             <img id="loginLogo" class="logo" src="http://i.imgur.com/78aw6TO.png"/>
             <hr />
@@ -26,8 +26,8 @@
         <!--<script src="/bundle/loginbundle.js"></script>-->
 
         <script>
-            var myApp = angular.module('postgreSQL',[]);
-            myApp.controller('postgreSQLCtrl', ['$scope' ,'$http', '$window',  function($scope,$http,$window) {
+            var myApp = angular.module('login',[]);
+            myApp.controller('login_controller', ['$scope' ,'$http', '$window',  function($scope,$http,$window) {
                 $scope.val1 = 'This is temp Val' ;
                 $scope.uName = '';
                 $scope.pWord = '';
