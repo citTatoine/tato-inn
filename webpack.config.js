@@ -10,6 +10,7 @@ var config = {
     entry: {
         "login":jF+"/login.js",
         //vendor: ['angular'],
+        "admin-angular":jF+"/admin-angular.js",
         "admin":jF+"/admin.js",
         "order":jF+"/orderpage.js",
         "owl":jF+"/owl.carousel.min.js",
