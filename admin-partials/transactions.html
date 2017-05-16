@@ -14,27 +14,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>Burger Combo</td>
-                <td>2:15 PM</td>
-                <td>$12.00</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Burger Combo</td>
-                <td>2:15 PM</td>
-                <td>$12.00</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Burger Combo</td>
-                <td>2:15 PM</td>
-                <td>$12.00</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Burger Combo</td>
+            <tr ng-repeat="item in dataset">
+                <td>{{item.order_id}}</td>
+                <td>{{}}</td>
                 <td>2:15 PM</td>
                 <td>$12.00</td>
             </tr>

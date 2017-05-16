@@ -12,27 +12,27 @@
 
     </ul>
     <div class="tab-content">
-        <div class="tab-pane fade active in" id="password">
+        <div class="tab-pane fade active in" id=password">
             <br />
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="input-group">
                     <div class="row">
                         <h5>Old Password:</h5>
-                        <input type="text" class="form-control" placeholder="Password" />
+                        <input type="text" class="form-control" placeholder="Password" ng-model="old_password"/>
                     </div>
                     <br>
                     <div class="row">
                         <h5>New Password:</h5>
-                        <input type="text" class="form-control" placeholder="Enter new password" />
+                        <input type="text" class="form-control" placeholder="Enter new password" ng-model="new_created_password"/>
                     </div>
                     <br>
                     <div class="row">
                         <h5>Confirm new password:</h5>
-                        <input type="text" class="form-control" placeholder="Confirm new password" />
+                        <input type="text" class="form-control" placeholder="Confirm new password" ng-model="con_new_created_password"/>
                     </div>
                     <br>
                     <div class="row">
-                        <button type="button" class="btn btn-primary disabled">submit</button>
+                        <button ng-click="modify()" type="button" class="btn btn-primary enable">submit</button>
                     </div>
                 </div>
             </div>
@@ -43,12 +43,12 @@
                 <div class="input-group">
                     <div class="row">
                         <h5>Username:</h5>
-                        <input type="text" id="created_username" class="form-control" placeholder="Username" />
+                        <input type="text" id="created_username" class="form-control" placeholder="Username" ng-model="created_username"/>
                     </div>
                     <br>
                     <div class="row">
                         <label class="mr-sm-2" for="EditinlineFormCustomSelect"><h5 class="required">User Type</h5></label>
-                        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="EditinlineFormCustomSelect">
+                        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="EditinlineFormCustomSelect" ng-model="user_option">
                             <option id="user_option" selected>Choose...</option>
                             <option value="1">Admin</option>
                             <option value="2">Chef</option>
@@ -57,16 +57,16 @@
                     <br>
                     <div class="row">
                         <h5>Password:</h5>
-                        <input type="text" id="created_password" class="form-control" placeholder="Password" />
+                        <input type="text" id="created_password" class="form-control" placeholder="Password" ng-model="created_password" />
                     </div>
                     <br>
                     <div class="row">
                         <h5>Confirm password:</h5>
-                        <input type="text" id="con_created_password" class="form-control" placeholder="Confirm password" />
+                        <input type="text" id="con_created_password" class="form-control" placeholder="Confirm password" ng-model="con_created_password"/>
                     </div>
                     <br>
                     <div class="row">
-                        <button type="button" id="reg_but" class="btn btn-primary enable">Register</button>
+                        <button ng-click="register()" type="button" id="reg_but" class="btn btn-primary enable">Register</button>
                     </div>
                 </div>
             </div>
@@ -77,23 +77,24 @@
                 <div class="input-group">
                     <div class="row">
                         <h5>Old Password:</h5>
-                        <input type="text" class="form-control" placeholder="Password" />
+                        <input type="text" class="form-control" placeholder="Password" ng-model="old_password"/>
                     </div>
                     <br>
                     <div class="row">
                         <h5>New Password:</h5>
-                        <input type="text" class="form-control" placeholder="Enter new password" />
+                        <input type="text" class="form-control" placeholder="Enter new password" ng-model="new_created_password"/>
                     </div>
                     <br>
                     <div class="row">
                         <h5>Confirm new password:</h5>
-                        <input type="text" class="form-control" placeholder="Confirm new password" />
+                        <input type="text" class="form-control" placeholder="Confirm new password" ng-model="con_new_created_password"/>
                     </div>
                     <br>
                     <div class="row">
-                        <button type="button" class="btn btn-primary disabled">submit</button>
+                        <button ng-click="modify()" type="button" class="btn btn-primary enable">submit</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
