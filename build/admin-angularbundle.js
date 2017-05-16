@@ -63,12 +63,17 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
+<<<<<<< HEAD
 /******/ 	return __webpack_require__(__webpack_require__.s = 4);
+=======
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+>>>>>>> 8ff476cb03b0421efd7f11ae0d17cce989f87aff
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */,
 /* 1 */
+<<<<<<< HEAD
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(2);
@@ -33478,6 +33483,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 var adminapp = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module("admin", [__WEBPACK_IMPORTED_MODULE_1_angular_route___default.a]);
+=======
+/***/ (function(module, exports) {
+
+/**
+ * Created by renzo on 2017-05-11.
+ */
+var adminapp = angular.module("admin", ["ngRoute"]);
+>>>>>>> 8ff476cb03b0421efd7f11ae0d17cce989f87aff
 
 adminapp.config(function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
@@ -33611,6 +33624,7 @@ adminapp.directive("fileread", [function () {
     }
 }]);
 
+<<<<<<< HEAD
 /***/ }),
 /* 5 */,
 /* 6 */,
@@ -34850,5 +34864,7 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 })(window, window.angular);
 
 
+=======
+>>>>>>> 8ff476cb03b0421efd7f11ae0d17cce989f87aff
 /***/ })
 /******/ ]);

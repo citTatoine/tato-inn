@@ -63,7 +63,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
+<<<<<<< HEAD
 /******/ 	return __webpack_require__(__webpack_require__.s = 8);
+=======
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+>>>>>>> 8ff476cb03b0421efd7f11ae0d17cce989f87aff
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10329,7 +10333,11 @@ return jQuery;
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 8:
+=======
+/***/ 6:
+>>>>>>> 8ff476cb03b0421efd7f11ae0d17cce989f87aff
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(jQuery) {/**

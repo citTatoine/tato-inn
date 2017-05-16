@@ -1,81 +1,15 @@
-<div>
-
-    <div class="container-fluid text-center">
-        <div class="row-fluid">
-            <div class="col-sm-4 centering text-center">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <img src="/img/breakfast/bread.png" class="img-responsive  menu-items" alt="Image">
-                    </div>
-                    <div class="col-lg-6 cartButDiv">
-                        <h1 style="color: white">Mc Double</h1>
-                        <button type="button" class="btn btn-success addtoCart">Add to order</button>
-                    </div>
+<div class="container-fluid text-center">
+    <div class="row-fluid">
+        <div class="col-sm-4 centering text-center" ng-repeat="x in typeset track by $index">
+            <div class="row">
+                <div class="col-lg-6">
+                    <img src={{'/img/'+foodtype+'/'+x.item_imgurl}} class="img-responsive  menu-items" alt="Image">
                 </div>
-            </div>
-            <div class="col-sm-4 centering text-center">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <img src="/img/breakfast/breakfast2.png" class="img-responsive  menu-items" alt="Image">
-                    </div>
-                    <div class="col-lg-6 cartButDiv">
-                        <h1 style="color: white">Mc Double</h1>
-                        <button type="button" class="btn btn-success addtoCart">Add to order</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 centering text-center">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <img src="/img/breakfast/breakfast3.png" class="img-responsive  menu-items" alt="Image">
-                    </div>
-                    <div class="col-lg-6 cartButDiv">
-                        <h1 style="color: white">Mc Double</h1>
-                        <button type="button" class="btn btn-success addtoCart">Add to order</button>
-                    </div>
+                <div class="col-lg-6 cartButDiv">
+                    <h1 style="color: white" id = "{{'item-' + $index}}">{{x.item_name}}</h1>
+                    <button data-id = "{{$index}}" data-ng-click = "update($event)" class="btn btn-success addtoCart" data-toggle="modal" data-target="#suggestiveSell">Add to order</button>
                 </div>
             </div>
         </div>
-    </div><br>
-
-
-
-    <div class="container-fluid text-center">
-        <div class="row-fluid">
-            <div class="col-sm-4 centering text-center">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <img src="/img/breakfast/dessert.png" class="img-responsive  menu-items" alt="Image">
-                    </div>
-                    <div class="col-lg-6 cartButDiv">
-                        <h1 style="color: white">Mc Double</h1>
-                        <button type="button" class="btn btn-success addtoCart">Add to order</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 centering text-center">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <img src="/img/breakfast/proteins.png" class="img-responsive  menu-items" alt="Image">
-                    </div>
-                    <div class="col-lg-6 cartButDiv">
-                        <h1 style="color: white">Mc Double</h1>
-                        <button type="button" class="btn btn-success addtoCart">Add to order</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 centering text-center">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <img src="/img/breakfast/nutrition.png" class="img-responsive  menu-items" alt="Image">
-                    </div>
-                    <div class="col-lg-6 cartButDiv">
-                        <h1 style="color: white">Mc Double</h1>
-                        <button type="button" class="btn btn-success addtoCart">Add to order</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div><br>
-
+    </div>
 </div>

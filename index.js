@@ -25,7 +25,7 @@ var app = express();
 
 const server = require("http").createServer(app);
 
-var io = require("socket.io")(server);
+// var io = require("socket.io")(server);
 
 //resolving paths
 var pF = path.resolve(__dirname, "public");
@@ -105,6 +105,18 @@ app.get("/db/alterItem", function(req,resp){
 });
 app.get("/db/addItem", function(req,resp){
     adminMenuOperation.addItem(req,resp);
+});
+
+app.get('/db/getCategory', function(req,resp){
+    adminMenuOperation.getCategory(req,resp);
+});
+
+app.get('/db/getCombo', function(req,resp){
+    adminMenuOperation.getCombo(req,resp);
+});
+
+app.get('/db/getItemPrice', function(req,resp){
+    adminMenuOperation.getItemPrice(req,resp);
 });
 
 
