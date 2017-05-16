@@ -2,6 +2,8 @@
  * Created by renzo on 2017-05-13.
  */
 module.exports ={
+
+    ////////////EDITING MENU////////////
     alterItem: function(req,resp){
         var pg = require('pg');
         var dbURL = process.env.DATABASE_URL || "postgres://postgres:Ilikepie5231!@localhost:5432/tatooine";
@@ -76,6 +78,8 @@ module.exports ={
         });
     },
 
+
+    ////////////ORDER FUNCTIONALITY////////////
     getCategory: function(req, resp) {
         var pg = require('pg');
         var dbURL = process.env.DATABASE_URL || "postgres://enterprisedb:kenster123@localhost:5444/tatooine";
