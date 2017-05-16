@@ -20,7 +20,7 @@ const logfmt = require("logfmt");
 const request = require("request");
 const http = require("http");
 
-
+var dbURL = process.env.DATABASE_URL || "postgres://localhost:5432/tatoinndb"; // edit this line to change DB url
 var app = express();
 
 const server = require("http").createServer(app);
@@ -31,25 +31,23 @@ const server = require("http").createServer(app);
 var pF = path.resolve(__dirname, "public");
 var css = path.resolve(__dirname, "css");
 var src = path.resolve(__dirname, "build");
-var jF = path.resolve(__dirname,"js");
 var db = path.resolve(__dirname, "db");
 var img = path.resolve(__dirname, "img");
-var modules = path.resolve(__dirname, "node_modules");
-var adminP = path.resolve(__dirname,"admin-partials");
-var orderP = path.resolve(__dirname,"order-partials");
 
-const loginOperation = require (db+"/login_query.js");
-const adminAccOperation = require (db+"/account_queries.js");
+const loginQueries = require (db+"/login_query.js");
+const accQueries = require (db+"/account_queries.js");
 const adminMenuOperation = require (db+"/menu_queries.js");
 const adminTransOperation = require (db+"/transaction_queries");
 
-app.use("/styles", express.static(css));
+var accounts = new accQueries(dbURL);
+var loginQ = new loginQueries(dbURL);
+
 app.use("/bundle", express.static(src));
-app.use("/plugin", express.static(jF));
+app.use("/styles", express.static(css));
+app.use("/admin-partials", express.static("admin-partials"));
+app.use("/order-partials", express.static("order-partials"));
+app.use("/plugin", express.static("js"));
 app.use("/img", express.static(img));
-app.use("/modules", express.static(modules));
-app.use("/admin-partials", express.static(adminP));
-app.use("/order-partials", express.static(orderP));
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -88,15 +86,15 @@ app.all("/admin", function(req,resp){
 
 //========== Login Queries ==========//
 app.get("/db/login", function(req,resp){
-    loginOperation.login(req,resp);
+    loginQ.login(req,resp);
 });
 
 //========== Account Queries ==========//
 app.get("/db/register", function(req,resp){
-    adminAccOperation.addUser(req,resp);
+    accounts.addUser(req,resp);
 });
 app.get("/db/modify", function(req,resp){
-    adminAccOperation.alterUser(req,resp);
+    accounts.alterUser(req,resp);
 });
 
 //========== Menu Queries ==========//
