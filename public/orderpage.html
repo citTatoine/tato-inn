@@ -1,3 +1,6 @@
+<!--// /**-->
+<!--//  * Created by Kenneth on 2017-05-09.-->
+<!--//  */-->
 <!DOCTYPE html>
 <html data-ng-app="tatooine">
 <head>
@@ -56,7 +59,9 @@
                 <h4 class="modal-title">My Order</h4>
             </div>
             <div class="modal-body">
-                <p data-ng-repeat = "x in items" >{{x}}<span class="glyphicon glyphicon-remove item-remove" data-ng-click = "remove($index)"></span></p>
+
+                <p data-ng-repeat = "(x, y) in items track by $index" >{{y}} x {{x}} <span data-id="{{x}}" class="glyphicon glyphicon-remove item-remove" data-ng-click = "remove($event)"></span></p>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Checkout</button>
@@ -66,6 +71,51 @@
 
     </div>
 </div>
+
+
+    <div id="suggestiveSell" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Order content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="container-fluid centering text-center" >
+                        <div class ="row">
+                            <div class="col-lg-6">
+                                <img src={{'/img/'+tempPrice.item_type+'/'+tempPrice.item_imgurl}} class="img-responsive  menu-items" alt="Image">
+                            </div>
+                            <div class="col-lg-6 cartButDiv">
+                                <h1 style="color: black" >Just the {{suggestionName}} ${{tempPrice.item_price}}</h1>
+                                <button data-id = "{{suggestion}}" data-ng-click = "save($event)" class="btn btn-success addtoCart" data-dismiss="modal">Just the sandwich</button>
+                            </div>
+                            <div class="col-lg-6">
+                                <img src={{'/img/'+tempPrice.item_type+'/'+tempPrice.combo_imgurl}} class="img-responsive  menu-items" alt="Image">
+                            </div>
+                            <div class="col-lg-6 cartButDiv">
+                                <h1 data-id = "combo" id="combo-head" style="color: black" >Add ${{tempPrice.item_combo_price - tempPrice.item_price}} more to make it a combo!</h1>
+                                <button data-id = "{{tempPrice.item_type}}" data-ng-click = "extendMeal()" class="btn btn-success addtoCart" data-dismiss="modal">Add Combo</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Checkout</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
 
 <wrap-owlcarousel class="owl-carousel owl-theme" data-options="{
             loop:true,
@@ -87,13 +137,13 @@
                 }
             }
         }">
-    <a href="/orderpage/menu1"><img src="/img/categories/hamburger.png" class="categories-img"></a>
-    <a href="/orderpage/menu2"><img src="/img/categories/sandwich.png" class="categories-img"></a>
-    <a href="/orderpage/menu3"><img src="/img/categories/french-fries.png" class="categories-img" ></a>
-    <a href="/orderpage/menu4"><img src="/img/categories/ice-cream.png" class="categories-img" ></a>
-    <a href="/orderpage/menu5"><img src="/img/categories/drinks.png" class="categories-img" ></a>
-    <a href="/orderpage/menu6"><img src="/img/categories/combo.png" class="categories-img" ></a>
-    <a href="/orderpage/menu7"><img src="/img/categories/breakfastcombo.png" class="categories-img" ></a>
+    <a data-id="burger" data-ng-click="getType($event)" href="/orderpage/menu1" ><img src="/img/categories/hamburger.png" class="categories-img"></a>
+    <a data-id="breakfast" data-ng-click="getType($event)" href="/orderpage/menu2"><img src="/img/categories/sandwich.png" class="categories-img"></a>
+    <a data-id="appetizer" data-ng-click="getType($event)" href="/orderpage/menu3"><img src="/img/categories/french-fries.png" class="categories-img" ></a>
+    <a data-id="desserts" data-ng-click="getType($event)" href="/orderpage/menu4"><img src="/img/categories/ice-cream.png" class="categories-img" ></a>
+    <a data-id="drinks" data-ng-click="getType($event)" href="/orderpage/menu5"><img src="/img/categories/drinks.png" class="categories-img" ></a>
+    <a data-id="burger" data-ng-click="getCombo($event)" href="/orderpage/menu6"><img src="/img/categories/combo.png" class="categories-img" ></a>
+    <a data-id="breakfast" data-ng-click="getCombo($event)" href="/orderpage/menu7"><img src="/img/categories/breakfastcombo.png" class="categories-img" ></a>
 </wrap-owlcarousel>
 
 

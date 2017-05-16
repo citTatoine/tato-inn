@@ -3,6 +3,8 @@
  */
 var tatooine = angular.module("tatooine", ["ngRoute"]);
 
+
+
 tatooine.config(function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     $routeProvider
@@ -41,20 +43,135 @@ tatooine.directive('wrapOwlcarousel', function () {
     };
 });
 
-tatooine.controller("orders", function($scope){
 
-    $scope.items= ["Mc double", "cheese burger"];
+tatooine.controller("orders", ['$scope', '$http', function($scope, $http){
 
-    $scope.save = function(){
+    $scope.items = ({});
+    $scope.typeset = ({});
+    $scope.suggestion = 0;
+    $scope.suggestionName = "";
+    $scope.tempPrice = ({});
+    $scope.foodtype = "";
 
-        $scope.items.push($scope.newItem)
+    $scope.save = function(index){
+
+        var tempIndex = index.currentTarget.getAttribute("data-id");
+        var menuItem = document.getElementById("item-" + tempIndex).innerHTML;
+
+        if (menuItem in $scope.items ){
+            $scope.items[menuItem]++;
+        }else{
+            $scope.items[menuItem] = 1;
+        }
 
     };
 
-    $scope.remove = function(index){
-        $scope.items.splice(index,1)
-    }
+    $scope.extendMeal = function(){
 
-});
+        var x = document.getElementById("combo-head").getAttribute("data-id");
+
+        var y = $scope.suggestionName + " " + x;
+
+        if (y in $scope.items ){
+            $scope.items[y]++;
+        }else{
+            $scope.items[y] = 1;
+        }
+
+        console.log($scope.items)
+    };
+
+    $scope.remove = function(index){
+
+        var tempIndex = index.currentTarget.getAttribute("data-id");
+
+        delete $scope.items[tempIndex];
+
+        // $scope.items.splice($scope.items.indexOf(index), 1);
+
+    };
+
+    $scope.update = function (index) {
+        $scope.suggestion = index.currentTarget.getAttribute("data-id");
+
+        var x =  $scope.suggestion + "";
+
+        var y = document.getElementById("item-" + x).innerHTML;
+
+        $scope.suggestionName = y;
+
+
+        $http({method: 'GET', url: '/db/getItemPrice?itemName='+y}).then(function successCallback (response){
+
+            $scope.tempPrice = response.data;
+
+            console.log(response.data)
+
+        });
+
+
+
+    };
+
+
+    $scope.getType = function(item){
+
+
+        var type = item.currentTarget.getAttribute("data-id");
+
+        $scope.foodtype = type;
+
+
+        $http({method: 'GET', url: '/db/getCategory?itemType='+type}).then(function successCallback (response){
+
+            $scope.typeset = response.data;
+
+            console.log(response.data)
+
+        });
+
+
+
+
+    };
+
+    $scope.getCombo = function(item){
+
+
+        var type = item.currentTarget.getAttribute("data-id");
+
+        $scope.foodtype = type;
+
+
+        $http({method: 'GET', url: '/db/getCombo?itemType='+type}).then(function successCallback (response){
+
+            $scope.typeset = response.data;
+
+            console.log(response.data)
+
+        });
+
+
+    };
+
+
+
+
+
+
+    // $scope.addCombo = function(index){
+    //
+    //     const tempIndex = index.currentTarget.getAttribute("data-id");
+    //     const menuItem = document.getElementById("item-" + tempIndex);
+    //
+    //
+    //     $scope.items.push(menuItem.innerHTML);
+    //
+    // };
+
+
+
+
+}]);
 
 
