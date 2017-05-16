@@ -63,42 +63,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-<<<<<<< HEAD
 /******/ 	return __webpack_require__(__webpack_require__.s = 7);
-=======
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
->>>>>>> 8ff476cb03b0421efd7f11ae0d17cce989f87aff
 /******/ })
 /************************************************************************/
 /******/ ({
 
-<<<<<<< HEAD
-/***/ 7:
-/***/ (function(module, exports) {
-
-//$(document).ready(function(){
-//    $('.owl-carousel').owlCarousel({
-//        loop:true,
-//        margin:10,
-//        responsiveClass:true,
-//        responsive:{
-//            0:{
-//                items:1,
-//                nav:true
-//            },
-//            600:{
-//                items:3,
-//                nav:false
-//            },
-//            1000:{
-//                items:5,
-//                nav:true,
-//                loop:false
-//            }
-//        }
-//    })
-//});
-=======
 /***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8410,7 +8379,6 @@ support.focusin = "onfocusin" in window;
 // Support: Firefox <=44
 // Firefox doesn't have focus(in | out) events
 // Related ticket - https://bugzilla.mozilla.org/show_bug.cgi?id=687787
->>>>>>> 8ff476cb03b0421efd7f11ae0d17cce989f87aff
 //
 // Support: Chrome <=48 - 49, Safari <=9.0 - 9.1
 // focus(in | out) events fire after focus & blur events,
@@ -10361,7 +10329,7 @@ return jQuery;
 
 /***/ }),
 
-/***/ 5:
+/***/ 7:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {/**

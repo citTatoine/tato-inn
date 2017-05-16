@@ -63,11 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-<<<<<<< HEAD
 /******/ 	return __webpack_require__(__webpack_require__.s = 6);
-=======
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
->>>>>>> 8ff476cb03b0421efd7f11ae0d17cce989f87aff
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -7027,7 +7023,6 @@ function $CacheFactoryProvider() {
   };
 }
 
-<<<<<<< HEAD
 /**
  * @ngdoc service
  * @name $templateCache
@@ -7079,18 +7074,6 @@ function $TemplateCacheProvider() {
     return $cacheFactory('templates');
   }];
 }
-=======
-return jQuery;
-} );
-
-
-/***/ }),
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
->>>>>>> 8ff476cb03b0421efd7f11ae0d17cce989f87aff
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *     Any commits to this file should be reviewed with security in mind.  *
