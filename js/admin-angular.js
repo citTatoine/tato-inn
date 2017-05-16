@@ -1,7 +1,11 @@
 /**
  * Created by renzo on 2017-05-11.
  */
-var adminapp = angular.module("admin", ["ngRoute"]);
+
+import angular from 'angular';
+import ngRoute from 'angular-route';
+
+var adminapp = angular.module("admin", [ngRoute]);
 
 adminapp.config(function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);

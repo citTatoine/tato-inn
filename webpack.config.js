@@ -8,9 +8,9 @@ var bF = path.resolve(__dirname, "build");
 
 var config = {
     entry: {
-        //"login":jF+"/login.js",
+        "login":jF+"/login.js",
         //vendor: ['angular'],
-        //"admin":jF+"/admin.js",
+        "admin-angular":jF+"/admin-angular.js",
         "order":jF+"/order.js",
         "owl":jF+"/owl.carousel.min.js",
         "kitchen":jF+"/kitchen.js"
@@ -20,7 +20,7 @@ var config = {
         path:bF
     },
     plugins: [
-        //new webpack.optimize.CommonsChunkPlugin( {name: "vendor",  filename: "vendor.bundle.js"}),
+        //new webpack.optimize.CommonsChunkPlugin( {name: "vendor",  filename: "vendor.bundle.js  "}),
 
         new webpack.ProvidePlugin({
             $: "jquery",
