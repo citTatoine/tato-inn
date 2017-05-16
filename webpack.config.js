@@ -11,7 +11,6 @@ var config = {
         "login":jF+"/login.js",
         //vendor: ['angular'],
         "admin-angular":jF+"/admin-angular.js",
-        "order":jF+"/order.js",
         "admin":jF+"/admin.js",
         "order":jF+"/orderpage.js",
         "owl":jF+"/owl.carousel.min.js",
@@ -22,7 +21,7 @@ var config = {
         path:bF
     },
     plugins: [
-        //new webpack.optimize.CommonsChunkPlugin( {name: "vendor",  filename: "vendor.bundle.js  "}),
+        //new webpack.optimize.CommonsChunkPlugin( {name: "vendor",  filename: "vendor.bundle.js"}),
 
         new webpack.ProvidePlugin({
             $: "jquery",

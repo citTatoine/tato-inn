@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node node_modules\\webpack\\bin\\webpack.js & node index.js",
     "e2e": "node_modules/.bin/nightwatch"
+    "start": "./node_modules/webpack/bin/webpack.js; node index.js",
+    "winstart": "node node_modules\\webpack\\bin\\webpack.js & node index.js"
   },
   "repository": {
     "type": "git",
@@ -34,12 +35,17 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "request": "^2.81.0",
-    "socket.io": "^1.7.4",
+    "socket.io": "^1.7.3",
+    "unit.js": "^2.0.0",
     "webpack": "^2.5.0"
   },
   "devDependencies": {
     "env2": "^2.2.0",
     "nightwatch": "^0.9.15",
     "selenium-download": "^2.0.10"
+    "http": "0.0.0",
+    "logfmt": "^1.2.0",
+    "pg": "^6.2.2",
+    "request": "^2.81.0"
   }
 }
