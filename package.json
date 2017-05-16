@@ -46,11 +46,17 @@
     "nightwatch": "^0.9.15",
     "selenium-download": "^2.0.10"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 71ba3281e5b7bd0c18071fea4083f0baac029d98
     "http": "0.0.0",
     "logfmt": "^1.2.0",
     "pg": "^6.2.2",
     "request": "^2.81.0"
+<<<<<<< HEAD
 >>>>>>> ab69b5b74c2a6a646e1533273664e8972abc1d90
+=======
+>>>>>>> 71ba3281e5b7bd0c18071fea4083f0baac029d98
   }
 }
