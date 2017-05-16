@@ -8,10 +8,11 @@ var bF = path.resolve(__dirname, "build");
 
 var config = {
     entry: {
-        //"login":jF+"/login.js",
+        "login":jF+"/login.js",
         //vendor: ['angular'],
-        //"admin":jF+"/admin.js",
-        "order":jF+"/order.js",
+        "admin-angular":jF+"/admin-angular.js",
+        "admin":jF+"/admin.js",
+        "order":jF+"/orderpage.js",
         "owl":jF+"/owl.carousel.min.js",
         "kitchen":jF+"/kitchen.js"
     },
