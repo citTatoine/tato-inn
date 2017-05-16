@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
           <link rel="stylesheet" href="/styles/login.css">
 
-          <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>-->
+          <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
     </head>
 
@@ -23,7 +23,29 @@
             <button ng-click="login()" id="loginBut" class="animated rubberBand">Login</button>
         </div>
 
-        <script src="/bundle/loginbundle.js"></script>
+        <!--<script src="/bundle/loginbundle.js"></script>-->
 
+        <script>
+            var myApp = angular.module('login',[]);
+            myApp.controller('login_controller', ['$scope' ,'$http', '$window',  function($scope,$http,$window) {
+                $scope.val1 = 'This is temp Val' ;
+                $scope.uName = '';
+                $scope.pWord = '';
+
+                $scope.login = function(){
+                    $http({method: 'GET', url: '/db/login?uName='+$scope.uName+'&pWord='+$scope.pWord}).then(function successCallback (response){
+                        $scope.dataset = response;
+                        if(response.data.type == "admin"){
+                            $window.location.href = "/admin";
+                        }
+                        else if (response.user.type == "chef"){
+                            $window.location.href = "/kitchen";
+                        }
+                    }, function errCallback(response){
+                        $scope.dataset = response || "Request failed ";
+                    });
+                }
+            }]);
+        </script>
     </body>
 </html>
