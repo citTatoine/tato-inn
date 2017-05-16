@@ -26,7 +26,6 @@ var app = express();
 const server = require("http").createServer(app);
 
 var io = require("socket.io")(server);
-var dbURL = process.env.DATABASE_URL || "postgres://postgres:Ilikepie5231!@localhost:5432/tatooine";
 
 //resolving paths
 var pF = path.resolve(__dirname, "public");
@@ -37,6 +36,8 @@ var img = path.resolve(__dirname, "img");
 
 const loginOperation = require (db+"/login_query.js");
 const adminAccOperation = require (db+"/account_queries.js");
+const adminMenuOperation = require (db+"/menu_queries.js");
+const adminTransOperation = require (db+"/transaction_queries");
 
 app.use("/bundle", express.static(src));
 app.use("/styles", express.static(css));
@@ -81,79 +82,26 @@ app.all("/admin", function(req,resp){
 
 
 //========== Login Queries ==========//
-
 app.get("/db/login", function(req,resp){
     loginOperation.login(req,resp);
 });
+
+//========== Account Queries ==========//
 app.get("/db/register", function(req,resp){
     adminAccOperation.addUser(req,resp);
 });
-// app.post("/register", function(req, resp){
-//     console.log("checkpoint2");
-//     if(req.body.pass == req.body.con_pass) {
-//
-//         bcrypt.hash(req.body.pass, 5, function (err, bpass) {
-//             pg.connect(dbURL, function (err, client, done) {
-//                 if (err) {
-//                     console.log(err);
-//                     resp.send({status: "fail"});
-//                 }
-//
-//                 client.query("INSERT INTO users (user_type, username, password) VALUES ($1, $2, $3) RETURNING user_id", [req.body.user_type, req.body.username, bpass], function (err, result) {
-//
-//                     done();
-//                     if (err) {
-//                         console.log(err);
-//                         resp.send({status: "fail"});
-//                     }
-//
-//                     resp.send({status: "success", id: result.rows[0].user_id});
-//                 });
-//             });
-//         });
-//     }
-//
-//     else{
-//         console.log("checkpoint3");
-//     }
-// });
-//
-// app.post("/login", function(req, resp){
-//
-//     pg.connect(dbURL, function(err, client, done){
-//         if(err){
-//             console.log(err);
-//             resp.send({status:"fail"});
-//         }
-//
-//         client.query("SELECT user_id, user_type, username, password FROM users WHERE username = $1", [req.body.username], function(err, result){
-//
-//             done();
-//             if(err){
-//                 console.log(err);
-//                 resp.send({status:"fail"});
-//             }
-//
-//             if(result.rows.length > 0){
-//                 bcrypt.compare(req.body.pass, result.rows[0].password, function(err, isMatch){
-//                     if(isMatch){
-//                         console.log("match");
-//                         req.session.user = {
-//                             username:result.rows[0].username,
-//                             id: result.rows[0].user_id,
-//                             type: result.rows[0].user_type
-//                         };
-//                         resp.send({status:"success", user:req.session.user});
-//                     } else {
-//                         console.log(err);
-//                     }
-//                 });
-//             } else {
-//                 resp.send({status:"fail"});
-//             }
-//         });
-//     })
-// });
+app.get("/db/modify", function(req,resp){
+    adminAccOperation.alterUser(req,resp);
+});
+
+//========== Menu Queries ==========//
+app.get("/db/alterItem", function(req,resp){
+    adminMenuOperation.alterItem(req,resp);
+});
+app.get("/db/addItem", function(req,resp){
+    adminMenuOperation.addItem(req,resp);
+});
+
 
 server.listen(port, function(err){
     if(err){

@@ -20,13 +20,13 @@
             <div class="row">
                 <div class="col-lg-4">
                     <h5 class="required">Product Name:</h5>
-                    <input type="text" class="form-control" placeholder="Product Name" />
+                    <input type="text" class="form-control" placeholder="Product Name" ng-model="selected_item_name"/>
                     <br>
                     <h5 class="required">New Product Name:</h5>
-                    <input type="text" class="form-control" placeholder="Product Name" />
+                    <input type="text" class="form-control" placeholder="Product Name" ng-model="edited_item_name"/>
                     <br>
                     <label class="mr-sm-2" for="EditinlineFormCustomSelect"><h5 class="required">New Product Type</h5></label>
-                    <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="EditinlineFormCustomSelect">
+                    <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="EditinlineFormCustomSelect" ng-model="edited_item_type">
                         <option selected>Choose...</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -35,16 +35,16 @@
                     <br>
                     <br>
                     <h5>New Product Price:</h5>
-                    <input type="text" class="form-control" placeholder="Product Price" />
+                    <input type="text" class="form-control" placeholder="Product Price" ng-model="edited_item_price"/>
                     <br>
                 </div>
                 <div class="col-lg-4">
                     <h5>New Combo Price:</h5>
-                    <input type="text" class="form-control" placeholder="Combo Price" />
+                    <input type="text" class="form-control" placeholder="Combo Price" ng-model="edited_item_combo_price"/>
                     <br>
                     <h5 class="required">New Product Image:</h5>
                     <label class="custom-file">
-                        <input type="file" id="editFile" class="custom-file-input">
+                        <input type="file" id="editFile" class="custom-file-input" fileread="edited_item_img">
                         <span class="custom-file-control"></span>
                     </label>
                     <br>
@@ -53,7 +53,7 @@
 
                         <div class="col-lg-6"></div>
                         <div class="col-lg-6">
-                            <button type="button" class="btn btn-primary disabled btn-lg btn-block">submit menu changes</button>
+                            <button ng-click="alterItem()" type="button" class="btn btn-primary enable btn-lg btn-block">submit menu changes</button>
                         </div>
                     </div>
                 </div>
@@ -64,10 +64,10 @@
             <div class="row">
                 <div class="col-lg-4">
                     <h5 class="required">Product Name:</h5>
-                    <input type="text" class="form-control" placeholder="Product Name" />
+                    <input type="text" class="form-control" placeholder="Product Name" ng-model="added_item_name" />
                     <br>
                     <label class="mr-sm-2" for="inlineFormCustomSelect"><h5 class="required">Product Type</h5></label>
-                    <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                    <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect" ng-model="added_item_type">
                         <option selected>Choose...</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -76,16 +76,16 @@
                     <br>
                     <br>
                     <h5>Product Price:</h5>
-                    <input type="text" class="form-control" placeholder="Product Price" />
+                    <input type="text" class="form-control" placeholder="Product Price" ng-model="added_item_price"/>
                     <br>
                 </div>
                 <div class="col-lg-4">
                     <h5>Combo Price:</h5>
-                    <input type="text" class="form-control" placeholder="Combo Price" />
+                    <input type="text" class="form-control" placeholder="Combo Price" ng-model="added_item_combo_price"/>
                     <br>
                     <h5 class="required">Product Image:</h5>
                     <label class="custom-file">
-                        <input type="file" id="file" class="custom-file-input">
+                        <input type="file" id="file" class="custom-file-input" fileread="added_item_img">
                         <span class="custom-file-control"></span>
                     </label>
                     <br>
@@ -94,7 +94,7 @@
 
                         <div class="col-lg-6"></div>
                         <div class="col-lg-6">
-                            <button type="button" class="btn btn-primary disabled btn-lg btn-block">submit menu changes</button>
+                            <button ng-click="addItem()" type="button" class="btn btn-primary enable btn-lg btn-block">submit menu changes</button>
                         </div>
 
                     </div>
@@ -102,3 +102,5 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
