@@ -63,11 +63,16 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+<<<<<<< HEAD
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+=======
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+>>>>>>> 8ff476cb03b0421efd7f11ae0d17cce989f87aff
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10327,10 +10332,12 @@ return jQuery;
 
 
 /***/ }),
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */
+
+<<<<<<< HEAD
+/***/ 8:
+=======
+/***/ 6:
+>>>>>>> 8ff476cb03b0421efd7f11ae0d17cce989f87aff
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(jQuery) {/**
@@ -10343,4 +10350,5 @@ a.fn.owlCarousel.Constructor.Plugins.Animate=e}(window.Zepto||window.jQuery,wind
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ })
-/******/ ]);
+
+/******/ });
