@@ -34,12 +34,13 @@ var src = path.resolve(__dirname, "build");
 var db = path.resolve(__dirname, "db");
 var img = path.resolve(__dirname, "img");
 
-const loginOperation = require (db+"/login_query.js");
+const loginQueries = require (db+"/login_query.js");
 const accQueries = require (db+"/account_queries.js");
 const adminMenuOperation = require (db+"/menu_queries.js");
 const adminTransOperation = require (db+"/transaction_queries");
 
 var accounts = new accQueries(dbURL);
+var loginQ = new loginQueries(dbURL);
 
 app.use("/bundle", express.static(src));
 app.use("/styles", express.static(css));
@@ -85,7 +86,7 @@ app.all("/admin", function(req,resp){
 
 //========== Login Queries ==========//
 app.get("/db/login", function(req,resp){
-    loginOperation.login(req,resp);
+    loginQ.login(req,resp);
 });
 
 //========== Account Queries ==========//
