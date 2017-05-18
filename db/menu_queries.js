@@ -4,7 +4,7 @@
 module.exports ={
     alterItem: function(req,resp){
         var pg = require('pg');
-        var dbURL = process.env.DATABASE_URL || "postgres://postgres:Ilikepie5231!@localhost:5432/tatooine";
+        var dbURL = process.env.DATABASE_URL || "postgres://localhost:5432/tatoinndb";
         var client = new pg.Client(dbURL);
         client.connect();
         var type = "";
