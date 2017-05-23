@@ -82,6 +82,29 @@ app.all("/admin", function(req,resp){
 });
 
 
+app.all("/pickup", function(req,resp){
+    resp.sendFile(pF+"/pickup.html");
+});
+
+
+//====== Store/Send Pickup Number ========//
+app.get("/save/CusPickupNo", function (req,resp) {
+
+    req.session.pickup = req.query.pickup;
+
+    console.log(req.session.pickup);
+
+    resp.send("Success")
+
+});
+
+app.get("/get/CusPickupNo", function (req,resp) {
+
+    console.log(req.session.pickup);
+
+    resp.send(req.session.pickup)
+
+});
 
 
 //========== Login Queries ==========//
@@ -113,9 +136,18 @@ app.get('/db/getCombo', function(req,resp){
     adminMenuOperation.getCombo(req,resp);
 });
 
-app.get('/db/getItemPrice', function(req,resp){
-    adminMenuOperation.getItemPrice(req,resp);
+app.get('/db/getAll', function(req,resp){
+    adminMenuOperation.getAllItems(req,resp);
 });
+
+app.get('/db/addOrder', function(req,resp){
+    adminMenuOperation.addOrder(req,resp);
+});
+
+app.get('/db/addOrderItems', function(req,resp){
+    adminMenuOperation.addOrderItems(req,resp);
+});
+
 
 
 server.listen(port, function(err){

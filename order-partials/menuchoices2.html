@@ -1,15 +1,65 @@
-<div class="container-fluid text-center">
+<!--// /**-->
+<!--//  * Created by Kenneth on 2017-05-09.-->
+<!--//  */-->
+
+<!---------------- Order content-------------------->
+
+<div class="container-fluid text-center" ng-hide="myVar">
     <div class="row-fluid">
         <div class="col-sm-4 centering text-center" ng-repeat="x in typeset track by $index">
             <div class="row">
                 <div class="col-lg-6">
-                    <img src={{'/img/'+foodtype+'/'+x.item_imgurl}} class="img-responsive  menu-items" alt="Image">
+                    <img ng-src="/img/{{foodtype}}/{{x.item_imgurl}}" class="img-responsive  menu-items" alt="Image">
                 </div>
                 <div class="col-lg-6 cartButDiv">
-                    <h1 style="color: white" id = "{{'item-' + $index}}">{{x.item_name}}</h1>
-                    <button data-id = "{{$index}}" data-ng-click = "update($event)" class="btn btn-success addtoCart" data-toggle="modal" data-target="#suggestiveSell">Add to order</button>
+                    <h1 class="item-name" id = "{{'item-' + $index}}">{{x.item_name}}</h1>
+                    <h1 class="item-name">${{x.item_price}}</h1>
+                    <button data-id = "{{$index}}" data-ng-click = "updateChoice(x)" class="btn btn-success addtoCart" data-toggle="modal" data-target="#suggestiveSell">Add to order</button>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+
+<!---------------- Combo content-------------------->
+
+<div id="suggestiveSell" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Order content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="container-fluid centering text-center" >
+                    <div class ="row">
+                        <div class="col-lg-6">
+                            <img ng-src="/img/{{tempitem.item_type}}/{{tempitem.item_imgurl}}" class="img-responsive  menu-items" alt="Image">
+                        </div>
+                        <div class="col-lg-6 cartButDiv">
+                            <h1 style="color: black" >Just the {{tempitem.item_name}} ${{tempitem.item_price}}</h1>
+                            <button data-ng-click = "save()" class="btn btn-success addtoCart" data-dismiss="modal">Just the sandwich</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <img ng-src="/img/{{tempitem.item_type}}/{{tempitem.combo_imgurl}}" class="img-responsive  menu-items" alt="Image">
+                        </div>
+                        <div class="col-lg-6 cartButDiv">
+                            <h1 data-id = "combo" id="combo-head" style="color: black" >Add ${{tempitem.item_combo_price - tempitem.item_price}} more to make it a combo!</h1>
+                            <button data-id = "{{tempitem.item_type}}" data-ng-click = "extendMeal()" class="btn btn-success addtoCart" data-dismiss="modal">Add Combo</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
     </div>
 </div>

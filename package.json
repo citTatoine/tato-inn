@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "e2e": "node_modules/.bin/nightwatch",
-    "start": "./node_modules/webpack/bin/webpack.js; node index.js",
+    "start": "node node_modules\\webpack\\bin\\webpack.js & node index.js",
     "winstart": "node node_modules\\webpack\\bin\\webpack.js & node index.js"
   },
   "repository": {
@@ -29,6 +29,7 @@
     "express-session": "^1.15.2",
     "http": "0.0.0",
     "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
     "logfmt": "^1.2.0",
     "owl.carousel": "^2.2.0",
     "pg": "^6.1.5",
@@ -42,8 +43,7 @@
   "devDependencies": {
     "env2": "^2.2.0",
     "nightwatch": "^0.9.15",
-    "selenium-download": "^2.0.10"
-    "http": "0.0.0",
+    "selenium-download": "^2.0.10",
     "logfmt": "^1.2.0",
     "pg": "^6.2.2",
     "request": "^2.81.0"

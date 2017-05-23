@@ -4,7 +4,7 @@
 module.exports ={
     alterItem: function(req,resp){
         var pg = require('pg');
-        var dbURL = process.env.DATABASE_URL || "postgres://localhost:5432/tatoinndb";
+        var dbURL = process.env.DATABASE_URL || "postgres://postgres:Ilikepie5231!@localhost:5432/tatooine";
         var client = new pg.Client(dbURL);
         client.connect();
         var type = "";
@@ -99,6 +99,29 @@ module.exports ={
     },
 
 
+    getAllItems: function(req, resp) {
+        var pg = require('pg');
+        var dbURL = process.env.DATABASE_URL || "postgres://enterprisedb:kenster123@localhost:5444/tatooine";
+        var client = new pg.Client(dbURL);
+        client.connect();
+        var query = client.query("select * from items");
+
+        query.on("end", function (result) {
+            client.end();
+            if(result.rows.length > 0) {
+
+                var foodType = result.rows;
+
+                resp.send(foodType);
+            }
+        });
+
+
+
+
+    },
+
+
     getCombo: function(req, resp) {
         var pg = require('pg');
         var dbURL = process.env.DATABASE_URL || "postgres://enterprisedb:kenster123@localhost:5444/tatooine";
@@ -121,27 +144,31 @@ module.exports ={
 
     },
 
-
-    getItemPrice: function(req, resp) {
+    addOrder: function(req,resp){
         var pg = require('pg');
         var dbURL = process.env.DATABASE_URL || "postgres://enterprisedb:kenster123@localhost:5444/tatooine";
         var client = new pg.Client(dbURL);
         client.connect();
-        var query = client.query("select * from items WHERE item_name = '" + req.query.itemName+ "'");
 
+        var query = client.query("INSERT INTO product_order (item_id, combo, order_id, quantity) VALUES ('"+req.query.item_ID+"','"+req.query.comboBoolean+"','"+req.query.order_ID+"','"+req.query.quantity+"')");
+        query.on("end", function () {
+            client.end();
+            resp.send("success")
+        });
+    },
+
+
+    addOrderItems: function(req,resp){
+        var pg = require('pg');
+        var dbURL = process.env.DATABASE_URL || "postgres://enterprisedb:kenster123@localhost:5444/tatooine";
+        var client = new pg.Client(dbURL);
+        client.connect();
+
+        var query = client.query("INSERT INTO orders (order_cost, order_status) VALUES ('"+req.query.total+"','"+req.query.orderStatus+"')RETURNING order_id, order_pickup_id");
         query.on("end", function (result) {
             client.end();
-            if(result.rows.length > 0) {
-
-                var itemPrice = result.rows[0];
-
-                resp.send(itemPrice);
-            }
+            resp.send(result.rows[0])
         });
-
-
-
-
     },
 
 };
