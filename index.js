@@ -60,11 +60,23 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.all("/", function(req, resp){
-    resp.sendFile(pF+"/login.html");
+app.all("/staff", function(req, resp){
+    if (!req.session.user) {
+
+        resp.sendFile(pF+"/login.html");
+        
+    } else if(req.session.user.type == "admin"){
+
+        resp.sendFile(pF+"/administration.html");
+
+    } else if(req.session.user.type == "chef"){
+
+        resp.sendFile(pF+"/kitchen.html");
+
+    }
 });
 
-app.all("/start", function(req,resp){
+app.all("/", function(req,resp){
     resp.sendFile(pF+"/startorder.html");
 });
 
@@ -73,13 +85,13 @@ app.all("/order", function(req,resp){
 });
 
 
-app.all("/kitchen", function(req,resp){
-    resp.sendFile(pF+"/kitchen.html");
-});
+// app.all("/kitchen", function(req,resp){
+//     resp.sendFile(pF+"/kitchen.html");
+// });
 
-app.all("/admin", function(req,resp){
-    resp.sendFile(pF+"/administration.html");
-});
+// app.all("/admin", function(req,resp){
+//     resp.sendFile(pF+"/administration.html");
+// });
 
 
 app.all("/pickup", function(req,resp){

@@ -10,13 +10,16 @@ myApp.controller('login_controller', ['$scope' ,'$http', '$window',  function($s
 
     $scope.login = function(){
         $http({method: 'GET', url: '/db/login?uName='+$scope.uName+'&pWord='+$scope.pWord}).then(function successCallback (response){
-            $scope.dataset = response;
-            if(response.data.type == "admin"){
-                $window.location.href = "/admin";
-            }
-            else if (response.user.type == "chef"){
-                $window.location.href = "/kitchen";
-            }
+
+            $window.location.reload();
+            console.log(response);
+            // $scope.dataset = response;
+            // if(response.data.type == "admin"){
+            //     $window.location.href = "/admin";
+            // }
+            // else if (response.user.type == "chef"){
+            //     $window.location.href = "/kitchen";
+            // }
         }, function errCallback(response){
             $scope.dataset = response || "Request failed ";
         });
