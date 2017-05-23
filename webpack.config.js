@@ -11,10 +11,6 @@ var config = {
         "login":jF+"/login.js",
         //vendor: ['angular'],
         "admin-angular":jF+"/admin-angular.js",
-<<<<<<< HEAD
-        "order":jF+"/order.js",
-=======
->>>>>>> 377a47fce02d93d77831fe322ac8cd24abba15cc
         "admin":jF+"/admin.js",
         "order":jF+"/orderpage.js",
         "owl":jF+"/owl.carousel.min.js",

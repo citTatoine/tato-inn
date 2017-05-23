@@ -1,6 +1,11 @@
 /**
  * Created by Kenneth on 2017-05-11.
  */
+
+// ----------------------------------//
+// Page routes to orderpage.html View
+// ----------------------------------//
+
 var tatooine = angular.module("tatooine", ["ngRoute"]);
 
 
@@ -29,9 +34,17 @@ tatooine.config(function($routeProvider, $locationProvider) {
         .when("/orderpage/menu7", {
             templateUrl : "/order-partials/menuchoices7.html"
         })
+        .when("/orderpage/allmenu", {
+            templateUrl : "/order-partials/allchoices.html"
+        })
         .otherwise({redirectTo: '/'});
 
 });
+
+
+// ----------------------------------//
+// Swipe carousel on orderpage
+// ----------------------------------//
 
 tatooine.directive('wrapOwlcarousel', function () {
     return {
@@ -44,74 +57,164 @@ tatooine.directive('wrapOwlcarousel', function () {
 });
 
 
-tatooine.controller("orders", ['$scope', '$http', function($scope, $http){
+// ----------------------------------//
+// Orderpage Controller
+// ----------------------------------//
 
-    $scope.items = ({});
+
+tatooine.controller("orders", ['$scope', '$http', '$window', function($scope, $http, $window){
+
+
+
+    $scope.cart = ({});
     $scope.typeset = ({});
-    $scope.suggestion = 0;
-    $scope.suggestionName = "";
     $scope.tempPrice = ({});
     $scope.foodtype = "";
+    $scope.tempitem = ({});
+    $scope.ammount = 0;
+    $scope.ordernumber = 0;
 
-    $scope.save = function(index){
 
-        var tempIndex = index.currentTarget.getAttribute("data-id");
-        var menuItem = document.getElementById("item-" + tempIndex).innerHTML;
 
-        if (menuItem in $scope.items ){
-            $scope.items[menuItem]++;
-        }else{
-            $scope.items[menuItem] = 1;
+
+    // -------------------------------------------------------//
+    // Adds single items from suggestive tab content to orders
+    // ------------------------------------------------------//
+
+    $scope.save = function(){
+
+        var x = ({});
+
+        x["item_id"] = $scope.tempitem.item_id;
+        x["item_price"] = $scope.tempitem.item_price;
+        x["qty"] = $scope.tempitem.qty;
+        x["combo"] = false;
+
+        if($scope.tempitem.item_name in $scope.cart ){
+            $scope.cart[$scope.tempitem.item_name].qty++
+        }else {
+            $scope.cart[$scope.tempitem.item_name] = x;
         }
 
+
+        $scope.ammount += $scope.tempitem.item_price;
+
     };
+
+    // -------------------------------------------------------//
+    // Adds single items from menu content to orders
+    // ------------------------------------------------------//
+
+    $scope.saveIndividual = function(index){
+        $scope.tempitem = index;
+
+        $scope.tempitem["qty"] = 1;
+
+        var x = ({});
+
+        x["item_id"] = $scope.tempitem.item_id;
+        x["item_price"] = $scope.tempitem.item_price;
+        x["qty"] = $scope.tempitem.qty;
+        x["combo"] = false;
+
+        if($scope.tempitem.item_name in $scope.cart ){
+            $scope.cart[$scope.tempitem.item_name].qty++
+        }else {
+            $scope.cart[$scope.tempitem.item_name] = x;
+        }
+
+        $scope.ammount += $scope.tempitem.item_price;
+
+    };
+
+    // -------------------------------------------------------//
+    // Adds combo items from menu content to orders
+    // ------------------------------------------------------//
+
+    $scope.saveCombo = function(index){
+        $scope.tempitem = index;
+
+        $scope.tempitem["qty"] = 1;
+
+        var x = ({});
+
+        x["item_id"] = $scope.tempitem.item_id;
+        x["item_price"] = $scope.tempitem.item_combo_price;
+        x["qty"] = $scope.tempitem.qty;
+        x["combo"] = true;
+
+        var y = $scope.tempitem.item_name + " Combo";
+
+        if(y in $scope.cart ){
+            $scope.cart[y].qty++
+        }else {
+            $scope.cart[y] = x;
+        }
+
+        $scope.ammount += $scope.tempitem.item_combo_price;
+
+    };
+
+    // -------------------------------------------------------//
+    // Adds combo from suggestive content to orders
+    // ------------------------------------------------------//
+
 
     $scope.extendMeal = function(){
 
-        var x = document.getElementById("combo-head").getAttribute("data-id");
+        var x = ({});
 
-        var y = $scope.suggestionName + " " + x;
+        x["item_id"] = $scope.tempitem.item_id;
+        x["item_price"] = $scope.tempitem.item_combo_price;
+        x["qty"] = $scope.tempitem.qty;
+        x["combo"] = true;
 
-        if (y in $scope.items ){
-            $scope.items[y]++;
-        }else{
-            $scope.items[y] = 1;
+        var y = $scope.tempitem.item_name + " Combo";
+
+        if(y in $scope.cart ){
+            $scope.cart[y].qty++
+        }else {
+            $scope.cart[y] = x;
         }
 
-        console.log($scope.items)
-    };
+        $scope.ammount += $scope.tempitem.item_combo_price;
 
-    $scope.remove = function(index){
-
-        var tempIndex = index.currentTarget.getAttribute("data-id");
-
-        delete $scope.items[tempIndex];
-
-        // $scope.items.splice($scope.items.indexOf(index), 1);
-
-    };
-
-    $scope.update = function (index) {
-        $scope.suggestion = index.currentTarget.getAttribute("data-id");
-
-        var x =  $scope.suggestion + "";
-
-        var y = document.getElementById("item-" + x).innerHTML;
-
-        $scope.suggestionName = y;
-
-
-        $http({method: 'GET', url: '/db/getItemPrice?itemName='+y}).then(function successCallback (response){
-
-            $scope.tempPrice = response.data;
-
-            console.log(response.data)
-
-        });
 
 
 
     };
+
+    // -------------------------------------------------------//
+    // Remove items from orders
+    // ------------------------------------------------------//
+
+    $scope.remove = function(x, y){
+
+        $scope.ammount -= y.qty*y.item_price;
+
+        delete $scope.cart[x];
+
+    };
+
+    // -------------------------------------------------------//
+    // Updates Scope items within controller
+    // ------------------------------------------------------//
+
+    $scope.updateChoice = function (index) {
+
+
+        $scope.tempitem = index;
+
+        $scope.tempitem["qty"] = 1;
+
+
+
+
+    };
+
+    // -------------------------------------------------------//
+    // Query to grab items from item table
+    // ------------------------------------------------------//
 
 
     $scope.getType = function(item){
@@ -126,7 +229,6 @@ tatooine.controller("orders", ['$scope', '$http', function($scope, $http){
 
             $scope.typeset = response.data;
 
-            console.log(response.data)
 
         });
 
@@ -134,6 +236,23 @@ tatooine.controller("orders", ['$scope', '$http', function($scope, $http){
 
 
     };
+
+
+    $scope.getAll = function(){
+
+        $http({method: 'GET', url: '/db/getAll'}).then(function successCallback (response){
+
+            $scope.typeset = response.data;
+
+
+        });
+
+    };
+
+
+    // -------------------------------------------------------//
+    // Query to grab Combo from item table
+    // ------------------------------------------------------//
 
     $scope.getCombo = function(item){
 
@@ -147,7 +266,88 @@ tatooine.controller("orders", ['$scope', '$http', function($scope, $http){
 
             $scope.typeset = response.data;
 
-            console.log(response.data)
+
+        });
+
+
+    };
+
+    // -------------------------------------------------------//
+    // Insert into order returns order ID and pick up number
+    // ------------------------------------------------------//
+
+    $scope.checkout = function(){
+
+
+        var total =  $scope.ammount;
+
+        var status = "onhold";
+
+
+        $http({method: 'GET', url: '/db/addOrderItems?total='+total+'&orderStatus='+status}).then(function successCallback (response){
+
+
+
+            $scope.ordernumber = response.data.order_pickup_id;
+
+            $scope.addTransaction(response.data.order_id)
+
+
+            });
+
+
+
+    };
+
+
+    // -------------------------------------------------------//
+    // Insert into item_order
+    // ------------------------------------------------------//
+
+
+    $scope.addTransaction = function (value) {
+
+        for (var key in $scope.cart) {
+
+
+            console.log($scope.cart[key]);
+
+            $http({
+                method: 'GET',
+                url: '/db/addOrder?item_ID='+$scope.cart[key].item_id+'&comboBoolean='+$scope.cart[key].combo+'&order_ID='+value+'&quantity='+$scope.cart[key].qty}).then(function successCallback(response) {
+
+                console.log(response);
+
+                $scope.saveOrderNo($scope.ordernumber);
+
+
+            });
+        }
+
+
+
+    };
+
+
+    // -------------------------------------------------------//
+    // Saves ordernumber session
+    // ------------------------------------------------------//
+
+
+    $scope.saveOrderNo = function (value) {
+
+
+        $http({
+            method: 'GET',
+            url: '/save/CusPickupNo?pickup='+value
+
+        })
+            .then(function successCallback(response) {
+
+            if(response.data === "Success"){
+                $window.location.href ="/pickup"
+            }
+
 
         });
 
@@ -159,19 +359,6 @@ tatooine.controller("orders", ['$scope', '$http', function($scope, $http){
 
 
 
-    // $scope.addCombo = function(index){
-    //
-    //     const tempIndex = index.currentTarget.getAttribute("data-id");
-    //     const menuItem = document.getElementById("item-" + tempIndex);
-    //
-    //
-    //     $scope.items.push(menuItem.innerHTML);
-    //
-    // };
-
-
-
 
 }]);
-
 
