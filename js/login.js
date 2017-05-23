@@ -1,41 +1,27 @@
 /**
  * Created by renzo on 2017-05-09.
  */
-$(document).ready(function(){
 
-    // document.getElementById("loginBut").addEventListener("click", function(){
-    //     $.ajax({
-    //         url:"/register",
-    //         type:"post",
-    //         data:{
-    //             user_type:"Admin",
-    //             username:document.getElementById("Username").value,
-    //             pass:document.getElementById("Password").value
-    //         },
-    //         success:function(resp){
-    //             console.log(resp);
-    //         }
-    //     })
-    // });
+var myApp = angular.module('login',[]);
+myApp.controller('login_controller', ['$scope' ,'$http', '$window',  function($scope,$http,$window) {
+    $scope.val1 = 'This is temp Val' ;
+    $scope.uName = '';
+    $scope.pWord = '';
 
-    document.getElementById("loginBut").addEventListener("click", function(){
-        $.ajax({
-            url:"/login",
-            type: "post",
-            data:{
-                username:document.getElementById("Username").value,
-                pass:document.getElementById("Password").value
-            },
-            success:function(resp){
-                console.log(resp);
-                if(resp.user.type == "Admin"){
-                    location.href = "/admin";
-                }
-                else if (resp.user.type == "Ramsey"){
-                    location.href = "/kitchen";
-                }
-            }
+    $scope.login = function(){
+        $http({method: 'GET', url: '/db/login?uName='+$scope.uName+'&pWord='+$scope.pWord}).then(function successCallback (response){
 
+            $window.location.reload();
+            console.log(response);
+            // $scope.dataset = response;
+            // if(response.data.type == "admin"){
+            //     $window.location.href = "/admin";
+            // }
+            // else if (response.user.type == "chef"){
+            //     $window.location.href = "/kitchen";
+            // }
+        }, function errCallback(response){
+            $scope.dataset = response || "Request failed ";
         });
-    });
-});
+    }
+}]);

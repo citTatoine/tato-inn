@@ -18,16 +18,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js"></script>
     <script src="/plugin/orderpage.js"></script>
-
-
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css" rel="stylesheet" integrity="sha384-Xqcy5ttufkC3rBa8EdiAyA1VgOGrmel2Y+wxm4K3kI3fcjTWlDWrlnxyD6hOi3PF" crossorigin="anonymous">
 </head>
 
 
@@ -35,7 +26,7 @@
 
 <body>
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">Tatoo-inn</a>
@@ -46,75 +37,62 @@
     </div>
 </nav>
 
+<br/>
+<br/>
+<br/>
+<br/>
+
 <div data-ng-controller = "orders">
 
-<!-- Modal -->
-<div id="myOrders" class="modal fade" role="dialog">
-    <div class="modal-dialog">
 
-        <!-- Order content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">My Order</h4>
-            </div>
-            <div class="modal-body">
-
-                <p data-ng-repeat = "(x, y) in items track by $index" >{{y}} x {{x}} <span data-id="{{x}}" class="glyphicon glyphicon-remove item-remove" data-ng-click = "remove($event)"></span></p>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Checkout</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-    <div id="suggestiveSell" class="modal fade" role="dialog">
+    <!-- Modal -->
+    <div id="myOrders" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!-- Order content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"></h4>
+                    <h4 class="modal-title">My Order</h4>
                 </div>
                 <div class="modal-body">
 
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th><h4>Quantity</h4></th>
+                            <th><h4>Items</h4></th>
+                            <th><h4>Price</h4></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="success" data-ng-repeat = "(x, y) in cart track by $index">
+                            <td>{{y.qty}}</td>
+                            <td>{{x}}</td>
+                            <td>${{y.qty*y.item_price}}</td>
+                            <td><span class="glyphicon glyphicon-remove item-remove" data-ng-click = "remove(x,y)"></span></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><h4 class = "total-ammount">Total: ${{ammount}}</h4></td>
+                        </tr>
+                        </tbody>
+                    </table>
 
-                    <div class="container-fluid centering text-center" >
-                        <div class ="row">
-                            <div class="col-lg-6">
-                                <img src={{'/img/'+tempPrice.item_type+'/'+tempPrice.item_imgurl}} class="img-responsive  menu-items" alt="Image">
-                            </div>
-                            <div class="col-lg-6 cartButDiv">
-                                <h1 style="color: black" >Just the {{suggestionName}} ${{tempPrice.item_price}}</h1>
-                                <button data-id = "{{suggestion}}" data-ng-click = "save($event)" class="btn btn-success addtoCart" data-dismiss="modal">Just the sandwich</button>
-                            </div>
-                            <div class="col-lg-6">
-                                <img src={{'/img/'+tempPrice.item_type+'/'+tempPrice.combo_imgurl}} class="img-responsive  menu-items" alt="Image">
-                            </div>
-                            <div class="col-lg-6 cartButDiv">
-                                <h1 data-id = "combo" id="combo-head" style="color: black" >Add ${{tempPrice.item_combo_price - tempPrice.item_price}} more to make it a combo!</h1>
-                                <button data-id = "{{tempPrice.item_type}}" data-ng-click = "extendMeal()" class="btn btn-success addtoCart" data-dismiss="modal">Add Combo</button>
-                            </div>
-                        </div>
-                    </div>
+                    <!--<span data-id="{{x}}" class="glyphicon glyphicon-remove item-remove" data-ng-click = "remove($event)"></span>-->
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Checkout</button>
+                    <a type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="checkout()" id="checkout">Checkout</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
 
         </div>
     </div>
-
-
 
 
 <wrap-owlcarousel class="owl-carousel owl-theme" data-options="{
@@ -137,13 +115,14 @@
                 }
             }
         }">
-    <a data-id="burger" data-ng-click="getType($event)" href="/orderpage/menu1" ><img src="/img/categories/hamburger.png" class="categories-img"></a>
-    <a data-id="breakfast" data-ng-click="getType($event)" href="/orderpage/menu2"><img src="/img/categories/sandwich.png" class="categories-img"></a>
-    <a data-id="appetizer" data-ng-click="getType($event)" href="/orderpage/menu3"><img src="/img/categories/french-fries.png" class="categories-img" ></a>
-    <a data-id="desserts" data-ng-click="getType($event)" href="/orderpage/menu4"><img src="/img/categories/ice-cream.png" class="categories-img" ></a>
-    <a data-id="drinks" data-ng-click="getType($event)" href="/orderpage/menu5"><img src="/img/categories/drinks.png" class="categories-img" ></a>
-    <a data-id="burger" data-ng-click="getCombo($event)" href="/orderpage/menu6"><img src="/img/categories/combo.png" class="categories-img" ></a>
-    <a data-id="breakfast" data-ng-click="getCombo($event)" href="/orderpage/menu7"><img src="/img/categories/breakfastcombo.png" class="categories-img" ></a>
+    <a data-id="burger" data-ng-click="getType($event)" href="/orderpage/menu1" ><img src="/img/categories/hamburger.png" class="categories-img"><h2 style="text-align: center; color: white">Burgers</h2></a>
+    <a data-id="breakfast" data-ng-click="getType($event)" href="/orderpage/menu2"><img src="/img/categories/sandwich.png" class="categories-img"><h2 style="text-align: center; color: white">Breakfasts</h2></a>
+    <a data-id="appetizer" data-ng-click="getType($event)" href="/orderpage/menu3"><img src="/img/categories/french-fries.png" class="categories-img" ><h2 style="text-align: center; color: white">Appetizers</h2></a>
+    <a data-id="desserts" data-ng-click="getType($event)" href="/orderpage/menu4"><img src="/img/categories/ice-cream.png" class="categories-img" ><h2 style="text-align: center; color: white">Desserts</h2></a>
+    <a data-id="drinks" data-ng-click="getType($event)" href="/orderpage/menu5"><img src="/img/categories/drinks.png" class="categories-img" ><h2 style="text-align: center; color: white">Drinks</h2></a>
+    <a data-id="burger" data-ng-click="getCombo($event)" href="/orderpage/menu6"><img src="/img/categories/combo.png" class="categories-img" ><h2 style="text-align: center; color: white">Burger Combos</h2></a>
+    <a data-id="breakfast" data-ng-click="getCombo($event)" href="/orderpage/menu7"><img src="/img/categories/breakfastcombo.png" class="categories-img" ><h2 style="text-align: center; color: white">Breakfast Combos</h2></a>
+    <a data-ng-click="getAll()" href="/orderpage/allmenu"><img src="/img/misc/clipboard.png" class="categories-img" ><h2 style="text-align: center; color: white">All Items</h2></a>
 </wrap-owlcarousel>
 
 

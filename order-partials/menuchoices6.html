@@ -1,15 +1,23 @@
-<div class="container-fluid text-center">
+<!--// /**-->
+<!--//  * Created by Kenneth on 2017-05-09.-->
+<!--//  */-->
+
+<!---------------- Order content-------------------->
+
+<div class="container-fluid text-center" ng-hide="myVar">
     <div class="row-fluid">
         <div class="col-sm-4 centering text-center" ng-repeat="x in typeset track by $index">
             <div class="row">
                 <div class="col-lg-6">
-                    <img src={{'/img/'+foodtype+'/'+x.combo_imgurl}} class="img-responsive  menu-items" alt="Image">
+                    <img ng-src="/img/{{foodtype}}/{{x.combo_imgurl}}" class="img-responsive  menu-items" alt="Image">
                 </div>
                 <div class="col-lg-6 cartButDiv">
-                    <h1 style="color: white" data-ng-model="newItem" id = "{{'item-' + $index}}">{{x.item_name}}</h1>
-                    <button data-id = "{{$index}}" data-ng-click = "save($event)" class="btn btn-success addtoCart">Add to order</button>
+                    <h1 class="item-name" data-ng-model="newItem" id = "{{'item-' + $index}}">{{x.item_name}} Combo</h1>
+                    <h1 class="item-name">${{x.item_combo_price}}</h1>
+                    <button data-id = "{{$index}}" data-ng-click = "saveCombo(x)" class="btn btn-success addtoCart">Add to order</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
