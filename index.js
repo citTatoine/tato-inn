@@ -43,7 +43,7 @@ var upload = multer({
     limits: { fileSize: 10000000 }
 }).single('myfile');
 
-var dbURL = process.env.DATABASE_URL || "postgres://postgres:Ilikepie5231!@localhost:5432/tatooine"; // edit this line to change DB url
+var dbURL = process.env.DATABASE_URL || "postgres://postgres:Ilikepie5231!@localhost:5432/tatoinn"; // edit this line to change DB url
 var app = express();
 
 const server = require("http").createServer(app);
