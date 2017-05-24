@@ -1,30 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-      <title>Java the Hutt - Login</title>
-          <meta charset="utf-8">
-        <base href="/" />
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-          <link rel="stylesheet" href="/styles/login.css">
+<head>
+    <title>Java the Hutt - Login</title>
+    <meta charset="utf-8">
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="/styles/login.css">
 
-          <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script> -->
+</head>
 
-    </head>
+<body data-ng-app="login">
+<div id="loginDiv" data-ng-controller="login_controller" class="animated bounceInDown" >
 
-    <body data-ng-app="login">
-        <div id="loginDiv" data-ng-controller="login_controller" class="animated bounceInDown" >
-            
-            <img id="loginLogo" class="logo" src="http://i.imgur.com/78aw6TO.png"/>
-            <hr />
-            <input class = "loginInput" id="Username" type="text" placeholder="    Username" ng-model="uName"/>
-            <input class = "loginInput" id="Password" type="password" placeholder="    Password" ng-model="pWord"/>
-            <button ng-click="login()" id="loginBut" class="animated rubberBand">Login</button>
-        </div>
+    <img id="loginLogo" class="logo" src="http://i.imgur.com/78aw6TO.png"/>
+    <hr />
+    <input class = "loginInput" id="Username" type="text" placeholder="    Username" ng-model="uName"/>
+    <input class = "loginInput" id="Password" type="password" placeholder="    Password" ng-model="pWord"/>
+    <button ng-click="login()" id="loginBut" class="animated rubberBand">Login</button>
+</div>
 
-        <!--<script src="/bundle/loginbundle.js"></script>-->
+<script src="/bundle/loginbundle.js"></script>
 
-        <script src="/bundle/loginbundle.js"></script>
-    </body>
+</body>
 </html>

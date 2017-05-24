@@ -33514,24 +33514,37 @@ var adminapp = __WEBPACK_IMPORTED_MODULE_0_angular___default.a.module("admin", [
 adminapp.config(function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     $routeProvider
-        .when("/admin", {
+        .when("/staff/dashboard", {
             templateUrl : "/admin-partials/dashboard.html"
         })
-        .when("/admin/accounts", {
+        .when("/staff/accounts", {
             templateUrl : "/admin-partials/accountdetails.html",
             controller: "accounts_controller"
         })
-        .when("/admin/transactions", {
+        .when("/staff/transactions", {
             templateUrl : "/admin-partials/transactions.html",
             controller: "transaction_controller"
         })
-        .when("/admin/menu", {
+        .when("/staff/menu", {
             templateUrl : "/admin-partials/menu.html",
             controller: "menu_controller"
         })
-        .otherwise({redirectTo: '/'});
+        .otherwise({redirectTo: '/staff'});
 
 });
+
+adminapp.controller('logout_controller', ['$scope', '$http', '$window', function($scope,$http,$window){
+    $scope.logout = function(){
+        console.log("its working kinda");
+        $http({method: 'GET', url: '/logout'}).then(function successCallback (response) {
+            console.log(response);
+            console.log("query successful");
+            $window.location.href = '/staff';
+        }, function errCallback() {
+            console.log("query unsuccessful");
+        });
+    }
+}]);
 
 adminapp.controller('shop_controller', ['$scope', '$http', function($scope,$http){
     $scope.openShop = function(){
@@ -33730,6 +33743,7 @@ adminapp.controller('menu_controller', ['$scope' ,'$http', '$timeout', 'uploadFi
 adminapp.controller('transaction_controller', ['$scope' ,'$http', function($scope,$http) {
     $scope.getTransactions = function(){
         $http({method: 'GET', url: '/db/transaction'}).then(function successCallback (response){
+            console.log(response.data);
             $scope.dataset = response.data.rows;
         }, function errCallback(response){
             $scope.dataset = response || "Request failed ";
@@ -33762,8 +33776,8 @@ adminapp.controller('transaction_controller', ['$scope' ,'$http', function($scop
         });
     }
 
-    $scope.getMenuItems();
     $scope.getTransactions();
+    $scope.getMenuItems();
 }]);
 
 

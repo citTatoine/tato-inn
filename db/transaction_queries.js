@@ -12,7 +12,6 @@ var queries = {
         var client = new pg.Client(dbURL);
 
         client.connect();
-
         var query = client.query("SELECT * FROM orders where order_start_time = current_date");
         query.on("row", function (row, result) {
             result.addRow(row);

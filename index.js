@@ -57,6 +57,7 @@ var css = path.resolve(__dirname, "css");
 var src = path.resolve(__dirname, "build");
 var db = path.resolve(__dirname, "db");
 var img = path.resolve(__dirname, "img");
+var adminP = path.resolve(__dirname, "admin-partials");
 
 const loginQueries = require (db+"/login_query.js");
 const accQueries = require (db+"/account_queries.js");
@@ -84,7 +85,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.all("/staff", function(req, resp){
+app.all("/staff/*", function(req, resp){
     if (!req.session.user) {
 
         resp.sendFile(pF+"/login.html");
@@ -132,7 +133,6 @@ app.all("/pickup", function(req,resp){
     resp.sendFile(pF+"/pickup.html");
 });
 
-
 //====== Store/Send Pickup Number ========//
 app.get("/save/CusPickupNo", function (req,resp) {
 
@@ -164,7 +164,12 @@ app.get("/closeShop", function () {
 app.get("/db/login", function(req,resp){
     loginQ.login(req,resp);
 });
-
+//========== Logout Queries ==========//
+app.get("/logout", function(req,resp){
+    console.log("this is working tooo");
+   req.session.destroy();
+   resp.send("data");
+});
 //========== Account Queries ==========//
 app.get("/db/register", function(req,resp){
     accounts.addUser(req,resp);
@@ -182,7 +187,20 @@ app.get("/db/saveItemType", function(req,resp){
 });
 
 app.get("/db/alterItem", function(req,resp){
-    item_type = req.query.item_type;
+    if(req.query.edited_item_price != 'default'){
+        if(req.query.edited_item_type ==1){
+            item_type = "meal";
+        }
+        else if(req.query.edited_item_type ==2){
+            item_type = "drink";
+        }
+        else if(req.query.edited_item_type ==3){
+            item_type = "desert";
+        }
+    }
+    else{
+        item_type = req.query.item_type;
+    }
     adminMenuOperation.setCredentials(dbURL);
     adminMenuOperation.alterItem(req,resp);
     resp.send('success');
