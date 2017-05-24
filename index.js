@@ -181,7 +181,7 @@ app.get("/db/modify", function(req,resp){
 app.get("/db/deleteUser", function(req,resp){
     accounts.deleteUser(req,resp);
 });
-//========== Menu Queries ==========//
+//========== Menu Editing Queries ==========//
 app.get("/db/saveItemType", function(req,resp){
     adminMenuOperation.setCredentials(dbURL);
     adminMenuOperation.saveItemType(req,resp);
@@ -225,6 +225,7 @@ app.get("/db/deleteItem", function(req,resp){
     adminMenuOperation.deleteItem(req,resp);
 });
 
+//========== Menu Functionality Queries ==========//
 app.get('/db/getCategory', function(req,resp){
     adminMenuOperation.setCredentials(dbURL);
     adminMenuOperation.getCategory(req,resp);
