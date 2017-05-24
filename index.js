@@ -43,7 +43,8 @@ var upload = multer({
     limits: { fileSize: 10000000 }
 }).single('myfile');
 
-var dbURL = process.env.DATABASE_URL || "postgres://postgres:Ilikepie5231!@localhost:5432/tatooine"; // edit this line to change DB url
+var dbURL = process.env.DATABASE_URL || "postgres://localhost:5432/tatoinn"; // edit this line to change DB url
+
 var app = express();
 
 const server = require("http").createServer(app);
@@ -87,20 +88,23 @@ app.use(session({
     saveUninitialized: true
 }));
 
+
 app.all("/staff/*", function(req, resp){
-    if (!req.session.user) {
+     if (!req.session.user) {
 
-        resp.sendFile(pF+"/login.html");
+         resp.sendFile(pF+"/login.html");
         
-    } else if(req.session.user.type == "admin"){
+     } else if(req.session.user.type == "admin"){
 
-        resp.sendFile(pF+"/administration.html");
+         resp.sendFile(pF+"/administration.html");
 
-    } else if(req.session.user.type == "chef"){
+     } else if(req.session.user.type == "chef"){
 
-        resp.sendFile(pF+"/kitchen.html");
+         resp.sendFile(pF+"/kitchen.html");
 
-    }
+     }
+
+    resp.sendFile(pF+"/administration.html");
 });
 
 app.all("/", function(req,resp){

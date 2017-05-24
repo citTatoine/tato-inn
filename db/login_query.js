@@ -36,3 +36,4 @@ LoginQuery.prototype.login = function(req, resp) {
 };
 
 module.exports = LoginQuery;
+

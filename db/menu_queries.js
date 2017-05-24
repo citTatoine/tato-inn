@@ -7,6 +7,7 @@ function MenuQuery(dbURL){
     /*
      * Construction for menuQueries object.
      */
+
     this.dbURL = dbURL;
 }
 
@@ -55,10 +56,6 @@ MenuQuery.prototype.alterItem = function(req, resp) {
             type = "misc";
             break;
     }
-    console.log(req.query.edited_item_name);
-    console.log(req.query.edited_item_type);
-    console.log(req.query.edited_item_price);
-    console.log(req.query.edited_item_combo_price);
 
     if(req.query.edited_item_name != 'default'){
         var query = client.query("UPDATE items SET item_name = '"+req.query.edited_item_name+"' WHERE item_name = "+"'"+req.query.selected_item_name+"'");
@@ -139,6 +136,7 @@ MenuQuery.prototype.deleteItem = function(req, resp) {
 };
 
 MenuQuery.prototype.getCategory = function(req, resp) {
+
         var client = new pg.Client(this.dbURL);
         client.connect();
         var query = client.query("select * from items WHERE item_type = '" + req.query.itemType+ "'");
@@ -187,6 +185,26 @@ MenuQuery.prototype.getCategory = function(req, resp) {
 
     MenuQuery.prototype.addOrder = function(req, resp) {
         var client = new pg.Client(this.dbURL);
+
+};
+
+MenuQuery.prototype.getCombo = function(req, resp) {
+    var client = new pg.Client(this.dbURL);
+    client.connect();
+    var query = client.query("select * from items WHERE item_type = '" + req.query.itemType+ "'" + "and item_comboprice is NOT NULL");
+
+    query.on("end", function (result) {
+        client.end();
+        if(result.rows.length > 0) {
+
+            var foodType = result.rows;
+            resp.send(foodType);
+        }
+    });
+};
+
+MenuQuery.prototype.addOrder = function(req, resp) {
+    var client = new pg.Client(this.dbURL);
         client.connect();
 
         var query = client.query("INSERT INTO product_order (item_id, combo, order_id, quantity) VALUES ('"+req.query.item_ID+"','"+req.query.comboBoolean+"','"+req.query.order_ID+"','"+req.query.quantity+"')");
@@ -196,8 +214,8 @@ MenuQuery.prototype.getCategory = function(req, resp) {
         });
     }
 
-    MenuQuery.prototype.addOrderItems = function(req, resp){
-        var client = new pg.Client(this.dbURL);
+MenuQuery.prototype.addOrderItems = function(req, resp){
+    var client = new pg.Client(this.dbURL);
         client.connect();
 
         var query = client.query("INSERT INTO orders (order_cost, order_status) VALUES ('"+req.query.total+"','"+req.query.orderStatus+"')RETURNING order_id, order_pickup");
