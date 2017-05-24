@@ -67,6 +67,7 @@ const adminTransOperation = require (db+"/transaction_queries");
 
 var accounts = new accQueries(dbURL);
 var loginQ = new loginQueries(dbURL);
+var menu = new adminMenuOperation(dbURL);
 
 app.use("/bundle", express.static(src));
 app.use("/styles", express.static(css));
@@ -167,7 +168,6 @@ app.get("/db/login", function(req,resp){
 });
 //========== Logout Queries ==========//
 app.get("/logout", function(req,resp){
-    console.log("this is working tooo");
    req.session.destroy();
    resp.send("data");
 });
@@ -183,72 +183,97 @@ app.get("/db/deleteUser", function(req,resp){
 });
 //========== Menu Editing Queries ==========//
 app.get("/db/saveItemType", function(req,resp){
-    adminMenuOperation.setCredentials(dbURL);
-    adminMenuOperation.saveItemType(req,resp);
+    menu.saveItemType(req,resp);
 });
 
 app.get("/db/alterItem", function(req,resp){
     if(req.query.edited_item_price != 'default'){
-        if(req.query.edited_item_type ==1){
-            item_type = "meal";
-        }
-        else if(req.query.edited_item_type ==2){
-            item_type = "drink";
-        }
-        else if(req.query.edited_item_type ==3){
-            item_type = "desert";
+        switch(req.query.edited_item_type){
+            case 1:
+                item_type = "appetizer";
+                break;
+            case 2:
+                item_type = "breakfast";
+                break;
+            case 3:
+                item_type = "breakfast-combo";
+                break;
+            case 4:
+                item_type = "burger";
+                break;
+            case 5:
+                item_type = "burger-combo";
+                break;
+            case 6:
+                item_type = "desserts";
+                break;
+            case 7:
+                item_type = "drinks";
+                break;
+            default:
+                item_type = "misc";
+                break;
         }
     }
     else{
         item_type = req.query.item_type;
     }
-    adminMenuOperation.setCredentials(dbURL);
-    adminMenuOperation.alterItem(req,resp);
+    menu.alterItem(req,resp);
     resp.send('success');
 });
 app.get("/db/addItem", function(req,resp){
-    if(req.query.added_item_type ==1){
-        item_type = "meal";
+    switch(req.query.added_item_type){
+        case 1:
+            item_type = "appetizer";
+            break;
+        case 2:
+            item_type = "breakfast";
+            break;
+        case 3:
+            item_type = "breakfast-combo";
+            break;
+        case 4:
+            item_type = "burger";
+            break;
+        case 5:
+            item_type = "burger-combo";
+            break;
+        case 6:
+            item_type = "desserts";
+            break;
+        case 7:
+            item_type = "drinks";
+            break;
+        default:
+            item_type = "misc";
+            break;
     }
-    else if(req.query.added_item_type ==2){
-        item_type = "drink";
-    }
-    else if(req.query.added_item_type ==3){
-        item_type = "desert";
-    }
-    adminMenuOperation.setCredentials(dbURL);
-    adminMenuOperation.addItem(req,resp);
+    menu.addItem(req,resp);
     resp.send('success');
 });
 app.get("/db/deleteItem", function(req,resp){
-    adminMenuOperation.setCredentials(dbURL);
-    adminMenuOperation.deleteItem(req,resp);
+    menu.deleteItem(req,resp);
 });
 
 //========== Menu Functionality Queries ==========//
 app.get('/db/getCategory', function(req,resp){
-    adminMenuOperation.setCredentials(dbURL);
-    adminMenuOperation.getCategory(req,resp);
+    menu.getCategory(req,resp);
 });
 
 app.get('/db/getCombo', function(req,resp){
-    adminMenuOperation.setCredentials(dbURL);
-    adminMenuOperation.getCombo(req,resp);
+    menu.getCombo(req,resp);
 });
 
 app.get('/db/getAll', function(req,resp){
-    adminMenuOperation.setCredentials(dbURL);
-    adminMenuOperation.getAllItems(req,resp);
+    menu.getAllItems(req,resp);
 });
 
 app.get('/db/addOrder', function(req,resp){
-    adminMenuOperation.setCredentials(dbURL);
-    adminMenuOperation.addOrder(req,resp);
+    menu.addOrder(req,resp);
 });
 
 app.get('/db/addOrderItems', function(req,resp){
-    adminMenuOperation.setCredentials(dbURL);
-    adminMenuOperation.addOrderItems(req,resp);
+    menu.addOrderItems(req,resp);
 });
 
 //========== Transaction Queries ==========//

@@ -20,7 +20,7 @@ AccQuery.prototype.alterPass = function(req, resp) {
     /*
      * This function allows a user with admin status to alter the password of another registered user, provided they have the previous one.
      * 
-    */
+     */
     pg.connect(this.dbURL, function(err, client, done){
 
         if(err){
@@ -35,7 +35,7 @@ AccQuery.prototype.alterPass = function(req, resp) {
 
         } else {
 
-            client.query("SELECT password FROM users WHERE username = $1;", [req.session.user.username], function(err, result){
+            client.query("SELECT emp_pword FROM employees WHERE emp_uname = $1;", [req.session.user.username], function(err, result){
 
                 if(err){
 
@@ -76,8 +76,8 @@ AccQuery.prototype.alterPass = function(req, resp) {
 
                                 bcrypt.hash(req.query.new_created_password, 5, function (err, bpass) {
 
-                                    client.query("UPDATE users SET password = $1 WHERE username = $2", [bpass, req.session.user.username], function(err, result){
-                                        
+                                    client.query("UPDATE employees SET emp_pword = $1 WHERE emp_uname = $2", [bpass, req.session.user.username], function(err, result){
+
                                         done();
 
                                         if(err){
@@ -118,7 +118,7 @@ AccQuery.prototype.addUser = function(req,resp){
      * This function allows a user with admin rights, to create another user inside the database
      */
     pg.connect(this.dbURL, function(err,client,done){
-        
+
         if(err){
 
             resp.send({
@@ -141,8 +141,8 @@ AccQuery.prototype.addUser = function(req,resp){
 
             if(req.query.created_password == req.query.con_created_password) {
                 bcrypt.hash(req.query.created_password, 5, function (err, bpass) {
-                    client.query("INSERT INTO users (user_type, username, password) VALUES ($1,$2,$3) RETURNING user_id", [type,req.query.created_username,bpass],function(err,result){
-                        
+                    client.query("INSERT INTO employees (emp_type, emp_uname, emp_pword) VALUES ($1,$2,$3) RETURNING emp_id", [type,req.query.created_username,bpass],function(err,result){
+
                         done();
 
                         if (err) {
@@ -170,7 +170,6 @@ AccQuery.prototype.addUser = function(req,resp){
         }
     });
 };
-
 AccQuery.prototype.deleteUser = function(req,resp){
     /*
      * This function allows a user with admin rights, to create another user inside the database
@@ -188,12 +187,12 @@ AccQuery.prototype.deleteUser = function(req,resp){
             return false;
 
         } else {
-            var query = client.query("SELECT password FROM users WHERE username = '" + req.session.user.username + "'");
+            var query = client.query("SELECT emp_pword FROM employees WHERE emp_uname = '" + req.session.user.username + "'");
             query.on("row", function (row) {
                 if (row != null) {
                     bcrypt.compare(req.query.own_password, row.password, function (err, isMatch) {
                         if (isMatch) {
-                            var query = client.query("DELETE FROM users where username = '" + req.query.deleted_user + "'");
+                            var query = client.query("DELETE FROM employees where emp_uname = '" + req.query.deleted_user + "'");
                             query.on("end", function () {
                                 client.end();
                                 console.log("success");
