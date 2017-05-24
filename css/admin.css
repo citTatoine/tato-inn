@@ -155,4 +155,10 @@ min-height: 80px;
     color:red
 }
 
+.mythumbnail {
+    width: 100%;
+    height: 100%;
+    max-width: 150px;
+    max-height: 150px;
+}
 

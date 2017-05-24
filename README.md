@@ -11,6 +11,13 @@ These instruction will allow you to initialize the application on your local mac
 1. [NodeJS](https://nodejs.org/en/)
 2. [PostgreSQL](https://www.postgresql.org/)
 
+### Module Dependencies
+
+* [AngularJS](https://angularjs.org/) v1.6.4
+* [BCrypt](https://github.com/kelektiv/node.bcrypt.js) v1.0.2
+* [body-parser](https://github.com/expressjs/body-parser) v1.17.1
+* [express](https://expressjs.com/) v4.15.2
+
 ### Setup
 
 OSX/Linux
@@ -26,11 +33,10 @@ npm init
 * Install project module dependencies
 
 ```
-npm install --save angular angular-route bcrypt body-parser bootstrap express express-session jquery owl.carousel pg react react-dom socket.io webpack
+npm run-script install-dependencies
 ```
 
-2. Database Setup
-
+* 
 
 <!-- 
 
