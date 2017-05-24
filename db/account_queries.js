@@ -171,4 +171,45 @@ AccQuery.prototype.addUser = function(req,resp){
     });
 };
 
+AccQuery.prototype.deleteUser = function(req,resp){
+    /*
+     * This function allows a user with admin rights, to create another user inside the database
+     */
+    pg.connect(this.dbURL, function(err,client){
+
+        if(err){
+
+            resp.send({
+                err:true,
+                errMsg:"Could not connect to Account servers, please try again later",
+                result:null
+            });
+            console.log(err);
+            return false;
+
+        } else {
+            var query = client.query("SELECT password FROM users WHERE username = '" + req.session.user.username + "'");
+            query.on("row", function (row) {
+                if (row != null) {
+                    bcrypt.compare(req.query.own_password, row.password, function (err, isMatch) {
+                        if (isMatch) {
+                            var query = client.query("DELETE FROM users where username = '" + req.query.deleted_user + "'");
+                            query.on("end", function () {
+                                client.end();
+                                console.log("success");
+                            });
+                        }
+                        else {
+                            console.log(err);
+                        }
+                    });
+                }
+                else {
+                    alert("password does not match account");
+                }
+            });
+        }
+    });
+};
+
 module.exports = AccQuery;

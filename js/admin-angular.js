@@ -1,7 +1,43 @@
 /**
  * Created by renzo on 2017-05-11.
  */
-var adminapp = angular.module("admin", ["ngRoute"]);
+
+import angular from 'angular';
+import ngRoute from 'angular-route';
+
+angular.module('fileModelDirective', [])
+
+    .directive('fileModel', ['$parse', function($parse) {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                var parsedFile = $parse(attrs.fileModel);
+                var parsedFileSetter = parsedFile.assign;
+
+                element.bind('change', function() {
+                    scope.$apply(function() {
+                        parsedFileSetter(scope, element[0].files[0]);
+                    });
+                });
+            }
+        };
+    }]);
+
+angular.module('uploadFileService', [])
+
+    .service('uploadFile', function($http) {
+        this.upload = function(file) {
+            var fd = new FormData();
+            fd.append('myfile', file.upload);
+            return $http.post('/upload/', fd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            });
+        };
+
+    });
+
+var adminapp = angular.module("admin", [ngRoute ,'uploadFileService', 'fileModelDirective']);
 
 adminapp.config(function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
@@ -14,7 +50,8 @@ adminapp.config(function($routeProvider, $locationProvider) {
             controller: "accounts_controller"
         })
         .when("/admin/transactions", {
-            templateUrl : "/admin-partials/transactions.html"
+            templateUrl : "/admin-partials/transactions.html",
+            controller: "transaction_controller"
         })
         .when("/admin/menu", {
             templateUrl : "/admin-partials/menu.html",
@@ -24,6 +61,23 @@ adminapp.config(function($routeProvider, $locationProvider) {
 
 });
 
+adminapp.controller('shop_controller', ['$scope', '$http', function($scope,$http){
+    $scope.openShop = function(){
+        $http({method: 'GET', url: '/openShop'}).then(function successCallback () {
+            console.log("query successful");
+        }, function errCallback() {
+            console.log("query unsuccessful");
+        });
+    }
+    $scope.closeShop = function(){
+        $http({method: 'GET', url: '/closeShop'}).then(function successCallback () {
+            console.log("query successful");
+        }, function errCallback() {
+            console.log("query unsuccessful");
+        });
+    }
+
+}]);
 adminapp.controller('accounts_controller', ['$scope' ,'$http',  function($scope,$http) {
     //MODIFY USER
     $scope.old_password = '';
@@ -36,26 +90,39 @@ adminapp.controller('accounts_controller', ['$scope' ,'$http',  function($scope,
     $scope.created_password = '';
     $scope.con_created_password = '';
 
+    //DELETE USER
+    $scope.own_password;
+    $scope.deleted_user;
+
 
     $scope.modify = function(){
-        $http({method: 'GET', url: '/db/modify?old_password='+$scope.old_password+'&new_created_password='+$scope.new_created_password+'&con_new_created_password='+$scope.con_new_created_password}).then(function successCallback (){
-            console.log("query successful")
-        }, function errCallback(){
-            console.log("query unsuccessful")
+        $http({method: 'GET', url: '/db/modify?old_password='+$scope.old_password+'&new_created_password='+$scope.new_created_password+'&con_new_created_password='+$scope.con_new_created_password}).then(function successCallback (response){
+            console.log("query successful");
+        }, function errCallback(response){
+            console.log("query unsuccessful");
         });
     }
 
 
-    $scope.register = function(){
-        $http({method: 'GET', url: '/db/register?created_username='+$scope.created_username+'&user_option='+$scope.user_option+'&created_password='+$scope.created_password+'&con_created_password='+$scope.con_created_password}).then(function successCallback (){
-            console.log("query successful")
+    $scope.registers = function(){
+        $http({method: 'GET', url: '/db/register?created_username='+$scope.created_username+'&user_option='+$scope.user_option+'&created_password='+$scope.created_password+'&con_created_password='+$scope.con_created_password}).then(function successCallback (response){
+            console.log("query successful");
         }, function errCallback(){
-            console.log("query unsuccessful")
+            console.log("query unsuccessful");
+        });
+    }
+
+    $scope.deleteUser = function(){
+        $http({method: 'GET', url: '/db/deleteUser?own_password='+$scope.own_password+'&deleted_user='+$scope.deleted_user}).then(function successCallback (response){
+            console.log("query successful");
+        }, function errCallback(response){
+            console.log("query unsuccessful");
         });
     }
 }]);
 
-adminapp.controller('menu_controller', ['$scope' ,'$http',  function($scope,$http) {
+
+adminapp.controller('menu_controller', ['$scope' ,'$http', '$timeout', 'uploadFile', function($scope,$http,$timeout,uploadFile) {
     //MODIFYING PAGE
     $scope.selected_item_name = '';
     $scope.edited_item_name = '';
@@ -64,6 +131,11 @@ adminapp.controller('menu_controller', ['$scope' ,'$http',  function($scope,$htt
     $scope.edited_item_combo_price = '';
     $scope.edited_item_img = '';
 
+    $scope.file = {};
+    $scope.message = false;
+    $scope.alert = '';
+    $scope.default = 'http://media.istockphoto.com/vectors/question-mark-drawing-vector-id490801610';
+
     //ADDING PAGE
     $scope.added_item_name = '';
     $scope.added_item_type = '';
@@ -71,7 +143,27 @@ adminapp.controller('menu_controller', ['$scope' ,'$http',  function($scope,$htt
     $scope.added_item_combo_price = '';
     $scope.added_item_img = '';
 
+    //DELETING PAGE
+    $scope.deleted_item_name = '';
+
+    $scope.item_type = '';
+
+    $scope.save_item_type = function () {
+
+        $http({method: 'GET', url: '/db/saveItemType?selected_item_name='+$scope.selected_item_name}).then(function successCallback (response){
+            console.log("query successful");
+            $scope.item_type = response.data.rows[0].item_type;
+            $scope.alterItem();
+
+        }, function errCallback(response) {
+            console.log(response);
+            console.log("query unsuccessful");
+        });
+    };
+
+
     $scope.alterItem = function(){
+
 
         if($scope.selected_item_name == ''){
             $scope.selected_item_name = 'default';
@@ -92,11 +184,11 @@ adminapp.controller('menu_controller', ['$scope' ,'$http',  function($scope,$htt
             $scope.edited_item_img.name = 'default';
         }
 
-        $http({method: 'GET', url: '/db/alterItem?selected_item_name='+$scope.selected_item_name+'&edited_item_name='+$scope.edited_item_name+'&edited_item_type='+$scope.edited_item_type+'&edited_item_price='+$scope.edited_item_price+'&edited_item_combo_price='+$scope.edited_item_combo_price+'&edited_item_img='+$scope.edited_item_img.name}).then(function successCallback (){
-            console.log("query successful")
-            // $scope.getCategory();
+        $http({method: 'GET', url: '/db/alterItem?selected_item_name='+$scope.selected_item_name+'&edited_item_name='+$scope.edited_item_name+'&edited_item_type='+$scope.edited_item_type+'&edited_item_price='+$scope.edited_item_price+'&edited_item_combo_price='+$scope.edited_item_combo_price+'&edited_item_img='+$scope.edited_item_img.name+"&item_type="+$scope.item_type}).then(function successCallback (response){
+            console.log("query successful");
+            $scope.uploadPhoto();
         }, function errCallback(){
-            console.log("query unsuccessful")
+            console.log("query unsuccessful");
         });
 
         $scope.selected_item_name = '';
@@ -105,17 +197,103 @@ adminapp.controller('menu_controller', ['$scope' ,'$http',  function($scope,$htt
         $scope.edited_item_price = '';
         $scope.edited_item_combo_price = '';
         $scope.edited_item_img = '';
-    }
+
+    };
 
     $scope.addItem = function(){
-        $http({method: 'GET', url: '/db/addItem?added_item_name='+$scope.added_item_name+'&added_item_type='+$scope.added_item_type+'&added_item_price='+$scope.added_item_price+'&added_item_combo_price='+$scope.added_item_combo_price+'&added_item_img='+$scope.added_item_img.name}).then(function successCallback (){
-            console.log("query successful")
-            // $scope.getCategory();
+        $http({method: 'GET', url: '/db/addItem?added_item_name='+$scope.added_item_name+'&added_item_type='+$scope.added_item_type+'&added_item_price='+$scope.added_item_price+'&added_item_combo_price='+$scope.added_item_combo_price+'&added_item_img='+$scope.added_item_img.name}).then(function successCallback (response){
+            console.log("query successful");
+            $scope.uploadPhoto();
+        }, function errCallback(response){
+            console.log("query unsuccessful");
+        });
+    };
+
+    $scope.deleteItem = function(){
+        $http({method: 'GET', url: '/db/deleteItem?deleted_item_name='+$scope.deleted_item_name}).then(function successCallback (){
+            console.log("query successful");
         }, function errCallback(){
-            console.log("query unsuccessful")
+            console.log("query unsuccessful");
+        });
+    };
+    $scope.uploadPhoto = function () {
+        $scope.uploading = true;
+        uploadFile.upload($scope.file).then(function(data) {
+            if (data.data.success) {
+                $scope.uploading = false;
+                $scope.alert = 'alert alert-success';
+                $scope.message = data.data.message;
+                $scope.file = {};
+            } else {
+                $scope.uploading = false;
+                $scope.alert = 'alert alert-danger';
+                $scope.message = data.data.message;
+                $scope.file = {};
+            }
+        });
+    };
+
+    $scope.photoChanged = function(files) {
+        if (files.length > 0 && files[0].name.match(/\.(png|jpeg|jpg)$/)) {
+            $scope.uploading = true;
+            var file = files[0];
+            var fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+            fileReader.onload = function(e) {
+                $timeout(function() {
+                    $scope.thumbnail = {};
+                    $scope.thumbnail.dataUrl = e.target.result;
+                    $scope.uploading = false;
+                    $scope.message = false;
+                });
+            };
+        } else {
+            $scope.thumbnail = {};
+            $scope.message = false;
+        }
+    };
+
+}]);
+
+adminapp.controller('transaction_controller', ['$scope' ,'$http', function($scope,$http) {
+    $scope.getTransactions = function(){
+        $http({method: 'GET', url: '/db/transaction'}).then(function successCallback (response){
+            $scope.dataset = response.data.rows;
+        }, function errCallback(response){
+            $scope.dataset = response || "Request failed ";
         });
     }
+
+    $scope.getOrderDetails = function(item){
+        $http({method: 'GET', url: '/db/orderDetails?order_id='+item.order_id}).then(function successCallback (response){
+            $scope.orderset = response.data.rows;
+        }, function errCallback(response){
+            $scope.orderset = response || "Request failed ";
+        });
+    }
+
+    $scope.getMenuItems = function(){
+        $http({method: 'GET', url: '/db/menuItems'}).then(function successCallback (response){
+            $scope.menuset = response.data.rows;
+            // console.log($scope.dataset);
+        }, function errCallback(response){
+            $scope.menuset = response || "Request failed ";
+        });
+    }
+
+    $scope.getMenuItemDetails = function(item){
+        $http({method: 'GET', url: '/db/menuItemDetails?item_id='+item.item_id}).then(function successCallback (response){
+            $scope.productset = response.data.rows;
+            // console.log($scope.dataset);
+        }, function errCallback(response){
+            $scope.productset = response || "Request failed ";
+        });
+    }
+
+    $scope.getMenuItems();
+    $scope.getTransactions();
 }]);
+
 
 
 adminapp.directive("fileread", [function () {

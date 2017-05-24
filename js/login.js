@@ -1,6 +1,7 @@
 /**
  * Created by renzo on 2017-05-09.
  */
+import angular from 'angular';
 
 var myApp = angular.module('login',[]);
 myApp.controller('login_controller', ['$scope' ,'$http', '$window',  function($scope,$http,$window) {
