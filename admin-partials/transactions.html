@@ -2,71 +2,118 @@
 <!--//  * Created by Kenneth on 2017-05-09.-->
 <!--//  */-->
 <div class="row">
-    <div class="col-lg-6 col-md-6">
-        <h5>Previous Date</h5>
-        <table class="table table-striped table-bordered table-hover">
-            <thead>
-            <tr>
-                <th>Transaction No.</th>
-                <th>Order</th>
-                <th>Time</th>
-                <th>Price</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="item in dataset">
-                <td>{{item.order_id}}</td>
-                <td>{{}}</td>
-                <td>2:15 PM</td>
-                <td>$12.00</td>
-            </tr>
-            </tbody>
-        </table>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#transactions" data-toggle="tab">Transaction History</a>
+        </li>
+        <li class=""><a href="#products" data-toggle="tab">Product History</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade active in" id=transactions">
+            <div class="col-lg-6 col-md-6">
+                <h5>Previous Date</h5>
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>Transaction No.</th>
+                        <th>Start Time</th>
+                        <th>Finish Time</th>
+                        <th>Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="order in dataset" ng-click="getOrderDetails(order)">
+                        <td>{{order.order_id}}</td>
+                        <td>{{order.order_start_time}}</td>
+                        <td>{{order.order_finish_time}}</td>
+                        <td>{{order.order_cost}}</td>
+                    </tr>
+                    </tbody>
+                </table>
 
-        <div class="row">
+                <div class="row">
 
+                </div>
+
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <h5>Current Date</h5>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Item ID</th>
+                            <th>Item Name</th>
+                            <th>Item Combo</th>
+                            <th>Item Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="success" ng-repeat="item in orderset">
+                            <td>{{item.item_id}}</td>
+                            <td>{{item.item_name}}</td>
+                            <td>{{item.combo}}</td>
+                            <td>{{item.item_price}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
-    </div>
-    <div class="col-lg-6 col-md-6">
-        <h5>Current Date</h5>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Transaction No.</th>
-                    <th>Order</th>
-                    <th>Time</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="success">
-                    <td>1</td>
-                    <td>Burger Combo</td>
-                    <td>2:15 PM</td>
-                    <td>$12.00</td>
-                </tr>
-                <tr class="info">
-                    <td>2</td>
-                    <td>Burger Combo</td>
-                    <td>2:15 PM</td>
-                    <td>$12.00</td>
-                </tr>
-                <tr class="warning">
-                    <td>3</td>
-                    <td>Burger Combo</td>
-                    <td>2:15 PM</td>
-                    <td>$12.00</td>
-                </tr>
-                <tr class="danger">
-                    <td>4</td>
-                    <td>Burger Combo</td>
-                    <td>2:15 PM</td>
-                    <td>$12.00</td>
-                </tr>
-                </tbody>
-            </table>
+
+
+        <div class="tab-pane fade" id="products" >
+            <div class="col-lg-6 col-md-6">
+                <h5>Menu</h5>
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>Item ID</th>
+                        <th>Item Name</th>
+                        <th>Item Price</th>
+                        <th>Item Combo Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="product in menuset" ng-click="getMenuItemDetails(product)">
+                        <td>{{product.item_id}}</td>
+                        <td>{{product.item_name}}</td>
+                        <td>{{product.item_price}}</td>
+                        <td>{{product.item_combo_price}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="row">
+
+                </div>
+
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <h5>Details</h5>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Total Sales</th>
+                            <th>Total Loss</th>
+                            <th>Total Profits</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="success" ng-repeat="sale in productset">
+                            <td>{{sale.item_name}}</td>
+                            <td>afja</td>
+                            <td>sadasfa</td>
+                            <td>asfdasd</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+
     </div>
 </div>

@@ -1,10 +1,28 @@
 /**
  * Created by renzo on 2017-05-13.
  */
-module.exports ={
+
+var pg = require('pg');
+var dbURL;
+
+var queries ={
+    setCredentials: function(dburl){
+        dbURL = dburl;
+    },
+
+    saveItemType: function (req,resp) {
+        var client = new pg.Client(dbURL);
+        client.connect();
+        var query = client.query("SELECT item_type from items where item_name ='"+ req.query.selected_item_name+"'");
+        query.on("end", function(result){
+            client.end();
+            console.log(result);
+            resp.send(result);
+        });
+    },
+
+    ////////////EDITING MENU////////////
     alterItem: function(req,resp){
-        var pg = require('pg');
-        var dbURL = process.env.DATABASE_URL || "postgres://postgres:Ilikepie5231!@localhost:5432/tatooine";
         var client = new pg.Client(dbURL);
         client.connect();
         var type = "";
@@ -18,10 +36,7 @@ module.exports ={
         else if(req.query.added_item_type ==3){
             type = "desert";
         }
-        console.log(req.query.edited_item_name);
-        console.log(req.query.edited_item_type);
-        console.log(req.query.edited_item_price);
-        console.log(req.query.edited_item_combo_price);
+
 
         if(req.query.edited_item_name != 'default'){
             var query = client.query("UPDATE items SET item_name = '"+req.query.edited_item_name+"' WHERE item_name = "+"'"+req.query.selected_item_name+"'");
@@ -54,9 +69,7 @@ module.exports ={
             });
         }
     },
-    addItem: function(req,resp){
-        var pg = require('pg');
-        var dbURL = process.env.DATABASE_URL || "postgres://postgres:Ilikepie5231!@localhost:5432/tatooine";
+    addItem: function(req){
         var client = new pg.Client(dbURL);
         client.connect();
         var type = "";
@@ -76,9 +89,18 @@ module.exports ={
         });
     },
 
+    deleteItem: function(req) {
+        var client = new pg.Client(dbURL);
+        client.connect();
+        var query = client.query("DELETE FROM items WHERE item_name = '" + req.query.deleted_item_name + "'");
+        query.on("end", function () {
+            client.end();
+        });
+    },
+
+
+    ////////////ORDER FUNCTIONALITY////////////
     getCategory: function(req, resp) {
-        var pg = require('pg');
-        var dbURL = process.env.DATABASE_URL || "postgres://enterprisedb:kenster123@localhost:5444/tatooine";
         var client = new pg.Client(dbURL);
         client.connect();
         var query = client.query("select * from items WHERE item_type = '" + req.query.itemType+ "'");
@@ -100,8 +122,6 @@ module.exports ={
 
 
     getAllItems: function(req, resp) {
-        var pg = require('pg');
-        var dbURL = process.env.DATABASE_URL || "postgres://enterprisedb:kenster123@localhost:5444/tatooine";
         var client = new pg.Client(dbURL);
         client.connect();
         var query = client.query("select * from items");
@@ -123,8 +143,6 @@ module.exports ={
 
 
     getCombo: function(req, resp) {
-        var pg = require('pg');
-        var dbURL = process.env.DATABASE_URL || "postgres://enterprisedb:kenster123@localhost:5444/tatooine";
         var client = new pg.Client(dbURL);
         client.connect();
         var query = client.query("select * from items WHERE item_type = '" + req.query.itemType+ "'" + "and item_combo_price is NOT NULL");
@@ -145,8 +163,6 @@ module.exports ={
     },
 
     addOrder: function(req,resp){
-        var pg = require('pg');
-        var dbURL = process.env.DATABASE_URL || "postgres://enterprisedb:kenster123@localhost:5444/tatooine";
         var client = new pg.Client(dbURL);
         client.connect();
 
@@ -159,8 +175,6 @@ module.exports ={
 
 
     addOrderItems: function(req,resp){
-        var pg = require('pg');
-        var dbURL = process.env.DATABASE_URL || "postgres://enterprisedb:kenster123@localhost:5444/tatooine";
         var client = new pg.Client(dbURL);
         client.connect();
 
@@ -169,6 +183,8 @@ module.exports ={
             client.end();
             resp.send(result.rows[0])
         });
-    },
+    }
 
 };
+
+module.exports = queries;
