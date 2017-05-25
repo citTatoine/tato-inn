@@ -1,0 +1,57 @@
+{
+  "name": "tato-inn",
+  "version": "1.0.0",
+  "description": "Tatooine Fast Food Restaurant",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+<<<<<<< HEAD
+    "start": "./node_modules/webpack/bin/webpack.js; node index.js",
+    "winstart": "node node_modules\\webpack\\bin\\webpack.js & node index.js"
+=======
+    "start": "node node_modules\\webpack\\bin\\webpack.js & node index.js"
+>>>>>>> 6ea4e6eac6890aa7ec30073c89ee4924b4b95841
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nightwisper/tato-inn.git"
+  },
+  "author": "Lucas Silva, Renzo Pamplona, Michael Liao, Kenneth Situ, Kabilan Thangarajah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/citTatoine/tato-inn/issues"
+  },
+  "homepage": "https://github.com/citTatoine/tato-inn#readme",
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-route": "^1.6.4",
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.1",
+<<<<<<< HEAD
+    "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "http": "0.0.0",
+    "logfmt": "^1.2.0",
+    "owl.carousel": "^2.2.0",
+    "pg": "^6.1.5",
+    "request": "^2.81.0",
+    "socket.io": "^1.7.3",
+    "unit.js": "^2.0.0",
+=======
+    "bootstrap": "^3.3.7",
+    "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "http": "0.0.0",
+    "jquery": "^3.2.1",
+    "logfmt": "^1.2.0",
+    "multer": "^1.3.0",
+    "owl.carousel": "^2.2.0",
+    "pg": "^6.1.5",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "request": "^2.81.0",
+    "socket.io": "^1.7.4",
+>>>>>>> 6ea4e6eac6890aa7ec30073c89ee4924b4b95841
+    "webpack": "^2.5.0"
+  }
+}

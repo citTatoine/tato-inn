@@ -8,6 +8,8 @@
             </li>
             <li class=""><a href="#addmenu" data-toggle="tab">Add New Menu</a>
             </li>
+            <li class=""><a href="#deletemenu" data-toggle="tab">Delete From Menu</a>
+            </li>
         </ul>
 
     </div>
@@ -44,16 +46,22 @@
                     <br>
                     <h5 class="required">New Product Image:</h5>
                     <label class="custom-file">
-                        <input type="file" id="editFile" class="custom-file-input" fileread="edited_item_img">
+                        <input ng-disabled="uploading" file-model="file.upload" name="myfile" type="file" id="editFile" class="custom-file-input" fileread="edited_item_img" onchange="angular.element(this).scope().photoChanged(this.files)">
                         <span class="custom-file-control"></span>
                     </label>
                     <br>
                     <br>
+                    <img class="mythumbnail" ng-src="{{ thumbnail.dataUrl || default }}">
+                    <br>
+                    <br>
+                    <div ng-show="message">
+                        <div ng-class="alert">{{ message }}</div>
+                    </div>
                     <div class="row">
 
                         <div class="col-lg-6"></div>
                         <div class="col-lg-6">
-                            <button ng-click="alterItem()" type="button" class="btn btn-primary enable btn-lg btn-block">submit menu changes</button>
+                            <button ng-disabled="uploading" ng-click="save_item_type()" type="button" class="btn btn-primary enable btn-lg btn-block">submit menu changes</button>
                         </div>
                     </div>
                 </div>
@@ -85,20 +93,45 @@
                     <br>
                     <h5 class="required">Product Image:</h5>
                     <label class="custom-file">
-                        <input type="file" id="file" class="custom-file-input" fileread="added_item_img">
+                        <input  ng-disabled="uploading" file-model="file.upload" name="myfile" type="file" class="custom-file-input" fileread="added_item_img" onchange="angular.element(this).scope().photoChanged(this.files)">
                         <span class="custom-file-control"></span>
                     </label>
                     <br>
                     <br>
+                    <img class="mythumbnail" ng-src="{{ thumbnail.dataUrl || default }}">
+                    <br>
+                    <br>
+                    <div ng-show="message">
+                        <div ng-class="alert">{{ message }}</div>
+                    </div>
                     <div class="row">
 
                         <div class="col-lg-6"></div>
                         <div class="col-lg-6">
-                            <button ng-click="addItem()" type="button" class="btn btn-primary enable btn-lg btn-block">submit menu changes</button>
+                            <button ng-disabled="uploading" ng-click="addItem()" type="button" class="btn btn-primary enable btn-lg btn-block">submit menu changes</button>
                         </div>
 
                     </div>
 
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="deletemenu">
+            <br />
+            <div class="row">
+                <div class="col-lg-4">
+                    <h5 class="required">Product Name:</h5>
+                    <input type="text" class="form-control" placeholder="Product Name" ng-model="deleted_item_name" />
+                    <br>
+                </div>
+                <div class="col-lg-4">
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-6"></div>
+                        <div class="col-lg-6">
+                            <button ng-click="deleteItem()" type="button" class="btn btn-primary enable btn-lg btn-block">submit menu changes</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
