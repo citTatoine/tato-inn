@@ -205,11 +205,11 @@ tatooine.controller("kitchen", ['$scope', '$http', '$timeout', function($scope, 
 
         for(var i = 0; i<$scope.prices.length; i++){
 
-            if($scope.prices[i].item_combo_price !== null){
+            if($scope.prices[i].item_comboprice !== null){
                 var x = $scope.prices[i].item_name + " combo";
 
                 if(x == name){
-                    price = $scope.prices[i].item_combo_price;
+                    price = $scope.prices[i].item_comboprice;
 
                 }else if($scope.prices[i].item_name == name){
                         price = $scope.prices[i].item_price;
