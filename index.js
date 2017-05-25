@@ -63,6 +63,7 @@ const loginQueries = require (db+"/login_query.js");
 const accQueries = require (db+"/account_queries.js");
 const adminMenuOperation = require (db+"/menu_queries.js");
 const adminTransOperation = require (db+"/transaction_queries");
+const kitchenOperation = require (db+"/kitchen_queries");
 
 var accounts = new accQueries(dbURL);
 var loginQ = new loginQueries(dbURL);
@@ -281,6 +282,29 @@ app.get('/db/menuItems', function(req,resp){
 app.get('/db/menuItemDetails', function(req,resp){
     adminTransOperation.setCredentials(dbURL);
     adminTransOperation.getMenuItemDetails(req,resp);
+});
+
+//========= Kitchen Queries ========//
+app.get("/db/getorders", function(req, resp){
+    kitchenOperation.setCredentials(dbURL);
+    kitchenOperation.getOrders(req,resp);
+});
+app.get("/db/getitems", function(req, resp){
+    kitchenOperation.setCredentials(dbURL);
+    kitchenOperation.getItems(req,resp);
+});
+app.get("/db/addSpoil", function(req, resp){
+    kitchenOperation.setCredentials(dbURL);
+    kitchenOperation.addSpoiled(req,resp);
+});
+app.get("/db/getPrice", function(req, resp){
+    kitchenOperation.setCredentials(dbURL);
+    kitchenOperation.getPrice(req,resp);
+});
+
+app.get("/db/updateStatus", function(req, resp){
+    kitchenOperation.setCredentials(dbURL);
+    kitchenOperation.updateStatus(req,resp);
 });
 
 //========== Img Upload Error Catching ==========//

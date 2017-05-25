@@ -3,15 +3,18 @@
  *
  * Credits Kenneth Situ
  */
-module.exports = {
+var pg = require('pg');
+var dbURL;
+var queries = {
+    setCredentials: function(dburl){
+        dbURL = dburl;
+    },
 
     // -------------------------------------------------------//
     // Grab all orders that are pending
     // ------------------------------------------------------//
 
     getOrders: function(req, resp) {
-        var pg = require('pg');
-        var dbURL = process.env.DATABASE_URL || "postgres://enterprisedb:kenster123@localhost:5444/tatooine";
         var client = new pg.Client(dbURL);
         client.connect();
 
@@ -34,8 +37,6 @@ module.exports = {
     // ------------------------------------------------------//
     
     getItems: function(req, resp) {
-        var pg = require('pg');
-        var dbURL = process.env.DATABASE_URL || "postgres://enterprisedb:kenster123@localhost:5444/tatooine";
         var client = new pg.Client(dbURL);
         client.connect();
 
@@ -59,8 +60,6 @@ module.exports = {
     // ------------------------------------------------------//
 
     addSpoiled: function(req, resp) {
-        var pg = require('pg');
-        var dbURL = process.env.DATABASE_URL || "postgres://enterprisedb:kenster123@localhost:5444/tatooine";
         var client = new pg.Client(dbURL);
         client.connect();
 
@@ -78,8 +77,6 @@ module.exports = {
     // ------------------------------------------------------//
 
     getPrice: function(req, resp) {
-        var pg = require('pg');
-        var dbURL = process.env.DATABASE_URL || "postgres://enterprisedb:kenster123@localhost:5444/tatooine";
         var client = new pg.Client(dbURL);
         client.connect();
 
@@ -102,8 +99,6 @@ module.exports = {
     // ------------------------------------------------------//
 
     updateStatus: function(req, resp) {
-        var pg = require('pg');
-        var dbURL = process.env.DATABASE_URL || "postgres://enterprisedb:kenster123@localhost:5444/tatooine";
         var client = new pg.Client(dbURL);
         client.connect();
 
@@ -121,3 +116,5 @@ module.exports = {
 
 
 };
+
+module.exports = queries;
