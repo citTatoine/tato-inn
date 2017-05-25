@@ -77,6 +77,7 @@ AccQuery.prototype.alterPass = function(req, resp) {
                                 bcrypt.hash(req.query.new_created_password, 5, function (err, bpass) {
 
                                     client.query("UPDATE employees SET emp_pword = $1 WHERE emp_uname = $2", [bpass, req.session.user.username], function(err, result){
+
                                         done();
 
                                         if(err){
@@ -141,6 +142,7 @@ AccQuery.prototype.addUser = function(req,resp){
             if(req.query.created_password == req.query.con_created_password) {
                 bcrypt.hash(req.query.created_password, 5, function (err, bpass) {
                     client.query("INSERT INTO employees (emp_type, emp_uname, emp_pword) VALUES ($1,$2,$3) RETURNING emp_id", [type,req.query.created_username,bpass],function(err,result){
+
                         done();
 
                         if (err) {
