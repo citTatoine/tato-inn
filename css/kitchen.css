@@ -1,0 +1,142 @@
+@import "//fonts.googleapis.com/css?family=Bangers";
+body{
+    background-image: url("http://wallpapercave.com/wp/4hgiRFC.jpg");
+}
+
+.orderdiv{
+    background-color: #214761;
+    background-size: 100% 100%;
+    padding: 20px;
+    border-style: solid;
+    border-radius: 25px;
+    min-height: 25vh;
+    opacity: 0.8;
+
+}
+
+.order-content{
+    height:200px;
+    overflow-x:hidden;
+}
+
+.orderscontainer{
+    text-align: center;
+    height: 50vh;
+}
+
+.banner {
+    background-color: skyblue;
+    top: 0;
+    left: 0;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    position: absolute;
+    width: 100%;
+
+}
+
+.banner-content {
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.orderrow{
+    height: auto;
+}
+
+.items{
+    margin-top: 5%;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.hotbox{
+    min-height: 325px;
+}
+
+.fulfilled{
+    min-height: 50vh;
+    background-color: #214761; 
+    color: white;
+    border-top: 6px solid red;
+    
+    opacity: 0.8;
+}
+
+table{
+    color: white;
+}
+
+.tableDiv{
+    height: 400px !important;
+    overflow-y: auto;
+}
+
+.cookBut{
+    margin: 2%;
+    width: 100px;
+}
+
+.hotTable{
+    height: 40vh !important;
+    overflow-y: auto;
+    color: black;
+}
+
+
+.time-to {
+    font-size: 25px;
+    font-weight: 600;
+    font-family: "comic sans ms";
+    letter-spacing: 2px;
+    display: block;
+    color: red;
+}
+
+.choices{
+    background-color: #214761;
+    min-height: 50vh;
+    opacity: 0.8;
+}
+
+h1{
+    background-color: skyblue;
+    padding: 20px;
+    border-radius: 25px;
+}
+h2{
+    background-color: skyblue;
+    padding: 20px;
+    color: white;
+    border-radius: 20px;
+}
+.hotbox{
+    background-color: #214761;
+    opacity: 0.8;
+    min-height: 50vh !important;  
+}
+
+.kitchenpage{
+        min-height: 100vh;
+}
+
+.tableHot{
+    color: white;   
+    text-align: center;
+}
+
+.choicerow{
+    background-color: #5f9ea0;
+    color: black;
+}   
+
+
+.choicerow:hover{
+    background-color: #568f91;
+}
+
+.choicehead{
+    background-color: #457274;
+}

@@ -1,249 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-ng-app="tatooine-kitchen">
 <head>
     <title>Tatoo-Inn - Kitchen</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js"></script>
+    <script src="/plugin/progressbar.js"></script>
+    <script src="/plugin/kitchen.js"></script>
+    <link rel="stylesheet" href="/styles/kitchen.css">
 </head>
-<style>
-    body{
-        background-color: dimgray;
-    }
 
-    .orderdiv{
-        background-color: #214761;
-        background-size: 100% 100%;
-        min-height: 300px;
-        min-width: 200px;
-        padding: 20px;
-        border-style: solid;
-        border-color: dimgray;
-        border-radius: 25px;
+<body data-ng-controller = "kitchen">
 
-    }
-
-    #orderscontainer{
-        text-align: center;
-    }
-
-    .banner {
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: skyblue;
-        width: 100%;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
-    }
-
-    .banner-content {
-        padding: 10px;
-        color: white;
-        font-weight: bold;
-        font-size: 25px;
-    }
-
-    .cookButDiv{
-        background-image: url("http://i.imgur.com/E20jTpB.png");
-        width: 151px;
-        height: 56px;
-        margin-left: 30%;
-        bottom: 20px;
-        position: absolute;
-    }
-    .cookButDiv:hover{
-        background-image: url("http://i.imgur.com/rU5sL9z.png");
-        cursor: pointer;
-    }
-
-    #orderrow{
-        height: auto;
-    }
-
-    .items{
-        margin-top: 50px;
-        color: white;
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 20%;
-    }
-
-</style>
-<body>
-<div class="container-fluid">
+<div class="container-fluid kitchenpage">
     <div class="row">
-        <div class="col-sm-8" id="orderscontainer">
-            <div class="row" class="orderrow">
-                <div class="col-sm-4 orderdiv" id="orderdiv1">
+        <div class="col-sm-8 orderscontainer">
+            <div class="row orderrow">
+                <div class="col-sm-4 orderdiv" data-ng-repeat="x in orders">
                     <div class="banner">
-                        <div class="banner-content">
-                            Order 1
-                        </div>
+                        <div class="banner-content">Order:{{x[0].order_id}}</div>
                     </div>
-                    <div class="items">
-                        <p>Cheese Burger   1</p>
-                        <p>Big Mac         2</p>
-                        <p>Diet Coke (L)   3</p>
-                        <p>Fries (L)       3</p>
+                    <div class="order-content">
+                    <p class="items" data-ng-repeat="i in x">{{i.quantity}} x {{i.item_name}}</p>
                     </div>
-                    <div class="cookButDiv" id="1" onclick = "cooktime(this)">
-                    </div>
+
                 </div>
-                <div class="col-sm-4 orderdiv" id="orderdiv2">
-                    <div class="banner">
-                        <div class="banner-content">
-                            Order 2
-                        </div>
-                    </div>
-                    <div class="items">
-                        <p>Cheese Burger   1</p>
-                        <p>Big Mac         2</p>
-                        <p>Diet Coke (L)   3</p>
-                        <p>Fries (L)       3</p>
-                    </div>
-                    <div class="cookButDiv" id="2" onclick = "cooktime(this)">
-                    </div>
-                </div>
-                <div class="col-sm-4 orderdiv" id="orderdiv3">
-                    <div class="banner">
-                        <div class="banner-content">
-                            Order 3
-                        </div>
-                    </div>
-                    <div class="items">
-                        <p>Cheese Burger   1</p>
-                        <p>Big Mac         2</p>
-                        <p>Diet Coke (L)   3</p>
-                        <p>Fries (L)       3</p>
-                    </div>
-                    <div class="cookButDiv" id="3" onclick = "cooktime(this)">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4 orderdiv" id="orderdiv4">
-                    <div class="banner">
-                        <div class="banner-content">
-                            Order 4
-                        </div>
-                    </div>
-                    <div class="items">
-                        <p>Cheese Burger   1</p>
-                        <p>Big Mac         2</p>
-                        <p>Diet Coke (L)   3</p>
-                        <p>Fries (L)       3</p>
-                    </div>
-                    <div class="cookButDiv" id="4" onclick = "cooktime(this)">
-                    </div>
-                </div>
-                <div class="col-sm-4 orderdiv" id="orderdiv5">
-                    <div class="banner">
-                        <div class="banner-content">
-                            Order 5
-                        </div>
-                    </div>
-                    <div class="items">
-                        <p>Cheese Burger   1</p>
-                        <p>Big Mac         2</p>
-                        <p>Diet Coke (L)   3</p>
-                        <p>Fries (L)       3</p>
-                    </div>
-                    <div class="cookButDiv" id="5" onclick = "cooktime(this)">
-                    </div>
-                </div>
-                <div class="col-sm-4 orderdiv" id="orderdiv6">
-                    <div class="banner">
-                        <div class="banner-content">
-                            Order 6
-                        </div>
-                    </div>
-                    <div class="items">
-                        <p>Cheese Burger   1</p>
-                        <p>Big Mac         2</p>
-                        <p>Diet Coke (L)   3</p>
-                        <p>Fries (L)       3</p>
-                    </div>
-                    <div class="cookButDiv" id="6" onclick = "cooktime(this)">
-                    </div>
-                </div>
+
             </div>
         </div>
-        <div class="col-sm-4" style="background-color:#C5C5C5;" id="fulfilled">
-            <h1>Fulfilled</h1>
+
+        <div class="col-sm-4 choices">
+            <h1 style="color: white;">Choices</h1>
+            <div class="col-sm-12 tableDiv">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr class="choicehead">
+                        <th></th>
+                        <th>Items</th>
+                        <th>Quantity</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class = "choicerow" data-ng-repeat="(x,y) in work">
+                        <td><input data-ng-disabled="button.disabled" type="radio" name="optradio" data-ng-model="selected.item_name" value="{{x}}"></td>
+                        <td>{{x}}</td>
+                        <td>{{y}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-sm-12 text-center">
+                <button class="btn btn-danger cookBut" ng-click="selectCookAmt(1)" data-ng-disabled="button.disabled || !selected.item_name">Cook one (1)</button>
+                <button class="btn btn-warning cookBut" ng-click="selectCookAmt(2)" data-ng-disabled="button.disabled || !selected.item_name">Cook two (2)</button>
+                <button class="btn btn-success cookBut" ng-click="selectCookAmt(6)" data-ng-disabled="button.disabled || !selected.item_name">Cook six (6)</button>
+            </div>
         </div>
     </div>
 </div>
-<script>
 
-    var finishDiv = document.getElementById("fulfilled");
+    <div class="row">
+        <div class="col-sm-8 hotbox">
+            <div class="col-sm-12 hotTable">
+                <table class="table table-condensed tableHot">
+                    <thead>
+                    <tr>
+                        <th><h2>Items</h2></th>
+                        <th><h2>Quantity</h2></th>
+                        <th><h2>Live for now</h2></th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-    function cooktime(elem){
-        elem.onclick = "NOPE";
-        elem.style.backgroundImage = "url('https://upload.wikimedia.org/wikipedia/commons/5/54/Blank_Canvas_on_Transparent_Background.png')";
+                    <tr data-ng-repeat="x in hotPotato">
+                        <td><h3>{{x[0]}}</h3></td>
+                        <td><h3>{{x[1]}}</h3></td>
+                        <td>
+                            <destroy data='{{$index}}' delete="remove(index, name, qty)" itemname = '{{x[0]}}' quantity = '{{x[1]}}'>
+                            <span class='time-to countdown' countdown=''  date='300' >&nbsp;</span>
+                            </destroy>
+                        </td>
+                    </tr>
 
-        var progContainer = document.createElement("div");
-        var progBar = document.createElement("div");
-        var progBarComplete = document.createElement("div");
-        progContainer.className = "col-xs-12 col-sm-12 progress-container";
-        progBar.className = "progress progress-striped active";
-        progBarComplete.className = "progress-bar progress-bar-info";
-        progBarComplete.style.width = "0%";
-        elem.append(progContainer);
-        progContainer.appendChild(progBar);
-        progBar.appendChild(progBarComplete);
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-4 fulfilled draw">
+            <h1>Fulfilled</h1>
+            <div class="row">
+                <div class="col-lg-12 col-sm-12" data-ng-repeat="item in finished">
+                    <h2>Order:{{item[0].order_id}}</h2>
+                </div>
+            </div>
+        </div>
 
+         </div>
 
-        $(".progress-bar").animate({
-            width: "100%"
-        }, 5000);
-
-        var counter = 0;
-        var interval = setInterval(function() {
-            counter++;
-            if (counter == 5) { //change the 5 here to the calculated time
-                progBarComplete.className += "progress-bar-complete";
-            }
-            if(counter == 6){ //change the 6 here to the calculated time + 1
-                clearInterval(interval);
-                var mainDiv = "#orderdiv" + elem.id;
-                console.log(mainDiv);
-
-                console.log($(mainDiv +' div:eq(2)').html());
-                var ndiv = document.createElement("div");
-                var countndiv = document.createElement("div");
-                ndiv.innerHTML = " <hr /> <br /> <b>Order: " + elem.id + "</b><br /> Items: <br />" + $(mainDiv +' div:eq(2)').html();
-                ndiv.id = "#finisheddiv" + elem.id;
-                ndiv.append(countndiv);
-                finishDiv.append(ndiv);
-                elem.parentNode.remove();
-                function startTimer(duration, display) {
-                    var timer = duration, minutes, seconds;
-                    setInterval(function () {
-                        minutes = parseInt(timer / 60, 10)
-                        seconds = parseInt(timer % 60, 10);
-
-                        minutes = minutes < 10 ? "0" + minutes : minutes;
-                        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                        display.text(minutes + ":" + seconds);
-
-                        if (--timer < 0) {
-                            timer = duration;
-                        }
-                    }, 1000);
-                }
-
-                jQuery(function ($) {
-                    var fiveMinutes = 60 * 5,
-                        display = $(countndiv);
-                    startTimer(fiveMinutes, display);
-                });
-            }
-        }, 1150);
-    }
-</script>
-</body>
+    </body>
 </html>
