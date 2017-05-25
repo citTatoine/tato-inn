@@ -67,10 +67,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="success" data-ng-repeat = "(x, y) in cart track by $index">
-                            <td>{{y.qty}}</td>
-                            <td>{{x}}</td>
-                            <td>${{y.qty*y.item_price}}</td>
+                        <tr class="info" data-ng-repeat = "(x, y) in cart track by $index">
+                            <td style="font-size: 15px">{{y.qty}}</td>
+                            <td style="font-size: 15px">{{x}}</td>
+                            <td style="font-size: 15px">${{y.qty*y.item_price}}</td>
                             <td><span class="glyphicon glyphicon-remove item-remove" data-ng-click = "remove(x,y)"></span></td>
                         </tr>
                         <tr>

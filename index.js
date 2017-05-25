@@ -65,14 +65,11 @@ const loginQueries = require (db+"/login_query.js");
 const accQueries = require (db+"/account_queries.js");
 const menuQueries = require (db+"/menu_queries.js");
 const adminTransOperation = require (db+"/transaction_queries");
+const kitchenOperation = require (db+"/kitchen_queries");
 
 var accounts = new accQueries(dbURL);
 var loginQ = new loginQueries(dbURL);
-<<<<<<< HEAD
 var menu = new menuQueries(dbURL);
-=======
-var menu = new adminMenuOperation(dbURL);
->>>>>>> 6ea4e6eac6890aa7ec30073c89ee4924b4b95841
 
 app.use("/bundle", express.static(src));
 app.use("/styles", express.static(css));
@@ -92,9 +89,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-<<<<<<< HEAD
-app.all("/staff", function(req, resp){
-=======
+
 
 app.all("/staff/*", function(req, resp){
      if (!req.session.user) {
@@ -111,7 +106,6 @@ app.all("/staff/*", function(req, resp){
 
      }
 
->>>>>>> 6ea4e6eac6890aa7ec30073c89ee4924b4b95841
     resp.sendFile(pF+"/administration.html");
 });
 
@@ -199,12 +193,11 @@ app.get("/db/saveItemType", function(req,resp){
 });
 
 app.get("/db/alterItem", function(req,resp){
-<<<<<<< HEAD
+
     menu.alterItem(req,resp);
 });
 app.get("/db/addItem", function(req,resp){
     menu.addItem(req,resp);
-=======
     if(req.query.edited_item_price != 'default'){
         switch(req.query.edited_item_type){
             case 1:
@@ -271,7 +264,6 @@ app.get("/db/addItem", function(req,resp){
 });
 app.get("/db/deleteItem", function(req,resp){
     menu.deleteItem(req,resp);
->>>>>>> 6ea4e6eac6890aa7ec30073c89ee4924b4b95841
 });
 
 //========== Menu Functionality Queries ==========//
@@ -281,13 +273,11 @@ app.get('/db/getCategory', function(req,resp){
 
 app.get('/db/getCombo', function(req,resp){
     menu.getCombo(req,resp);
-<<<<<<< HEAD
 });
 
 app.get('/db/getItemPrice', function(req,resp){
     menu.getItemPrice(req,resp);
-=======
->>>>>>> 6ea4e6eac6890aa7ec30073c89ee4924b4b95841
+
 });
 
 app.get('/db/getAll', function(req,resp){
@@ -300,15 +290,12 @@ app.get('/db/addOrder', function(req,resp){
 
 app.get('/db/addOrderItems', function(req,resp){
     menu.addOrderItems(req,resp);
-<<<<<<< HEAD
-=======
 });
 
 //========== Transaction Queries ==========//
 app.get('/db/transaction', function(req,resp){
     adminTransOperation.setCredentials(dbURL);
     adminTransOperation.getTransactions(req,resp);
->>>>>>> 6ea4e6eac6890aa7ec30073c89ee4924b4b95841
 });
 
 app.get('/db/orderDetails', function(req,resp){
@@ -325,6 +312,26 @@ app.get('/db/menuItemDetails', function(req,resp){
     adminTransOperation.setCredentials(dbURL);
     adminTransOperation.getMenuItemDetails(req,resp);
 });
+
+//========= Kitchen Queries ========//
+app.get("/db/getorders", function(req, resp){
+    kitchenOperation.getOrders(req,resp);
+});
+app.get("/db/getitems", function(req, resp){
+    kitchenOperation.getItems(req,resp);
+});
+app.get("/db/addSpoil", function(req, resp){
+    kitchenOperation.addSpoiled(req,resp);
+});
+app.get("/db/getPrice", function(req, resp){
+    kitchenOperation.getPrice(req,resp);
+});
+
+app.get("/db/updateStatus", function(req, resp){
+    kitchenOperation.updateStatus(req,resp);
+});
+
+
 
 //========== Img Upload Error Catching ==========//
 app.post('/upload', function(req, res) {

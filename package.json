@@ -5,12 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< HEAD
     "start": "./node_modules/webpack/bin/webpack.js; node index.js",
-    "winstart": "node node_modules\\webpack\\bin\\webpack.js & node index.js"
-=======
+    "winstart": "node node_modules\\webpack\\bin\\webpack.js & node index.js",
     "start": "node node_modules\\webpack\\bin\\webpack.js & node index.js"
->>>>>>> 6ea4e6eac6890aa7ec30073c89ee4924b4b95841
   },
   "repository": {
     "type": "git",
@@ -27,7 +24,6 @@
     "angular-route": "^1.6.4",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
-<<<<<<< HEAD
     "express": "^4.15.2",
     "express-session": "^1.15.2",
     "http": "0.0.0",
@@ -37,7 +33,6 @@
     "request": "^2.81.0",
     "socket.io": "^1.7.3",
     "unit.js": "^2.0.0",
-=======
     "bootstrap": "^3.3.7",
     "express": "^4.15.2",
     "express-session": "^1.15.2",
@@ -51,7 +46,6 @@
     "react-dom": "^15.5.4",
     "request": "^2.81.0",
     "socket.io": "^1.7.4",
->>>>>>> 6ea4e6eac6890aa7ec30073c89ee4924b4b95841
     "webpack": "^2.5.0"
   }
 }
