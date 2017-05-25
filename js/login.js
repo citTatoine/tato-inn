@@ -14,13 +14,6 @@ myApp.controller('login_controller', ['$scope' ,'$http', '$window',  function($s
 
             $window.location.reload();
             console.log(response);
-            // $scope.dataset = response;
-            // if(response.data.type == "admin"){
-            //     $window.location.href = "/admin";
-            // }
-            // else if (response.user.type == "chef"){
-            //     $window.location.href = "/kitchen";
-            // }
         }, function errCallback(response){
             $scope.dataset = response || "Request failed ";
         });

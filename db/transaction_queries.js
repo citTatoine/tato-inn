@@ -1,7 +1,6 @@
 /**
  * Created by renzo on 2017-05-14.
  */
-
 var pg = require('pg');
 var dbURL;
 
@@ -13,7 +12,7 @@ var queries = {
         var client = new pg.Client(dbURL);
 
         client.connect();
-        var query = client.query("SELECT * FROM orders where order_start_time = current_date");
+        var query = client.query("SELECT * FROM orders where order_date > timestamp 'today'");
         query.on("row", function (row, result) {
             result.addRow(row);
         });
@@ -25,7 +24,7 @@ var queries = {
     getOrderDetails: function(req,resp){
         var client = new pg.Client(dbURL);
         client.connect();
-        var query = client.query("SELECT items.item_id, order_id, item_name, combo, item_price, item_combo_price FROM items INNER JOIN item_order on items.item_id = item_order.item_id where order_id ="+req.query.order_id);
+        var query = client.query("SELECT items.item_id, order_id, item_name, combo, item_price, item_comboprice FROM items INNER JOIN items_orders on items.item_id = items_orders.item_id where order_id ="+req.query.order_id);
         query.on("row", function (row,result) {
             if (row != null){
                 result.addRow(row);
@@ -61,11 +60,12 @@ var queries = {
     getMenuItemDetails: function(req,resp){
         var client = new pg.Client(dbURL);
         client.connect();
-        var query = client.query("SELECT * FROM items where item_id ="+req.query.item_id);
+        var query = client.query("select * from (SELECT item_name,(items.item_price * items_orders.qty) as total_price FROM items INNER JOIN items_orders on items.item_id = items_orders.item_id where items.item_id ="+req.query.item_id+ " and items_orders.combo = false) as y, (SELECT (items.item_comboprice * items_orders.qty) as total_combo_price FROM items INNER JOIN items_orders on items.item_id = items_orders.item_id where items.item_id ="+req.query.item_id+ " and items_orders.combo = true) as x");
         query.on("row", function (row,result) {
             result.addRow(row);
         });
         query.on("end",function(end){
+            console.log(end);
             resp.send(end);
         });
     }
