@@ -64,7 +64,7 @@
                     <!--<div ng-show="message">-->
                     <!--<div ng-class="alert">{{ message }}</div>-->
                     <!--</div>-->
-                </div>
+                <!--</div>-->
             </div>
             <div class="col-lg-4">
                 <h5>New Combo Price:</h5>
@@ -80,7 +80,8 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div>
+
     <div class="tab-pane fade" id="addmenu">
         <br />
         <div class="row">
@@ -109,11 +110,7 @@
                     <input  ng-disabled="uploading" file-model="file.upload" name="myfile" type="file" class="custom-file-input" fileread="added_item_img" onchange="angular.element(this).scope().photoChanged1(this.files)">
                     <span class="custom-file-control"></span>
                 </label>
-                <br>
-                <br>
                 <img class="mythumbnail" ng-src="{{ thumbnail1.dataUrl || default }}">
-                <br>
-                <br>
                 <div ng-show="message">
                     <div ng-class="alert">{{ message }}</div>
                 </div>
@@ -135,6 +132,7 @@
             </div>
         </div>
     </div>
+
     <div class="tab-pane fade" id="deletemenu">
         <br />
         <div class="row">
