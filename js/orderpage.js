@@ -293,7 +293,7 @@ tatooine.controller("orders", ['$scope', '$http', '$window', function($scope, $h
             $scope.addTransaction(response.data.order_id)
 
 
-            });
+        });
 
 
 
@@ -344,12 +344,12 @@ tatooine.controller("orders", ['$scope', '$http', '$window', function($scope, $h
         })
             .then(function successCallback(response) {
 
-            if(response.data === "Success"){
-                $window.location.href ="/pickup"
-            }
+                if(response.data === "Success"){
+                    $window.location.href ="/pickup"
+                }
 
 
-        });
+            });
 
 
     };
