@@ -27,10 +27,10 @@
                             <button data-ng-click = "save()" class="btn btn-success addtoCart" data-dismiss="modal">Just the sandwich</button>
                         </div>
                         <div class="col-lg-6">
-                            <img ng-src="/img/{{tempitem.item_type}}/{{tempitem.combo_imgurl}}" class="img-responsive  menu-items" alt="Image">
+                            <img ng-src="/img/{{tempitem.item_type}}/{{tempitem.item_comboimgurl}}" class="img-responsive  menu-items" alt="Image">
                         </div>
                         <div class="col-lg-6 cartButDiv">
-                            <h1 data-id = "combo" id="combo-head" style="color: black" >Add ${{tempitem.item_combo_price - tempitem.item_price}} more to make it a combo!</h1>
+                            <h1 data-id = "combo" id="combo-head" style="color: black" >Add ${{tempitem.item_comboprice - tempitem.item_price}} more to make it a combo!</h1>
                             <button data-id = "{{tempitem.item_type}}" data-ng-click = "extendMeal()" class="btn btn-success addtoCart" data-dismiss="modal">Add Combo</button>
                         </div>
                     </div>

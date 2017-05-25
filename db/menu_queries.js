@@ -138,7 +138,7 @@ MenuQuery.prototype.getCategory = function(req, resp) {
 MenuQuery.prototype.getCombo = function(req, resp) {
     var client = new pg.Client(this.dbURL);
     client.connect();
-    var query = client.query("select * from items WHERE item_type = '" + req.query.itemType+ "'" + "and item_comboprice != 0");
+    var query = client.query("select * from items WHERE item_type = '" + req.query.itemType+ "'" + "and item_comboprice is not null");
 
     query.on("end", function (result) {
         client.end();
