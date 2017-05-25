@@ -355,7 +355,7 @@ tatooine.controller("orders", ['$scope', '$http', '$window', '$timeout', functio
 
 
 
-            $scope.ordernumber = response.data.order_pickup_id;
+            $scope.ordernumber = response.data.order_pickup;
 
             $scope.addTransaction(response.data.order_id)
 
