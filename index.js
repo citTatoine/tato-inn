@@ -25,7 +25,7 @@ var item_type = '';
 
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, './images/'+ item_type);
+        cb(null, './img/'+ item_type);
     },
     filename: function(req, file, cb) {
         if (!file.originalname.match(/\.(png|jpeg|jpg)$/)) {
@@ -58,7 +58,6 @@ var css = path.resolve(__dirname, "css");
 var src = path.resolve(__dirname, "build");
 var db = path.resolve(__dirname, "db");
 var img = path.resolve(__dirname, "img");
-var adminP = path.resolve(__dirname, "admin-partials");
 
 const loginQueries = require (db+"/login_query.js");
 const accQueries = require (db+"/account_queries.js");
@@ -187,32 +186,25 @@ app.get("/db/saveItemType", function(req,resp){
 });
 
 app.get("/db/alterItem", function(req,resp){
-    if(req.query.edited_item_price != 'default'){
+    if(req.query.edited_item_type != 'default'){
         switch(req.query.edited_item_type){
-            case 1:
+            case '1':
                 item_type = "appetizer";
                 break;
-            case 2:
+            case '2':
                 item_type = "breakfast";
                 break;
-            case 3:
-                item_type = "breakfast-combo";
-                break;
-            case 4:
+            case '3':
                 item_type = "burger";
                 break;
-            case 5:
-                item_type = "burger-combo";
-                break;
-            case 6:
+            case '4':
                 item_type = "desserts";
                 break;
-            case 7:
+            case '5':
                 item_type = "drinks";
                 break;
             default:
                 item_type = "misc";
-                break;
         }
     }
     else{
@@ -222,31 +214,25 @@ app.get("/db/alterItem", function(req,resp){
     resp.send('success');
 });
 app.get("/db/addItem", function(req,resp){
+    console.log(req.query.added_item_type);
     switch(req.query.added_item_type){
-        case 1:
+        case '1':
             item_type = "appetizer";
             break;
-        case 2:
+        case '2':
             item_type = "breakfast";
             break;
-        case 3:
-            item_type = "breakfast-combo";
-            break;
-        case 4:
+        case '3':
             item_type = "burger";
             break;
-        case 5:
-            item_type = "burger-combo";
-            break;
-        case 6:
+        case '4':
             item_type = "desserts";
             break;
-        case 7:
+        case '5':
             item_type = "drinks";
             break;
         default:
             item_type = "misc";
-            break;
     }
     menu.addItem(req,resp);
     resp.send('success');
@@ -299,7 +285,6 @@ app.get('/db/menuItemDetails', function(req,resp){
 
 //========== Img Upload Error Catching ==========//
 app.post('/upload', function(req, res) {
-    console.log(item_type);
     upload(req, res, function(err) {
         if (err) {
             if (err.code === 'LIMIT_FILE_SIZE') {

@@ -28,11 +28,13 @@
                     <input type="text" class="form-control" placeholder="Product Name" ng-model="edited_item_name"/>
                     <br>
                     <label class="mr-sm-2" for="EditinlineFormCustomSelect"><h5 class="required">New Product Type</h5></label>
-                    <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="EditinlineFormCustomSelect" ng-model="edited_item_type">
+                    <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="EditinlineFormCustomSelect" ng-model="edited_item_type" >
                         <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option value="1">appetizer</option>
+                        <option value="2">breakfast</option>
+                        <option value="3">burger</option>
+                        <option value="4">desserts</option>
+                        <option value="5">drinks</option>
                     </select>
                     <br>
                     <br>
@@ -40,23 +42,35 @@
                     <input type="text" class="form-control" placeholder="Product Price" ng-model="edited_item_price"/>
                     <br>
                 </div>
+                <div class="col-lg-3">
+                    <div>
+                        <h5 class="required">Alter Image:</h5>
+                        <label class="custom-file">
+                            <input ng-disabled="uploading" file-model="file.upload" name="myfile" type="file" id="editFile" class="custom-file-input" fileread="edited_item_img" onchange="angular.element(this).scope().photoChanged1(this.files)">
+                            <span class="custom-file-control"></span>
+                        </label>
+                        <img class="mythumbnail" ng-src="{{ thumbnail1.dataUrl || default }}">
+                        <div ng-show="message">
+                            <div ng-class="alert">{{ message }}</div>
+                        </div>
+                    </div>
+                    <!--<div ng-if="edited_item_type=='2' || edited_item_type=='3'">-->
+                        <!--<h5 class="required">Alter Combo Image:</h5>-->
+                        <!--<label class="custom-file">-->
+                            <!--<input ng-disabled="uploading" file-model="file.upload" name="myfile" type="file" id="editFilecombo" class="custom-file-input" fileread="edited_item_img" onchange="angular.element(this).scope().photoChanged2(this.files)">-->
+                            <!--<span class="custom-file-control"></span>-->
+                        <!--</label>-->
+                        <!--<img class="mythumbnail" ng-src="{{ thumbnail2.dataUrl || default }}">-->
+                        <!--<div ng-show="message">-->
+                            <!--<div ng-class="alert">{{ message }}</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
                 <div class="col-lg-4">
                     <h5>New Combo Price:</h5>
                     <input type="text" class="form-control" placeholder="Combo Price" ng-model="edited_item_combo_price"/>
                     <br>
-                    <h5 class="required">New Product Image:</h5>
-                    <label class="custom-file">
-                        <input ng-disabled="uploading" file-model="file.upload" name="myfile" type="file" id="editFile" class="custom-file-input" fileread="edited_item_img" onchange="angular.element(this).scope().photoChanged(this.files)">
-                        <span class="custom-file-control"></span>
-                    </label>
                     <br>
-                    <br>
-                    <img class="mythumbnail" ng-src="{{ thumbnail.dataUrl || default }}">
-                    <br>
-                    <br>
-                    <div ng-show="message">
-                        <div ng-class="alert">{{ message }}</div>
-                    </div>
                     <div class="row">
 
                         <div class="col-lg-6"></div>
@@ -77,9 +91,11 @@
                     <label class="mr-sm-2" for="inlineFormCustomSelect"><h5 class="required">Product Type</h5></label>
                     <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect" ng-model="added_item_type">
                         <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option value="1">appetizer</option>
+                        <option value="2">breakfast</option>
+                        <option value="3">burger</option>
+                        <option value="4">desserts</option>
+                        <option value="5">drinks</option>
                     </select>
                     <br>
                     <br>
@@ -87,23 +103,26 @@
                     <input type="text" class="form-control" placeholder="Product Price" ng-model="added_item_price"/>
                     <br>
                 </div>
-                <div class="col-lg-4">
-                    <h5>Combo Price:</h5>
-                    <input type="text" class="form-control" placeholder="Combo Price" ng-model="added_item_combo_price"/>
-                    <br>
+                <div class="col-lg-3">
                     <h5 class="required">Product Image:</h5>
                     <label class="custom-file">
-                        <input  ng-disabled="uploading" file-model="file.upload" name="myfile" type="file" class="custom-file-input" fileread="added_item_img" onchange="angular.element(this).scope().photoChanged(this.files)">
+                        <input  ng-disabled="uploading" file-model="file.upload" name="myfile" type="file" class="custom-file-input" fileread="added_item_img" onchange="angular.element(this).scope().photoChanged1(this.files)">
                         <span class="custom-file-control"></span>
                     </label>
                     <br>
                     <br>
-                    <img class="mythumbnail" ng-src="{{ thumbnail.dataUrl || default }}">
+                    <img class="mythumbnail" ng-src="{{ thumbnail1.dataUrl || default }}">
                     <br>
                     <br>
                     <div ng-show="message">
                         <div ng-class="alert">{{ message }}</div>
                     </div>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Combo Price:</h5>
+                    <input type="text" class="form-control" placeholder="Combo Price" ng-model="added_item_combo_price"/>
+                    <br>
+                    <br>
                     <div class="row">
 
                         <div class="col-lg-6"></div>

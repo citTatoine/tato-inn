@@ -16,7 +16,6 @@ MenuQuery.prototype.saveItemType = function(req, resp) {
     var query = client.query("SELECT item_type from items where item_name ='"+ req.query.selected_item_name+"'");
     query.on("end", function(result){
         client.end();
-        console.log(result);
         resp.send(result);
     });
 };
@@ -30,35 +29,24 @@ MenuQuery.prototype.alterItem = function(req, resp) {
     var type = "";
 
     switch(req.query.edited_item_type){
-        case 1:
+        case '1':
             type = "appetizer";
             break;
-        case 2:
+        case '2':
             type = "breakfast";
             break;
-        case 3:
-            type = "breakfast-combo";
-            break;
-        case 4:
+        case '3':
             type = "burger";
             break;
-        case 5:
-            type = "burger-combo";
-            break;
-        case 6:
+        case '4':
             type = "desserts";
             break;
-        case 7:
+        case '5':
             type = "drinks";
             break;
         default:
             type = "misc";
-            break;
     }
-    console.log(req.query.edited_item_name);
-    console.log(req.query.edited_item_type);
-    console.log(req.query.edited_item_price);
-    console.log(req.query.edited_item_combo_price);
 
     if(req.query.edited_item_name != 'default'){
         var query = client.query("UPDATE items SET item_name = '"+req.query.edited_item_name+"' WHERE item_name = "+"'"+req.query.selected_item_name+"'");
@@ -84,7 +72,7 @@ MenuQuery.prototype.alterItem = function(req, resp) {
             client.end();
         });
     }
-    if(req.query.edited_item_img != 'default'){
+    if(req.query.edited_item_img != 'undefined'){
         var query = client.query("UPDATE items SET item_imgurl = '"+req.query.edited_item_img+"' WHERE item_name = "+"'"+req.query.selected_item_name+"'");
         query.on("end", function () {
             client.end();
@@ -98,30 +86,23 @@ MenuQuery.prototype.addItem = function(req, resp) {
     var type = "";
 
     switch(req.query.added_item_type){
-        case 1:
+        case '1':
             type = "appetizer";
             break;
-        case 2:
+        case '2':
             type = "breakfast";
             break;
-        case 3:
-            type = "breakfast-combo";
-            break;
-        case 4:
+        case '3':
             type = "burger";
             break;
-        case 5:
-            type = "burger-combo";
-            break;
-        case 6:
+        case '4':
             type = "desserts";
             break;
-        case 7:
+        case '5':
             type = "drinks";
             break;
         default:
             type = "misc";
-            break;
     }
     var query = client.query("INSERT INTO items (item_name, item_type, item_price, item_comboprice, item_imgurl) VALUES ('"+req.query.added_item_name+"','"+type+"','"+req.query.added_item_price+"','"+req.query.added_item_combo_price+"','"+req.query.added_item_img+"')");
     query.on("end", function () {

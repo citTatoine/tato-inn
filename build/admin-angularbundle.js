@@ -33616,10 +33616,12 @@ adminapp.controller('menu_controller', ['$scope' ,'$http', '$timeout', 'uploadFi
     $scope.edited_item_combo_price = '';
     $scope.edited_item_img = '';
 
+    $scope.edited_item_img_name = $scope.edited_item_img.name;
+
     $scope.file = {};
     $scope.message = false;
     $scope.alert = '';
-    $scope.default = 'http://media.istockphoto.com/vectors/question-mark-drawing-vector-id490801610';
+    $scope.default = 'http://www.engraversnetwork.com/files/placeholder.jpg';
 
     //ADDING PAGE
     $scope.added_item_name = '';
@@ -33665,10 +33667,11 @@ adminapp.controller('menu_controller', ['$scope' ,'$http', '$timeout', 'uploadFi
         if($scope.edited_item_combo_price == ''){
             $scope.edited_item_combo_price = 'default';
         }
-        if($scope.edited_item_img.name == ''){
-            $scope.edited_item_img.name = 'default';
+        if($scope.edited_item_img == ''){
+            $scope.edited_item_img = 'default';
         }
 
+        console.log($scope.edited_item_type);
         $http({method: 'GET', url: '/db/alterItem?selected_item_name='+$scope.selected_item_name+'&edited_item_name='+$scope.edited_item_name+'&edited_item_type='+$scope.edited_item_type+'&edited_item_price='+$scope.edited_item_price+'&edited_item_combo_price='+$scope.edited_item_combo_price+'&edited_item_img='+$scope.edited_item_img.name+"&item_type="+$scope.item_type}).then(function successCallback (response){
             console.log("query successful");
             $scope.uploadPhoto();
@@ -33718,7 +33721,7 @@ adminapp.controller('menu_controller', ['$scope' ,'$http', '$timeout', 'uploadFi
         });
     };
 
-    $scope.photoChanged = function(files) {
+    $scope.photoChanged1 = function(files) {
         if (files.length > 0 && files[0].name.match(/\.(png|jpeg|jpg)$/)) {
             $scope.uploading = true;
             var file = files[0];
@@ -33726,16 +33729,37 @@ adminapp.controller('menu_controller', ['$scope' ,'$http', '$timeout', 'uploadFi
             fileReader.readAsDataURL(file);
             fileReader.onload = function(e) {
                 $timeout(function() {
-                    $scope.thumbnail = {};
-                    $scope.thumbnail.dataUrl = e.target.result;
+                    $scope.thumbnail1 = {};
+                    $scope.thumbnail1.dataUrl = e.target.result;
                     $scope.uploading = false;
                     $scope.message = false;
                 });
             };
         } else {
-            $scope.thumbnail = {};
+            $scope.thumbnail1 = {};
             $scope.message = false;
         }
+
+    };
+    $scope.photoChanged2 = function(files) {
+        if (files.length > 0 && files[0].name.match(/\.(png|jpeg|jpg)$/)) {
+            $scope.uploading = true;
+            var file = files[0];
+            var fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+            fileReader.onload = function(e) {
+                $timeout(function() {
+                    $scope.thumbnail2 = {};
+                    $scope.thumbnail2.dataUrl = e.target.result;
+                    $scope.uploading = false;
+                    $scope.message = false;
+                });
+            };
+        } else {
+            $scope.thumbnail2 = {};
+            $scope.message = false;
+        }
+
     };
 
 }]);
@@ -33743,7 +33767,6 @@ adminapp.controller('menu_controller', ['$scope' ,'$http', '$timeout', 'uploadFi
 adminapp.controller('transaction_controller', ['$scope' ,'$http', function($scope,$http) {
     $scope.getTransactions = function(){
         $http({method: 'GET', url: '/db/transaction'}).then(function successCallback (response){
-            console.log(response.data);
             $scope.dataset = response.data.rows;
         }, function errCallback(response){
             $scope.dataset = response || "Request failed ";
@@ -33769,6 +33792,7 @@ adminapp.controller('transaction_controller', ['$scope' ,'$http', function($scop
 
     $scope.getMenuItemDetails = function(item){
         $http({method: 'GET', url: '/db/menuItemDetails?item_id='+item.item_id}).then(function successCallback (response){
+            console.log(response.data);
             $scope.productset = response.data.rows;
             // console.log($scope.dataset);
         }, function errCallback(response){
