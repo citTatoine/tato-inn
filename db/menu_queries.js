@@ -170,7 +170,7 @@ MenuQuery.prototype.addOrder = function(req, resp) {
     var client = new pg.Client(this.dbURL);
     client.connect();
 
-    var query = client.query("INSERT INTO items_orders (item_id, combo, order_id, quantity) VALUES ('"+req.query.item_ID+"','"+req.query.comboBoolean+"','"+req.query.order_ID+"','"+req.query.quantity+"')");
+    var query = client.query("INSERT INTO items_orders (item_id, combo, order_id, qty) VALUES ('"+req.query.item_ID+"','"+req.query.comboBoolean+"','"+req.query.order_ID+"','"+req.query.quantity+"')");
     query.on("end", function () {
         client.end();
         resp.send("success")
