@@ -63,7 +63,6 @@ const loginQueries = require (db+"/login_query.js");
 const accQueries = require (db+"/account_queries.js");
 const adminMenuOperation = require (db+"/menu_queries.js");
 const adminTransOperation = require (db+"/transaction_queries");
-const kitchenOperation = require (db+"/kitchen_queries");
 
 var accounts = new accQueries(dbURL);
 var loginQ = new loginQueries(dbURL);
