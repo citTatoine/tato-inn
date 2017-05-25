@@ -34,6 +34,7 @@ tatooine.controller("kitchen", ['$scope', '$http', '$timeout', function($scope, 
             for (var i = 0; i < response.data.length; i++) {
                 $scope.orderId.push(response.data[i].order_id)
             }
+            console.log(response)
 
             console.log($scope.orderId);
 
@@ -53,6 +54,8 @@ tatooine.controller("kitchen", ['$scope', '$http', '$timeout', function($scope, 
         $http({method: 'GET', url: '/db/getPrice'}).then(function successCallback (response){
 
             $scope.prices = response.data;
+
+            console.log(response)
 
             console.log($scope.prices)
 
