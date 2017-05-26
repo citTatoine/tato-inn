@@ -175,7 +175,7 @@ MenuQuery.prototype.addOrder = function(req, resp) {
         client.end();
         resp.send("success")
     });
-}
+};
 
 MenuQuery.prototype.addOrderItems = function(req, resp){
     var client = new pg.Client(this.dbURL);
@@ -186,6 +186,13 @@ MenuQuery.prototype.addOrderItems = function(req, resp){
         client.end();
         resp.send(result.rows[0])
     });
-}
+};
+
+// MenuQuery.prototype.spoilItems = function (req,res) {
+//     var client = new pg.client(this.dbURL);
+//     client.connect();
+//
+//     var query = client.query("SELECT ")
+// }
 
 module.exports = MenuQuery;
