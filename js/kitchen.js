@@ -34,6 +34,7 @@ tatooine.controller("kitchen", ['$scope', '$http', '$timeout', function($scope, 
             for (var i = 0; i < response.data.length; i++) {
                 $scope.orderId.push(response.data[i].order_id)
             }
+            console.log(response)
 
             console.log($scope.orderId);
 
@@ -53,6 +54,8 @@ tatooine.controller("kitchen", ['$scope', '$http', '$timeout', function($scope, 
         $http({method: 'GET', url: '/db/getPrice'}).then(function successCallback (response){
 
             $scope.prices = response.data;
+
+            console.log(response)
 
             console.log($scope.prices)
 
@@ -151,9 +154,9 @@ tatooine.controller("kitchen", ['$scope', '$http', '$timeout', function($scope, 
             for(var z = 0; z < temp1.length; z++){
 
                 if(temp1[z].item_name in $scope.work){
-                    $scope.work[temp1[z].item_name] += temp1[z].quantity;
+                    $scope.work[temp1[z].item_name] += temp1[z].qty;
                 }else{
-                    $scope.work[temp1[z].item_name] = temp1[z].quantity;
+                    $scope.work[temp1[z].item_name] = temp1[z].qty;
                 }
 
             }
@@ -205,11 +208,11 @@ tatooine.controller("kitchen", ['$scope', '$http', '$timeout', function($scope, 
 
         for(var i = 0; i<$scope.prices.length; i++){
 
-            if($scope.prices[i].item_combo_price !== null){
+            if($scope.prices[i].item_comboprice !== null){
                 var x = $scope.prices[i].item_name + " combo";
 
                 if(x == name){
-                    price = $scope.prices[i].item_combo_price;
+                    price = $scope.prices[i].item_comboprice;
 
                 }else if($scope.prices[i].item_name == name){
                         price = $scope.prices[i].item_price;
@@ -242,15 +245,15 @@ tatooine.controller("kitchen", ['$scope', '$http', '$timeout', function($scope, 
             for(var y = 0; y < $scope.orders[x].length; y++) {
                 for (var i = 0; i < $scope.hotPotato.length; i++) {
                     if ($scope.hotPotato[i][0] == $scope.orders[x][y].item_name) {
-                        if ($scope.hotPotato[i][1] >= $scope.orders[x][y].quantity) {
-                            $scope.hotPotato[i][1] -= $scope.orders[x][y].quantity;
-                            $scope.orders[x][y].quantity = 0;
+                        if ($scope.hotPotato[i][1] >= $scope.orders[x][y].qty) {
+                            $scope.hotPotato[i][1] -= $scope.orders[x][y].qty;
+                            $scope.orders[x][y].qty = 0;
                             if($scope.hotPotato[i][1] == 0){
                                 $scope.removeHot();
                             }
                             $scope.removeOrders();
                         } else {
-                            $scope.orders[x][y].quantity -= $scope.hotPotato[i][1];
+                            $scope.orders[x][y].qty -= $scope.hotPotato[i][1];
                             $scope.hotPotato[i][1] = 0;
                             $scope.removeHot();
                         }
@@ -291,7 +294,7 @@ tatooine.controller("kitchen", ['$scope', '$http', '$timeout', function($scope, 
         for(var i = 0; i < $scope.orders.length; i++){
             var counter = 0;
             for(var x = 0; x < $scope.orders[i].length; x++){
-                if($scope.orders[i][x].quantity == 0){
+                if($scope.orders[i][x].qty == 0){
                     counter += 1;
                     if(counter == $scope.orders[i].length){
                         $scope.finished.push($scope.orders[i]);

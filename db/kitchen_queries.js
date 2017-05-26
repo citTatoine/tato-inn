@@ -41,7 +41,7 @@ var queries = {
         client.connect();
 
 
-        var query = client.query("SELECT * FROM product_order INNER JOIN items ON (product_order.item_id = items.item_id) WHERE order_id = '" + req.query.orderId+ "'");
+        var query = client.query("SELECT * FROM items_orders INNER JOIN items ON (items_orders.item_id = items.item_id) WHERE order_id = '" + req.query.orderId+ "'");
        
         query.on("end", function (result) {
             client.end();
@@ -81,7 +81,7 @@ var queries = {
         client.connect();
 
 
-        var query = client.query("SELECT item_name, item_price, item_combo_price FROM items");
+        var query = client.query("SELECT item_name, item_price, item_comboprice FROM items");
 
         query.on("end", function (result) {
             client.end();

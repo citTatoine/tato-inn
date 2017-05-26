@@ -9,7 +9,7 @@ body{
     padding: 20px;
     border-style: solid;
     border-radius: 25px;
-    min-height: 25vh;
+    min-height: 24vh;
     opacity: 0.8;
 
 }
@@ -21,7 +21,7 @@ body{
 
 .orderscontainer{
     text-align: center;
-    height: 50vh;
+    height: 28vh;
 }
 
 .banner {
@@ -57,7 +57,7 @@ body{
 }
 
 .fulfilled{
-    min-height: 50vh;
+    min-height: 48vh;
     background-color: #214761; 
     color: white;
     border-top: 6px solid red;
@@ -115,7 +115,7 @@ h2{
 .hotbox{
     background-color: #214761;
     opacity: 0.8;
-    min-height: 50vh !important;  
+    min-height: 48vh !important;
 }
 
 .kitchenpage{
