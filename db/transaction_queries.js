@@ -60,7 +60,7 @@ var queries = {
     getMenuItemDetails: function(req,resp){
         var client = new pg.Client(dbURL);
         client.connect();
-        var query = client.query("select * from (SELECT item_name,(items.item_price * items_orders.qty) as total_price FROM items INNER JOIN items_orders on items.item_id = items_orders.item_id where items.item_id ="+req.query.item_id+ " and items_orders.combo = false) as y, (SELECT (items.item_comboprice * items_orders.qty) as total_combo_price FROM items INNER JOIN items_orders on items.item_id = items_orders.item_id where items.item_id ="+req.query.item_id+ " and items_orders.combo = true) as x");
+        var query = client.query("select * from (SELECT item_name,(items.item_price * items_orders.qty) as total_price FROM items INNER JOIN items_orders on items.item_id = items_orders.item_id where items.item_id ="+req.query.item_id+ " and items_orders.combo = false) as y, (SELECT (items.item_comboprice * items_orders.qty) as total_combo_price FROM items INNER JOIN items_orders on items.item_id = items_orders.item_id where items.item_id ="+req.query.item_id+ " and items_orders.combo = true) as x, (select sum(spoil.quantity * spoil.price) as total_loss from items inner join spoil on items.item_name = spoil.item_name where items.item_id = 4) as z");
         query.on("row", function (row,result) {
             result.addRow(row);
         });
