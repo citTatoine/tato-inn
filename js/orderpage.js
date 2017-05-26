@@ -112,7 +112,8 @@ tatooine.controller("orders", ['$scope', '$http', '$window', '$timeout', functio
                 if ($scope.cart[$scope.tempitem.item_name].qty > 9) {
                     alert("Sorry you cant add anymore of this item")
                 } else {
-                    $scope.cart[$scope.tempitem.item_name].qty++
+                    $scope.cart[$scope.tempitem.item_name].qty++;
+                    $scope.ammount += $scope.tempitem.item_price;
                 }
             }else{
                 alert("Sorry Shopping Cart is full");
@@ -121,14 +122,14 @@ tatooine.controller("orders", ['$scope', '$http', '$window', '$timeout', functio
             if($scope.cart[$scope.tempitem.item_name].qty > 9){
                 alert("Sorry you cant add anymore of this item")
             }else{
-                $scope.cart[$scope.tempitem.item_name].qty++
+                $scope.cart[$scope.tempitem.item_name].qty++;
+                $scope.ammount += $scope.tempitem.item_price;
             }
         }else{
             $scope.cart[$scope.tempitem.item_name] = x;
+            $scope.ammount += $scope.tempitem.item_price;
         }
 
-
-        $scope.ammount += $scope.tempitem.item_price;
 
 
 
@@ -159,7 +160,8 @@ tatooine.controller("orders", ['$scope', '$http', '$window', '$timeout', functio
                 if ($scope.cart[$scope.tempitem.item_name].qty > 9) {
                     alert("Sorry you cant add anymore of this item")
                 } else {
-                    $scope.cart[$scope.tempitem.item_name].qty++
+                    $scope.cart[$scope.tempitem.item_name].qty++;
+                    $scope.ammount += $scope.tempitem.item_price;
                 }
             }else {
                 alert("Sorry Shopping Cart is full");
@@ -168,13 +170,14 @@ tatooine.controller("orders", ['$scope', '$http', '$window', '$timeout', functio
             if($scope.cart[$scope.tempitem.item_name].qty > 9){
                 alert("Sorry you cant add anymore of this item")
             }else{
-                $scope.cart[$scope.tempitem.item_name].qty++
+                $scope.cart[$scope.tempitem.item_name].qty++;
+                $scope.ammount += $scope.tempitem.item_price;
             }
         }else{
             $scope.cart[$scope.tempitem.item_name] = x;
+            $scope.ammount += $scope.tempitem.item_price;
         }
 
-        $scope.ammount += $scope.tempitem.item_price;
 
     };
 
@@ -204,7 +207,8 @@ tatooine.controller("orders", ['$scope', '$http', '$window', '$timeout', functio
                 if($scope.cart[y].qty > 9){
                     alert("Sorry you cant add anymore of this item")
                 }else{
-                    $scope.cart[y].qty++
+                    $scope.cart[y].qty++;
+                    $scope.ammount += $scope.tempitem.item_comboprice;
                 }
             }else{
                 alert("Sorry Shopping Cart is full");
@@ -213,13 +217,14 @@ tatooine.controller("orders", ['$scope', '$http', '$window', '$timeout', functio
             if($scope.cart[y].qty > 9){
                 alert("Sorry you cant add anymore of this item")
             }else{
-                $scope.cart[y].qty++
+                $scope.cart[y].qty++;
+                $scope.ammount += $scope.tempitem.item_comboprice;
             }
         }else{
             $scope.cart[y] = x;
+            $scope.ammount += $scope.tempitem.item_comboprice;
         }
 
-        $scope.ammount += $scope.tempitem.item_comboprice;
 
     };
 
@@ -246,7 +251,8 @@ tatooine.controller("orders", ['$scope', '$http', '$window', '$timeout', functio
                 if($scope.cart[y].qty > 9){
                     alert("Sorry you cant add anymore of this item")
                 }else{
-                    $scope.cart[y].qty++
+                    $scope.cart[y].qty++;
+                    $scope.ammount += $scope.tempitem.item_comboprice;
                 }
             }else{
                 alert("Sorry Shopping Cart is full");
@@ -255,13 +261,14 @@ tatooine.controller("orders", ['$scope', '$http', '$window', '$timeout', functio
             if($scope.cart[y].qty > 9){
                 alert("Sorry you cant add anymore of this item")
             }else{
-                $scope.cart[y].qty++
+                $scope.cart[y].qty++;
+                $scope.ammount += $scope.tempitem.item_comboprice;
             }
         }else{
             $scope.cart[y] = x;
+            $scope.ammount += $scope.tempitem.item_comboprice;
         }
 
-        $scope.ammount += $scope.tempitem.item_comboprice;
 
 
 
