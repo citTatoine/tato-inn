@@ -62,7 +62,7 @@ tatooine.directive('wrapOwlcarousel', function () {
 // ----------------------------------//
 
 
-tatooine.controller("orders", ['$scope', '$http', '$window', function($scope, $http, $window){
+tatooine.controller("orders", ['$scope', '$http', '$window', '$timeout', function($scope, $http, $window, $timeout){
 
 
 
@@ -73,7 +73,21 @@ tatooine.controller("orders", ['$scope', '$http', '$window', function($scope, $h
     $scope.tempitem = ({});
     $scope.ammount = 0;
     $scope.ordernumber = 0;
+    $scope.button = {};
 
+
+
+    angular.element(document).ready(function () {
+
+        console.log($scope.cart.length !== "undefined");
+
+        $timeout(function () {
+            if(Object.keys($scope.cart).length == 0){
+                $scope.button.disabled = true;
+            }
+        }, 1000);
+
+    });
 
 
 
@@ -90,14 +104,36 @@ tatooine.controller("orders", ['$scope', '$http', '$window', function($scope, $h
         x["qty"] = $scope.tempitem.qty;
         x["combo"] = false;
 
-        if($scope.tempitem.item_name in $scope.cart ){
-            $scope.cart[$scope.tempitem.item_name].qty++
-        }else {
+
+        $scope.button.disabled = false;
+
+        if(Object.keys($scope.cart).length > 5){
+            if($scope.tempitem.item_name in $scope.cart ) {
+                if ($scope.cart[$scope.tempitem.item_name].qty > 9) {
+                    alert("Sorry you cant add anymore of this item")
+                } else {
+                    $scope.cart[$scope.tempitem.item_name].qty++;
+                    $scope.ammount += $scope.tempitem.item_price;
+                }
+            }else{
+                alert("Sorry Shopping Cart is full");
+            }
+        }else if($scope.tempitem.item_name in $scope.cart ){
+            if($scope.cart[$scope.tempitem.item_name].qty > 9){
+                alert("Sorry you cant add anymore of this item")
+            }else{
+                $scope.cart[$scope.tempitem.item_name].qty++;
+                $scope.ammount += $scope.tempitem.item_price;
+            }
+        }else{
             $scope.cart[$scope.tempitem.item_name] = x;
+            $scope.ammount += $scope.tempitem.item_price;
         }
 
 
-        $scope.ammount += $scope.tempitem.item_price;
+
+
+
 
     };
 
@@ -117,13 +153,31 @@ tatooine.controller("orders", ['$scope', '$http', '$window', function($scope, $h
         x["qty"] = $scope.tempitem.qty;
         x["combo"] = false;
 
-        if($scope.tempitem.item_name in $scope.cart ){
-            $scope.cart[$scope.tempitem.item_name].qty++
-        }else {
+        $scope.button.disabled = false;
+
+        if(Object.keys($scope.cart).length > 5){
+            if($scope.tempitem.item_name in $scope.cart ) {
+                if ($scope.cart[$scope.tempitem.item_name].qty > 9) {
+                    alert("Sorry you cant add anymore of this item")
+                } else {
+                    $scope.cart[$scope.tempitem.item_name].qty++;
+                    $scope.ammount += $scope.tempitem.item_price;
+                }
+            }else {
+                alert("Sorry Shopping Cart is full");
+            }
+        }else if($scope.tempitem.item_name in $scope.cart ){
+            if($scope.cart[$scope.tempitem.item_name].qty > 9){
+                alert("Sorry you cant add anymore of this item")
+            }else{
+                $scope.cart[$scope.tempitem.item_name].qty++;
+                $scope.ammount += $scope.tempitem.item_price;
+            }
+        }else{
             $scope.cart[$scope.tempitem.item_name] = x;
+            $scope.ammount += $scope.tempitem.item_price;
         }
 
-        $scope.ammount += $scope.tempitem.item_price;
 
     };
 
@@ -139,19 +193,38 @@ tatooine.controller("orders", ['$scope', '$http', '$window', function($scope, $h
         var x = ({});
 
         x["item_id"] = $scope.tempitem.item_id;
-        x["item_price"] = $scope.tempitem.item_combo_price;
+        x["item_price"] = $scope.tempitem.item_comboprice;
         x["qty"] = $scope.tempitem.qty;
         x["combo"] = true;
 
+        $scope.button.disabled = false;
+
         var y = $scope.tempitem.item_name + " Combo";
 
-        if(y in $scope.cart ){
-            $scope.cart[y].qty++
-        }else {
+
+        if(Object.keys($scope.cart).length > 5){
+            if(y in $scope.cart ){
+                if($scope.cart[y].qty > 9){
+                    alert("Sorry you cant add anymore of this item")
+                }else{
+                    $scope.cart[y].qty++;
+                    $scope.ammount += $scope.tempitem.item_comboprice;
+                }
+            }else{
+                alert("Sorry Shopping Cart is full");
+            }
+        }else if(y in $scope.cart ){
+            if($scope.cart[y].qty > 9){
+                alert("Sorry you cant add anymore of this item")
+            }else{
+                $scope.cart[y].qty++;
+                $scope.ammount += $scope.tempitem.item_comboprice;
+            }
+        }else{
             $scope.cart[y] = x;
+            $scope.ammount += $scope.tempitem.item_comboprice;
         }
 
-        $scope.ammount += $scope.tempitem.item_combo_price;
 
     };
 
@@ -165,19 +238,36 @@ tatooine.controller("orders", ['$scope', '$http', '$window', function($scope, $h
         var x = ({});
 
         x["item_id"] = $scope.tempitem.item_id;
-        x["item_price"] = $scope.tempitem.item_combo_price;
+        x["item_price"] = $scope.tempitem.item_comboprice;
         x["qty"] = $scope.tempitem.qty;
         x["combo"] = true;
 
+        $scope.button.disabled = false;
+
         var y = $scope.tempitem.item_name + " Combo";
 
-        if(y in $scope.cart ){
-            $scope.cart[y].qty++
-        }else {
+        if(Object.keys($scope.cart).length > 5){
+            if(y in $scope.cart ){
+                if($scope.cart[y].qty > 9){
+                    alert("Sorry you cant add anymore of this item")
+                }else{
+                    $scope.cart[y].qty++;
+                    $scope.ammount += $scope.tempitem.item_comboprice;
+                }
+            }else{
+                alert("Sorry Shopping Cart is full");
+            }
+        }else if(y in $scope.cart ){
+            if($scope.cart[y].qty > 9){
+                alert("Sorry you cant add anymore of this item")
+            }else{
+                $scope.cart[y].qty++;
+                $scope.ammount += $scope.tempitem.item_comboprice;
+            }
+        }else{
             $scope.cart[y] = x;
+            $scope.ammount += $scope.tempitem.item_comboprice;
         }
-
-        $scope.ammount += $scope.tempitem.item_combo_price;
 
 
 
@@ -193,6 +283,11 @@ tatooine.controller("orders", ['$scope', '$http', '$window', function($scope, $h
         $scope.ammount -= y.qty*y.item_price;
 
         delete $scope.cart[x];
+
+        if(Object.keys($scope.cart).length == 0){
+            $scope.button.disabled = true;
+        }
+
 
     };
 
@@ -284,16 +379,18 @@ tatooine.controller("orders", ['$scope', '$http', '$window', function($scope, $h
         var status = "onhold";
 
 
+
+
         $http({method: 'GET', url: '/db/addOrderItems?total='+total+'&orderStatus='+status}).then(function successCallback (response){
 
 
 
-            $scope.ordernumber = response.data.order_pickup_id;
+            $scope.ordernumber = response.data.order_pickup;
 
             $scope.addTransaction(response.data.order_id)
 
 
-            });
+        });
 
 
 
@@ -344,19 +441,18 @@ tatooine.controller("orders", ['$scope', '$http', '$window', function($scope, $h
         })
             .then(function successCallback(response) {
 
-            if(response.data === "Success"){
-                $window.location.href ="/pickup"
-            }
+                if(response.data === "Success"){
+
+                    $timeout(function () {
+                        $window.location.href ="/pickup"
+                    }, 1000);
+                }
 
 
-        });
+            });
 
 
     };
-
-
-
-
 
 
 

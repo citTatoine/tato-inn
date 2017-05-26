@@ -4,7 +4,10 @@
 
 var tatooine = angular.module("tatooine-kitchen", []);
 
-tatooine.controller("kitchen", ['$scope', '$http', '$timeout', function($scope, $http, $timeout){
+
+
+
+tatooine.controller("kitchen", ['$scope', '$http', '$timeout', '$window', function($scope, $http, $timeout, $window){
 
     // -------------------------------------------------------//
     // Scope Variables
@@ -34,6 +37,7 @@ tatooine.controller("kitchen", ['$scope', '$http', '$timeout', function($scope, 
             for (var i = 0; i < response.data.length; i++) {
                 $scope.orderId.push(response.data[i].order_id)
             }
+            console.log(response)
 
             console.log($scope.orderId);
 
@@ -54,12 +58,29 @@ tatooine.controller("kitchen", ['$scope', '$http', '$timeout', function($scope, 
 
             $scope.prices = response.data;
 
+            console.log(response)
+
             console.log($scope.prices)
 
         });
 
 
     });
+
+    // -------------------------------------------------------//
+    // Logout
+    // ------------------------------------------------------//
+
+    $scope.logout = function(){
+        console.log("its working kinda");
+        $http({method: 'GET', url: '/logout'}).then(function successCallback (response) {
+            console.log(response);
+            console.log("query successful");
+            $window.location.href = '/staff/';
+        }, function errCallback() {
+            console.log("query unsuccessful");
+        });
+    };
 
 
     // -------------------------------------------------------//
@@ -151,9 +172,9 @@ tatooine.controller("kitchen", ['$scope', '$http', '$timeout', function($scope, 
             for(var z = 0; z < temp1.length; z++){
 
                 if(temp1[z].item_name in $scope.work){
-                    $scope.work[temp1[z].item_name] += temp1[z].quantity;
+                    $scope.work[temp1[z].item_name] += temp1[z].qty;
                 }else{
-                    $scope.work[temp1[z].item_name] = temp1[z].quantity;
+                    $scope.work[temp1[z].item_name] = temp1[z].qty;
                 }
 
             }
@@ -205,17 +226,17 @@ tatooine.controller("kitchen", ['$scope', '$http', '$timeout', function($scope, 
 
         for(var i = 0; i<$scope.prices.length; i++){
 
-            if($scope.prices[i].item_combo_price !== null){
+            if($scope.prices[i].item_comboprice !== null){
                 var x = $scope.prices[i].item_name + " combo";
 
                 if(x == name){
-                    price = $scope.prices[i].item_combo_price;
+                    price = $scope.prices[i].item_comboprice;
 
                 }else if($scope.prices[i].item_name == name){
-                        price = $scope.prices[i].item_price;
+                    price = $scope.prices[i].item_price;
                 }
             }else if($scope.prices[i].item_name == name){
-                    price = $scope.prices[i].item_price;
+                price = $scope.prices[i].item_price;
             }
         }
 
@@ -242,15 +263,15 @@ tatooine.controller("kitchen", ['$scope', '$http', '$timeout', function($scope, 
             for(var y = 0; y < $scope.orders[x].length; y++) {
                 for (var i = 0; i < $scope.hotPotato.length; i++) {
                     if ($scope.hotPotato[i][0] == $scope.orders[x][y].item_name) {
-                        if ($scope.hotPotato[i][1] >= $scope.orders[x][y].quantity) {
-                            $scope.hotPotato[i][1] -= $scope.orders[x][y].quantity;
-                            $scope.orders[x][y].quantity = 0;
+                        if ($scope.hotPotato[i][1] >= $scope.orders[x][y].qty) {
+                            $scope.hotPotato[i][1] -= $scope.orders[x][y].qty;
+                            $scope.orders[x][y].qty = 0;
                             if($scope.hotPotato[i][1] == 0){
                                 $scope.removeHot();
                             }
                             $scope.removeOrders();
                         } else {
-                            $scope.orders[x][y].quantity -= $scope.hotPotato[i][1];
+                            $scope.orders[x][y].qty -= $scope.hotPotato[i][1];
                             $scope.hotPotato[i][1] = 0;
                             $scope.removeHot();
                         }
@@ -291,7 +312,7 @@ tatooine.controller("kitchen", ['$scope', '$http', '$timeout', function($scope, 
         for(var i = 0; i < $scope.orders.length; i++){
             var counter = 0;
             for(var x = 0; x < $scope.orders[i].length; x++){
-                if($scope.orders[i][x].quantity == 0){
+                if($scope.orders[i][x].qty == 0){
                     counter += 1;
                     if(counter == $scope.orders[i].length){
                         $scope.finished.push($scope.orders[i]);
@@ -357,32 +378,32 @@ tatooine.directive('destroy', ['$timeout', function ($timeout) {
 // ------------------------------------------------------//
 
 tatooine.directive('countdown', ['Util', '$interval', function (Util, $interval) {
-            return {
-                restrict: 'A',
-                scope: { date: '@' },
-                link: function (scope, element) {
-                    $interval(function () {
+    return {
+        restrict: 'A',
+        scope: { date: '@' },
+        link: function (scope, element) {
+            $interval(function () {
 
-                        scope.date--;
+                scope.date--;
 
-                        return element.text(Util.dhms(scope.date));
+                return element.text(Util.dhms(scope.date));
 
-                    }, 1000, [300]);
-                }
-            };
+            }, 1000, [300]);
         }
-    ]);
+    };
+}
+]);
 tatooine.factory('Util', [function () {
-        return {
-            dhms: function (t) {
-                var minutes, seconds;
-                minutes = Math.floor(t / 60) % 60;
-                t -= minutes * 60;
-                seconds = t % 60;
-                return [
-                    minutes + 'm',
-                    seconds + 's'
-                ].join(' ');
-            }
-        };
-    }]);
+    return {
+        dhms: function (t) {
+            var minutes, seconds;
+            minutes = Math.floor(t / 60) % 60;
+            t -= minutes * 60;
+            seconds = t % 60;
+            return [
+                minutes + 'm',
+                seconds + 's'
+            ].join(' ');
+        }
+    };
+}]);

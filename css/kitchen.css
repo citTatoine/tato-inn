@@ -9,7 +9,7 @@ body{
     padding: 20px;
     border-style: solid;
     border-radius: 25px;
-    min-height: 25vh;
+    min-height: 24vh;
     opacity: 0.8;
 
 }
@@ -21,7 +21,7 @@ body{
 
 .orderscontainer{
     text-align: center;
-    height: 50vh;
+    height: 28vh;
 }
 
 .banner {
@@ -57,11 +57,12 @@ body{
 }
 
 .fulfilled{
-    min-height: 50vh;
-    background-color: #214761; 
+    min-height: 48vh;
+    max-height: 48vh;
+    overflow-y: auto;
+    background-color: #214761;
     color: white;
     border-top: 6px solid red;
-    
     opacity: 0.8;
 }
 
@@ -115,22 +116,22 @@ h2{
 .hotbox{
     background-color: #214761;
     opacity: 0.8;
-    min-height: 50vh !important;  
+    min-height: 48vh !important;
 }
 
 .kitchenpage{
-        min-height: 100vh;
+    min-height: 100vh;
 }
 
 .tableHot{
-    color: white;   
+    color: white;
     text-align: center;
 }
 
 .choicerow{
     background-color: #5f9ea0;
     color: black;
-}   
+}
 
 
 .choicerow:hover{

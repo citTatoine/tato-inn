@@ -9,7 +9,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js"></script>
-    <script src="/plugin/progressbar.js"></script>
     <script src="/plugin/kitchen.js"></script>
     <link rel="stylesheet" href="/styles/kitchen.css">
 </head>
@@ -25,7 +24,7 @@
                         <div class="banner-content">Order:{{x[0].order_id}}</div>
                     </div>
                     <div class="order-content">
-                    <p class="items" data-ng-repeat="i in x">{{i.quantity}} x {{i.item_name}}</p>
+                        <p class="items" data-ng-repeat="i in x">{{i.qty}} x {{i.item_name}}</p>
                     </div>
 
                 </div>
@@ -58,10 +57,10 @@
                 <button class="btn btn-danger cookBut" ng-click="selectCookAmt(1)" data-ng-disabled="button.disabled || !selected.item_name">Cook one (1)</button>
                 <button class="btn btn-warning cookBut" ng-click="selectCookAmt(2)" data-ng-disabled="button.disabled || !selected.item_name">Cook two (2)</button>
                 <button class="btn btn-success cookBut" ng-click="selectCookAmt(6)" data-ng-disabled="button.disabled || !selected.item_name">Cook six (6)</button>
+                <button class="btn btn-info cookBut" ng-click="logout()">LOGOUT</button>
             </div>
         </div>
     </div>
-</div>
 
     <div class="row">
         <div class="col-sm-8 hotbox">
@@ -81,7 +80,7 @@
                         <td><h3>{{x[1]}}</h3></td>
                         <td>
                             <destroy data='{{$index}}' delete="remove(index, name, qty)" itemname = '{{x[0]}}' quantity = '{{x[1]}}'>
-                            <span class='time-to countdown' countdown=''  date='300' >&nbsp;</span>
+                                <span class='time-to countdown' countdown=''  date='300' >&nbsp;</span>
                             </destroy>
                         </td>
                     </tr>
@@ -99,7 +98,8 @@
             </div>
         </div>
 
-         </div>
+    </div>
+</div>
 
-    </body>
+</body>
 </html>

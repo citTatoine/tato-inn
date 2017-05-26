@@ -57,7 +57,7 @@ adminapp.config(function($routeProvider, $locationProvider) {
             templateUrl : "/admin-partials/menu.html",
             controller: "menu_controller"
         })
-        .otherwise({redirectTo: '/staff'});
+        .otherwise({redirectTo: '/staff/'});
 
 });
 
@@ -67,7 +67,7 @@ adminapp.controller('logout_controller', ['$scope', '$http', '$window', function
         $http({method: 'GET', url: '/logout'}).then(function successCallback (response) {
             console.log(response);
             console.log("query successful");
-            $window.location.href = '/staff';
+            $window.location.href = '/staff/';
         }, function errCallback() {
             console.log("query unsuccessful");
         });
@@ -319,7 +319,7 @@ adminapp.controller('transaction_controller', ['$scope' ,'$http', function($scop
     }
 
     $scope.getMenuItemDetails = function(item){
-        $http({method: 'GET', url: '/db/menuItemDetails?item_id='+item.item_id}).then(function successCallback (response){
+        $http({method: 'GET', url: '/db/menuItemDetails?item_id='+item.item_id+'&item_name='+item.item_name}).then(function successCallback (response){
             console.log(response.data);
             $scope.productset = response.data.rows;
             // console.log($scope.dataset);
