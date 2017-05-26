@@ -77,6 +77,19 @@ tatooine.controller("orders", ['$scope', '$http', '$window', '$timeout', functio
 
 
 
+    angular.element(document).ready(function () {
+
+        console.log($scope.cart.length !== "undefined");
+
+        $timeout(function () {
+            if(Object.keys($scope.cart).length == 0){
+                $scope.button.disabled = true;
+            }
+        }, 1000);
+
+    });
+
+
 
     // -------------------------------------------------------//
     // Adds single items from suggestive tab content to orders
@@ -92,6 +105,7 @@ tatooine.controller("orders", ['$scope', '$http', '$window', '$timeout', functio
         x["combo"] = false;
 
 
+        $scope.button.disabled = false;
 
         if(Object.keys($scope.cart).length > 5){
             if($scope.tempitem.item_name in $scope.cart ) {
@@ -138,6 +152,7 @@ tatooine.controller("orders", ['$scope', '$http', '$window', '$timeout', functio
         x["qty"] = $scope.tempitem.qty;
         x["combo"] = false;
 
+        $scope.button.disabled = false;
 
         if(Object.keys($scope.cart).length > 5){
             if($scope.tempitem.item_name in $scope.cart ) {
@@ -175,9 +190,11 @@ tatooine.controller("orders", ['$scope', '$http', '$window', '$timeout', functio
         var x = ({});
 
         x["item_id"] = $scope.tempitem.item_id;
-        x["item_price"] = $scope.tempitem.item_combo_price;
+        x["item_price"] = $scope.tempitem.item_comboprice;
         x["qty"] = $scope.tempitem.qty;
         x["combo"] = true;
+
+        $scope.button.disabled = false;
 
         var y = $scope.tempitem.item_name + " Combo";
 
@@ -202,7 +219,7 @@ tatooine.controller("orders", ['$scope', '$http', '$window', '$timeout', functio
             $scope.cart[y] = x;
         }
 
-        $scope.ammount += $scope.tempitem.item_combo_price;
+        $scope.ammount += $scope.tempitem.item_comboprice;
 
     };
 
@@ -216,9 +233,11 @@ tatooine.controller("orders", ['$scope', '$http', '$window', '$timeout', functio
         var x = ({});
 
         x["item_id"] = $scope.tempitem.item_id;
-        x["item_price"] = $scope.tempitem.item_combo_price;
+        x["item_price"] = $scope.tempitem.item_comboprice;
         x["qty"] = $scope.tempitem.qty;
         x["combo"] = true;
+
+        $scope.button.disabled = false;
 
         var y = $scope.tempitem.item_name + " Combo";
 
@@ -242,7 +261,7 @@ tatooine.controller("orders", ['$scope', '$http', '$window', '$timeout', functio
             $scope.cart[y] = x;
         }
 
-        $scope.ammount += $scope.tempitem.item_combo_price;
+        $scope.ammount += $scope.tempitem.item_comboprice;
 
 
 
@@ -257,6 +276,10 @@ tatooine.controller("orders", ['$scope', '$http', '$window', '$timeout', functio
         $scope.ammount -= y.qty*y.item_price;
 
         delete $scope.cart[x];
+
+        if(Object.keys($scope.cart).length == 0){
+            $scope.button.disabled = true;
+        }
 
 
     };

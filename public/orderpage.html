@@ -86,7 +86,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <a type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="checkout()" id="checkout">Checkout</a>
+                    <a type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="checkout()" id="checkout" data-ng-disabled="button.disabled">Checkout</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -95,7 +95,7 @@
     </div>
 
 
-<wrap-owlcarousel class="owl-carousel owl-theme" data-options="{
+    <wrap-owlcarousel class="owl-carousel owl-theme" data-options="{
             loop:true,
             margin:10,
             responsiveClass:true,
@@ -115,20 +115,20 @@
                 }
             }
         }">
-    <a data-id="burger" data-ng-click="getType($event)" href="/orderpage/menu1" ><img src="/img/categories/hamburger.png" class="categories-img"><h2 style="text-align: center; color: white">Burgers</h2></a>
-    <a data-id="breakfast" data-ng-click="getType($event)" href="/orderpage/menu2"><img src="/img/categories/sandwich.png" class="categories-img"><h2 style="text-align: center; color: white">Breakfasts</h2></a>
-    <a data-id="appetizer" data-ng-click="getType($event)" href="/orderpage/menu3"><img src="/img/categories/french-fries.png" class="categories-img" ><h2 style="text-align: center; color: white">Appetizers</h2></a>
-    <a data-id="desserts" data-ng-click="getType($event)" href="/orderpage/menu4"><img src="/img/categories/ice-cream.png" class="categories-img" ><h2 style="text-align: center; color: white">Desserts</h2></a>
-    <a data-id="drinks" data-ng-click="getType($event)" href="/orderpage/menu5"><img src="/img/categories/drinks.png" class="categories-img" ><h2 style="text-align: center; color: white">Drinks</h2></a>
-    <a data-id="burger" data-ng-click="getCombo($event)" href="/orderpage/menu6"><img src="/img/categories/combo.png" class="categories-img" ><h2 style="text-align: center; color: white">Burger Combos</h2></a>
-    <a data-id="breakfast" data-ng-click="getCombo($event)" href="/orderpage/menu7"><img src="/img/categories/breakfastcombo.png" class="categories-img" ><h2 style="text-align: center; color: white">Breakfast Combos</h2></a>
-    <a data-ng-click="getAll()" href="/orderpage/allmenu"><img src="/img/misc/clipboard.png" class="categories-img" ><h2 style="text-align: center; color: white">All Items</h2></a>
-</wrap-owlcarousel>
+        <a data-id="burger" data-ng-click="getType($event)" href="/orderpage/menu1" ><img src="/img/categories/hamburger.png" class="categories-img"><h2 style="text-align: center; color: white">Burgers</h2></a>
+        <a data-id="breakfast" data-ng-click="getType($event)" href="/orderpage/menu2"><img src="/img/categories/sandwich.png" class="categories-img"><h2 style="text-align: center; color: white">Breakfasts</h2></a>
+        <a data-id="appetizer" data-ng-click="getType($event)" href="/orderpage/menu3"><img src="/img/categories/french-fries.png" class="categories-img" ><h2 style="text-align: center; color: white">Appetizers</h2></a>
+        <a data-id="desserts" data-ng-click="getType($event)" href="/orderpage/menu4"><img src="/img/categories/ice-cream.png" class="categories-img" ><h2 style="text-align: center; color: white">Desserts</h2></a>
+        <a data-id="drinks" data-ng-click="getType($event)" href="/orderpage/menu5"><img src="/img/categories/drinks.png" class="categories-img" ><h2 style="text-align: center; color: white">Drinks</h2></a>
+        <a data-id="burger" data-ng-click="getCombo($event)" href="/orderpage/menu6"><img src="/img/categories/combo.png" class="categories-img" ><h2 style="text-align: center; color: white">Burger Combos</h2></a>
+        <a data-id="breakfast" data-ng-click="getCombo($event)" href="/orderpage/menu7"><img src="/img/categories/breakfastcombo.png" class="categories-img" ><h2 style="text-align: center; color: white">Breakfast Combos</h2></a>
+        <a data-ng-click="getAll()" href="/orderpage/allmenu"><img src="/img/misc/clipboard.png" class="categories-img" ><h2 style="text-align: center; color: white">All Items</h2></a>
+    </wrap-owlcarousel>
 
 
-<div>
-    <div data-ng-view></div>
-</div>
+    <div>
+        <div data-ng-view></div>
+    </div>
 
 </div>
 

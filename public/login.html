@@ -13,12 +13,13 @@
 
 <body data-ng-app="login">
 <div id="loginDiv" data-ng-controller="login_controller" class="animated bounceInDown" >
-
-    <img id="loginLogo" class="logo" src="http://i.imgur.com/78aw6TO.png"/>
-    <hr />
-    <input class = "loginInput" id="Username" type="text" placeholder="    Username" ng-model="uName"/>
-    <input class = "loginInput" id="Password" type="password" placeholder="    Password" ng-model="pWord"/>
-    <button ng-click="login()" id="loginBut" class="animated rubberBand">Login</button>
+    <form data-ng-submit="login()">
+        <img id="loginLogo" class="logo" src="http://i.imgur.com/78aw6TO.png"/>
+        <hr />
+        <input class = "loginInput" id="Username" type="text" placeholder="    Username" ng-model="uName"/>
+        <input class = "loginInput" id="Password" type="password" placeholder="    Password" ng-model="pWord"/>
+        <input type="submit" id="loginBut" class="animated rubberBand"/>
+    </form>
 </div>
 
 <script src="/bundle/loginbundle.js"></script>

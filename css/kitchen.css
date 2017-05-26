@@ -58,10 +58,11 @@ body{
 
 .fulfilled{
     min-height: 48vh;
-    background-color: #214761; 
+    max-height: 48vh;
+    overflow-y: auto;
+    background-color: #214761;
     color: white;
     border-top: 6px solid red;
-    
     opacity: 0.8;
 }
 
@@ -119,18 +120,18 @@ h2{
 }
 
 .kitchenpage{
-        min-height: 100vh;
+    min-height: 100vh;
 }
 
 .tableHot{
-    color: white;   
+    color: white;
     text-align: center;
 }
 
 .choicerow{
     background-color: #5f9ea0;
     color: black;
-}   
+}
 
 
 .choicerow:hover{

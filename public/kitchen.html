@@ -24,7 +24,7 @@
                         <div class="banner-content">Order:{{x[0].order_id}}</div>
                     </div>
                     <div class="order-content">
-                    <p class="items" data-ng-repeat="i in x">{{i.qty}} x {{i.item_name}}</p>
+                        <p class="items" data-ng-repeat="i in x">{{i.qty}} x {{i.item_name}}</p>
                     </div>
 
                 </div>
@@ -57,6 +57,7 @@
                 <button class="btn btn-danger cookBut" ng-click="selectCookAmt(1)" data-ng-disabled="button.disabled || !selected.item_name">Cook one (1)</button>
                 <button class="btn btn-warning cookBut" ng-click="selectCookAmt(2)" data-ng-disabled="button.disabled || !selected.item_name">Cook two (2)</button>
                 <button class="btn btn-success cookBut" ng-click="selectCookAmt(6)" data-ng-disabled="button.disabled || !selected.item_name">Cook six (6)</button>
+                <button class="btn btn-info cookBut" ng-click="logout()">LOGOUT</button>
             </div>
         </div>
     </div>
@@ -79,7 +80,7 @@
                         <td><h3>{{x[1]}}</h3></td>
                         <td>
                             <destroy data='{{$index}}' delete="remove(index, name, qty)" itemname = '{{x[0]}}' quantity = '{{x[1]}}'>
-                            <span class='time-to countdown' countdown=''  date='300' >&nbsp;</span>
+                                <span class='time-to countdown' countdown=''  date='300' >&nbsp;</span>
                             </destroy>
                         </td>
                     </tr>
@@ -97,8 +98,8 @@
             </div>
         </div>
 
-         </div>
+    </div>
 </div>
 
-    </body>
+</body>
 </html>

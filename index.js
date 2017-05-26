@@ -112,7 +112,7 @@ app.all("/", function(req,resp){
     }
 });
 
-app.all("/order", function(req,resp){
+app.all("/orderpage/*", function(req,resp){
     if(shopStatus == true) {
         resp.sendFile(pF + "/orderpage.html");
     }
@@ -121,14 +121,6 @@ app.all("/order", function(req,resp){
     }
 });
 
-
-// app.all("/kitchen", function(req,resp){
-//     resp.sendFile(pF+"/kitchen.html");
-// });
-
-// app.all("/admin", function(req,resp){
-//     resp.sendFile(pF+"/administration.html");
-// });
 
 
 app.all("/pickup", function(req,resp){

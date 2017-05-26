@@ -4,7 +4,10 @@
 
 var tatooine = angular.module("tatooine-kitchen", []);
 
-tatooine.controller("kitchen", ['$scope', '$http', '$timeout', function($scope, $http, $timeout){
+
+
+
+tatooine.controller("kitchen", ['$scope', '$http', '$timeout', '$window', function($scope, $http, $timeout, $window){
 
     // -------------------------------------------------------//
     // Scope Variables
@@ -63,6 +66,21 @@ tatooine.controller("kitchen", ['$scope', '$http', '$timeout', function($scope, 
 
 
     });
+
+    // -------------------------------------------------------//
+    // Logout
+    // ------------------------------------------------------//
+
+    $scope.logout = function(){
+        console.log("its working kinda");
+        $http({method: 'GET', url: '/logout'}).then(function successCallback (response) {
+            console.log(response);
+            console.log("query successful");
+            $window.location.href = '/staff/';
+        }, function errCallback() {
+            console.log("query unsuccessful");
+        });
+    };
 
 
     // -------------------------------------------------------//
@@ -215,10 +233,10 @@ tatooine.controller("kitchen", ['$scope', '$http', '$timeout', function($scope, 
                     price = $scope.prices[i].item_comboprice;
 
                 }else if($scope.prices[i].item_name == name){
-                        price = $scope.prices[i].item_price;
+                    price = $scope.prices[i].item_price;
                 }
             }else if($scope.prices[i].item_name == name){
-                    price = $scope.prices[i].item_price;
+                price = $scope.prices[i].item_price;
             }
         }
 
@@ -360,32 +378,32 @@ tatooine.directive('destroy', ['$timeout', function ($timeout) {
 // ------------------------------------------------------//
 
 tatooine.directive('countdown', ['Util', '$interval', function (Util, $interval) {
-            return {
-                restrict: 'A',
-                scope: { date: '@' },
-                link: function (scope, element) {
-                    $interval(function () {
+    return {
+        restrict: 'A',
+        scope: { date: '@' },
+        link: function (scope, element) {
+            $interval(function () {
 
-                        scope.date--;
+                scope.date--;
 
-                        return element.text(Util.dhms(scope.date));
+                return element.text(Util.dhms(scope.date));
 
-                    }, 1000, [300]);
-                }
-            };
+            }, 1000, [300]);
         }
-    ]);
+    };
+}
+]);
 tatooine.factory('Util', [function () {
-        return {
-            dhms: function (t) {
-                var minutes, seconds;
-                minutes = Math.floor(t / 60) % 60;
-                t -= minutes * 60;
-                seconds = t % 60;
-                return [
-                    minutes + 'm',
-                    seconds + 's'
-                ].join(' ');
-            }
-        };
-    }]);
+    return {
+        dhms: function (t) {
+            var minutes, seconds;
+            minutes = Math.floor(t / 60) % 60;
+            t -= minutes * 60;
+            seconds = t % 60;
+            return [
+                minutes + 'm',
+                seconds + 's'
+            ].join(' ');
+        }
+    };
+}]);

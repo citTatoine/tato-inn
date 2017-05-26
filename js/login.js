@@ -5,7 +5,6 @@ import angular from 'angular';
 
 var myApp = angular.module('login',[]);
 myApp.controller('login_controller', ['$scope' ,'$http', '$window',  function($scope,$http,$window) {
-    $scope.val1 = 'This is temp Val' ;
     $scope.uName = '';
     $scope.pWord = '';
 
