@@ -57,7 +57,7 @@ adminapp.config(function($routeProvider, $locationProvider) {
             templateUrl : "/admin-partials/menu.html",
             controller: "menu_controller"
         })
-        .otherwise({redirectTo: '/staff'});
+        .otherwise({redirectTo: '/staff/'});
 
 });
 
@@ -67,7 +67,7 @@ adminapp.controller('logout_controller', ['$scope', '$http', '$window', function
         $http({method: 'GET', url: '/logout'}).then(function successCallback (response) {
             console.log(response);
             console.log("query successful");
-            $window.location.href = '/staff';
+            $window.location.href = '/staff/';
         }, function errCallback() {
             console.log("query unsuccessful");
         });
